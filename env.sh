@@ -1,0 +1,6 @@
+export HBNB_ENV='dev'
+export HBNB_MYSQL_USER='akwesi-bona'
+export HBNB_MYSQL_PWD='password'
+export HBNB_MYSQL_HOST='localhost'
+export HBNB_MYSQL_DB='HMS_DB'
+export HBNB_TYPE_STORAGE='db'

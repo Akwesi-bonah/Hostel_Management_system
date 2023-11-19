@@ -1,0 +1,66 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Allotment</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('views.dashboard')}}">Home</a></li>
+      <li class="breadcrumb-item active">Block List</li>
+    </ol>
+  </nav>
+</div>
+<section class="content">
+<div class="col-12">
+  <div class="card recent-sales overflow-auto">
+    
+
+    <div class="card-body">
+      <h5 class="card-title"><span>Block  List</span></h5>
+
+      <table class="table table-border datatable">
+       <thead>
+                                <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 30.5833px;" aria-sort="ascending" aria-label="#: activate to sort column descending">#</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 284.2px;" aria-label="
+                                       Campus
+                                    : activate to sort column ascending">
+                                       Campus
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 369.1px;" aria-label="
+                                        Name
+                                    : activate to sort column ascending">
+                                        Name
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 199.217px;" aria-label="
+                                        Description
+                                    : activate to sort column ascending">
+                                        Description
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 96.3px;" aria-label="
+                                        Action
+                                    : activate to sort column ascending">
+                                        Action
+                                    </th></tr>
+        <tbody>
+        {% for block in blocks %}
+          <tr>
+            <td>{{ block.id }}</td>
+            <td>{{ block.campus }}</td>
+            <td>{{ block.name }}</td>
+            <td>{{ block.description }}</td>
+            <td>
+              <a href="" class="btn btn-sm btn-info showloader">Edit</a>
+              <a href="" class="btn btn-sm btn-danger showloader">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+        
+        </tbody>
+      </table>
+    </div>
+      <div class="card-footer">
+
+                        <a href="{{url_for('manage.edit_block')}}"
+                           class="btn btn-sm btn-info showloader float-right">Create New</a>
+                    </div>
+  </div>
+</div>
+  <!-- /.row -->
+</section>
+{% endblock %}

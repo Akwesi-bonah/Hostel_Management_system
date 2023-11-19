@@ -1,0 +1,184 @@
+{% block content %}
+<aside id="sidebar" class="sidebar sidebar-offcanvas active">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <!-- Dashboard Nav -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{url_for('views.dashboard')}}">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <!-- End Dashboard Nav -->
+
+    <!-- Settings -->
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
+        data-bs-target="#settings-nav"
+        data-bs-toggle="collapse"
+        href="#"
+      >
+        <i class="bi bi-menu-button-wide"></i><span>Settings</span
+        ><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul
+        id="settings-nav"
+        class="nav-content collapse"
+        data-bs-parent="#sidebar-nav"
+      >
+        <li>
+          <a href="{{ url_for('staff.users')}}">
+            <i class="bi bi-circle"></i><span>Manage Staff</span>
+          </a>
+          <ul
+            id="add-nav"
+            class="nav-content collapse"
+            data-bs-parent="#setting-nav"
+          ></ul>
+        </li>
+        <li>
+          <a href="{{ url_for('manage.BlockManage')}}">
+            <i class="bi bi-circle"></i><span>Manage Block</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('manage.rooms')}}">
+            <i class="bi bi-circle"></i><span>Manage Rooms</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bi bi-circle"></i><span>Room Types</span>
+          </a>
+        </li>
+        <li>
+         <a href="{{ url_for('manage.configure')}}">
+            <i class="bi bi-circle"></i><span>Configure</span>
+          </a>
+        </li>
+
+      </ul>
+    </li>
+    <!-- End Setting -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('views.allotment')}}">
+        <i class="bi bi-grid"></i>
+        <span>Allotment</span>
+      </a>
+    </li>
+    <!-- End Allotment Nav -->
+
+    <!-- Reservation Nav -->
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
+        data-bs-target="#forms-nav"
+        data-bs-toggle="collapse"
+        href="#"
+      >
+        <i class="bi bi-journal-text"></i><span>Reservation</span
+        ><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul
+        id="forms-nav"
+        class="nav-content collapse"
+        data-bs-parent="#sidebar-nav"
+      >
+        <li>
+          <a href="{{ url_for('reservation.reserve')}}">
+            <i class="bi bi-circle"></i><span>Reserve Bed</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('reservation.AssignBed')}}">
+            <i class="bi bi-circle"></i><span>Assign Bed</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- End Reservation Nav -->
+
+
+
+
+    <!-- Messages Nav -->
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
+        data-bs-target="#icons-nav"
+        data-bs-toggle="collapse"
+        href="#"
+      >
+        <i class="bi bi-gem"></i><span>Messaging</span
+        ><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul
+        id="icons-nav"
+        class="nav-content collapse"
+        data-bs-parent="#sidebar-nav"
+      >
+        <li>
+          <a href="">
+            <i class="bi bi-circle"></i><span>Compose Massage</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bi bi-circle"></i><span>Message History</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- End Messages Nav -->
+    <!-- Students management Nav -->
+
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
+        data-bs-target="#student-nav"
+        data-bs-toggle="collapse"
+        href="#"
+      >
+        <i class="bi bi-journal-text"></i><span>Students Management</span
+        ><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul
+        id="student-nav"
+        class="nav-content collapse"
+        data-bs-parent="#sidebar-nav"
+      >
+        <li>
+          <a href="{{ url_for('student.add_students')}} ">
+            <i class="bi bi-circle"></i><span>Add Students</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('student.student_list') }}">
+            <i class="bi bi-circle"></i><span>Students List</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- End Student Nav -->
+
+    <li class="nav-heading">Pages</li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{{ url_for('profile.profile_info') }}">
+        <i class="bi bi-person"></i>
+        <span>Profile</span>
+      </a>
+    </li>
+    <!-- End Profile Page Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="">
+        <i class="bi bi-box-arrow-in-right"></i>
+        <span>Log Out</span>
+      </a>
+    </li>
+    <!-- End Login Page Nav -->
+  </ul>
+</aside>
+<!-- End Sidebar-->
+{% endblock %}

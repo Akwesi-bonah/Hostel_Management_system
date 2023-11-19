@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Add Edit Room</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('views.dashboard')}}">Home</a></li>
+      <li class="breadcrumb-item active">Add/edit rooms</li>
+    </ol>
+  </nav>
+</div>
+<section class="content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add/Update Room</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <div role="form">
+
+
+
+
+<form action="" class="agnet-contact-form" id="FormPost" method="post">                            <div class="text-danger">
+                                <input name="__RequestVerificationToken" type="hidden" value="">
+                                
+
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="inputName">Block<b class="red">*</b></label>
+                                    <div>
+
+                                        <select class="form-control" id="blockID" name="Block.blockID"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="">Block A</option>
+<option value="">Block B</option>
+<option value="">Block c</option>
+                                            <option value="">Block D</option>
+
+</select>
+
+                                        <input id="roomID" name="roomID" type="hidden" value="">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName">Room Type<b class="red">*</b></label>
+                                    <div>
+
+                                        <select class="form-control" data-val="true" data-val-required="The roomTypeID field is required." id="roomTypeID" name="roomTypeID"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="641ba2ae-848b-42f5-a7c9-0b1c60f4d753">TWO IN A ROOM - Bunk Bed with kitchen (JCR &amp; common area maintenance fees inclusive)</option>
+<option value="7569adbd-7730-491c-ad78-155e5b34f508">ANNEX ONE IN AROOM</option>
+<option value="129e28aa-159d-4142-9dd1-16227079c3f8">Three in a room with Balcony Kitchenette </option>
+<option value="355b21d1-527e-4117-a585-16fa26e46f3b">TWO IN A ROOM - self contain with kitchen- Annex A (JCR &amp; common area maintenance fees inclusive)</option>
+<option value="dd023314-45e7-4100-9a20-2093a3dd3b0e">Facility One in a room self contain with kitchen, Gas and stove</option>
+<option value="1fe343cd-216b-45cf-a0fc-2dfb3b348353">REFUND ROOM</option>
+
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName">Room Category<b class="red">*</b></label>
+                                    <div>
+
+
+                                        <select class="form-control" id="roomPType" name="roomPType"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="REGULAR">REGULAR</option>
+<option value="DOUBLE_TRACK">DOUBLE_TRACK</option>
+</select>
+
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName"> Name <b class="red">*</b></label>
+                                    <div>
+                                        <input autocomplete="off" class="form-control text-box single-line" data-val="true" data-val-maxlength="The field roomName must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" data-val-required="The roomName field is required." id="roomName" name="roomName" placeholder=" Enter Room Name" type="text" value="">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="roomName" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="inputName">Capacity <b class="red">*</b></label>
+                                    <div>
+                                        <input autocomplete="off" class="form-control text-box single-line" data-val="true" data-val-number="The field numberOfBed must be a number." data-val-required="The numberOfBed field is required." id="numberOfBed" name="numberOfBed" placeholder=" Enter Capacity" type="number" value="">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="numberOfBed" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputStatus">Gender</label>
+
+
+                                    <select class="form-control" id="gender" name="gender"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="FEMALE">FEMALE</option>
+<option value="MALE">MALE</option>
+<option value="MALE/FEMALE">MALE/FEMALE</option>
+</select>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputStatus">Floor</label>
+
+
+                                    <select class="form-control" id="floor" name="floor"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="Ground Floor">Ground Floor</option>
+<option value="First Floor">First Floor</option>
+<option value="Second Floor">Second Floor</option>
+<option value="Third Floor">Third Floor</option>
+<option value="Forth Floor">Forth Floor</option>
+<option value="Fifth Floor">Fifth Floor</option>
+</select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputStatus">Top Beds</label>
+
+
+                                    <select class="form-control" data-val="true" data-val-number="The field numOfTopBeds must be a number." data-val-required="The numOfTopBeds field is required." id="numOfTopBeds" name="numOfTopBeds"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+</select>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputStatus">Down Beds</label>
+
+
+                                    <select class="form-control" data-val="true" data-val-number="The field numOfDownBeds must be a number." data-val-required="The numOfDownBeds field is required." id="numOfTopBeds" name="numOfDownBeds"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="1">1</option>
+<option value="2">2</option>
+</select>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="inputName">Description<b class="red">*</b></label>
+                                    <div>
+                                        <textarea autocomplete="off" class="form-control" cols="20" id="description" name="description" placeholder="Description" row="4" rows="2"></textarea>
+
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="description" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputStatus">Status</label>
+                                    <div>
+                                        <select class="form-control" data-val="true" data-val-number="The field status must be a number." data-val-required="The status field is required." id="status" name="status"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="1">Active</option>
+<option value="0">Inactive</option>
+</select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary showloader float-left" id="AddData">Submit</button>
+
+                                <a href="/Room" class="btn btn-sm btn-secondary showloader float-right">Back to List</a>
+                            </div>
+</form>
+
+                    </div>
+                </div>
+                <!-- /.card -->
+
+
+            </div>
+            <!--/.col (left) -->
+            <div class="col-md-3">
+            </div>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</section>
+
+{% endblock %}

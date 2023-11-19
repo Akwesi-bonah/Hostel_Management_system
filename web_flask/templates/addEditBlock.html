@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Allotment</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('views.dashboard')}}">Home</a></li>
+      <li class="breadcrumb-item active">Add/Update Block</li>
+    </ol>
+  </nav>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add/Update Block</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <div role="form">
+
+
+
+
+
+
+
+<form action="/Block/Add" class="agnet-contact-form" id="FormPost" method="post">                            <div class="text-danger">
+                                <input name="__RequestVerificationToken" type="hidden" value="28x2s5xVQat8_zy9ZCJJuE7eVmMT_V_NhOPX8il37OLsGHOJpgd_SLFxvTgJY2ccMnt64tdsWfbBfx_bjFkwCgs0aUC2o7pLWy-NHdwprFc1">
+                                
+
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="inputName">Campus<b class="red">*</b></label>
+                                    <div>
+
+                                        <select class="form-control" id="campusID" name="campusID"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="e1d7760f-e6f5-4d66-a324-fa837b99d203">University of Ghana Campus</option>
+</select>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputName"> Name <b class="red">*</b></label>
+                                    <div>
+                                        <input autocomplete="off" class="form-control text-box single-line" id="name" name="name" placeholder=" Enter Room Name" type="text" value="">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="name" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                              
+                                <div class="form-group">
+                                    <label for="inputName">Description<b class="red">*</b></label>
+                                    <div>
+                                        <textarea autocomplete="off" class="form-control" cols="20" id="description" name="description" placeholder="Description" row="4" rows="2"></textarea>
+
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="description" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputStatus">Status</label>
+                                    <div>
+                                        <select class="form-control" data-val="true" data-val-number="The field status must be a number." data-val-required="The status field is required." id="status" name="status"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="1">Active</option>
+<option value="0">Inactive</option>
+</select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary showloader float-left" id="AddData">Submit</button>
+
+                                <a href="/Block" class="btn btn-sm btn-secondary showloader float-right">Back to List</a>
+                            </div>
+</form>
+
+                    </div>
+                </div>
+                <!-- /.card -->
+
+
+            </div>
+            <!--/.col (left) -->
+            <div class="col-md-3">
+            </div>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</section>
+
+{% endblock %}

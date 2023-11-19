@@ -1,0 +1,166 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <H1>Room Reservation</H1>
+<div class="content-wrapper" style="min-height: 602px;" data-select2-id="13">
+
+
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Index</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Reservation</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6" data-select2-id="12">
+                <!-- general form elements -->
+                <div class="card card-primary" data-select2-id="11">
+                    <div class="card-header">
+                        <h3 class="card-title">Bed Reservation</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <div role="form" data-select2-id="10">
+<form action="/Reservation/Add" class="agnet-contact-form" id="FormPostReserve" method="post" data-select2-id="FormPostReserve">                            <div class="text-danger">
+
+
+
+                            </div>
+                            <div class="card-body" data-select2-id="9">
+                                <div class="form-group" data-select2-id="8">
+                                    <label for="inputName">Block<b class="red">*</b></label>
+
+                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" id="blockID" data-select2-id="blockID" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="2">Please select</option>
+
+                                            <option value="7b03dfd8-e6bd-470e-9044-0123e82b07ac" data-select2-id="16">Perseverance Block- New Bani Block</option>
+                                            <option value="a7aaff90-2090-4717-b3c4-19fe7790e427" data-select2-id="17">Block B</option>
+                                            <option value="02fc1f2b-62da-4749-b7f0-4f2af158bac8" data-select2-id="18">Block C</option>
+                                            <option value="67ba7767-0cc3-4f1e-813b-6dd07a4b87ab" data-select2-id="19">Facility Block</option>
+                                            <option value="cb9f2ee4-c613-4a7f-bca1-af5156a2e459" data-select2-id="20">ANNEX</option>
+                                            <option value="6cd381a6-3904-42e1-bad1-b522e6c825fb" data-select2-id="21">Block A</option>
+                                            <option value="742fc329-321f-40c3-bc7d-eafc1c4308a2" data-select2-id="22">Administration Block</option>
+                                            <option value="bac90ffc-bc5d-4456-b3b4-f9094c559f7e" data-select2-id="23">Block D</option>
+                                    </select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" data-select2-id="1" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-blockID-container"><span class="select2-selection__rendered" id="select2-blockID-container" role="textbox" aria-readonly="true" title="Please select">Please select</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+
+                                </div>
+                                <div class="form-group" data-select2-id="25">
+                                    <label for="inputName">Room Type<b class="red">*</b></label>
+                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" id="roomTypeID" data-select2-id="roomTypeID" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="4">Please select</option>
+                                            <option value="641ba2ae-848b-42f5-a7c9-0b1c60f4d753" data-select2-id="26">TWO IN A ROOM - Bunk Bed with kitchen (JCR &amp; common area maintenance fees inclusive)</option>
+                                            <option value="7569adbd-7730-491c-ad78-155e5b34f508" data-select2-id="27">ANNEX ONE IN AROOM</option>
+                                            <option value="129e28aa-159d-4142-9dd1-16227079c3f8" data-select2-id="28">Three in a room with Balcony Kitchenette </option>
+                                            <option value="355b21d1-527e-4117-a585-16fa26e46f3b" data-select2-id="29">TWO IN A ROOM - self contain with kitchen- Annex A (JCR &amp; common area maintenance fees inclusive)</option>
+                                            <option value="dd023314-45e7-4100-9a20-2093a3dd3b0e" data-select2-id="30">Facility One in a room self contain with kitchen, Gas and stove</option>
+                                            <option value="1fe343cd-216b-45cf-a0fc-2dfb3b348353" data-select2-id="31">REFUND ROOM</option>
+                                            <option value="b3d212a2-e346-4f01-b5b3-34f9efdddf14" data-select2-id="32">FACILITY BUNK BED TWO IN A ROOM </option>
+                                            <option value="a7c87c12-91f8-47aa-8110-37c55f1d4c98" data-select2-id="33">ONE IN A ROOM - SHARED KITCHEN (JCR &amp; common area maintenance fees inclusive)</option>
+                                            <option value="ede4d72e-42ef-4d15-bc19-4090966e4ecd" data-select2-id="34">ONE IN A ROOM - BALCONY KITCHEN (JCR &amp; common area maintenance fees inclusive)</option>
+                                            <option value="be4ce412-37cb-4bae-b49e-460a0e9f2beb" data-select2-id="35">BUNK BED TWO IN A ROOM (A&amp;B)</option>
+                                            <option value="9107ecbc-43dc-4a7f-9dde-4a45917fb976" data-select2-id="36">Facility One in a room self contain with shared kitchen</option>
+                                            <option value="07b24549-18d2-4bea-a71d-4dc530871e2f" data-select2-id="37">Two in a self-contain with balcony kitchen( Block A,B and C only)</option>
+                                            <option value="18673abd-1d3e-4c66-aa83-4ee78bc3f963" data-select2-id="38">Bunked bed Three in a room self contain with Balcony Kitchen (Block A and B only)</option>
+                                            <option value="9b7c0cab-ee1f-40b9-9130-5d003c9141ad" data-select2-id="39">FACILTY FOUR IN A ROOM - Self Contain with porch</option>
+                                            <option value="2b400a88-502d-41f4-9233-5e93995e99c3" data-select2-id="40">Bunked bed two in a room with shared kitchen</option>
+                                            <option value="45fb4a72-a220-4eb2-9d59-5ef92b82f1a2" data-select2-id="41">REFUND ROOM</option>
+                                            <option value="53a91ca7-63a5-488a-9020-740819cc6ca0" data-select2-id="42">One in a room self contained with Kitchen (Block C&amp;D only)</option>
+                                            <option value="14136753-3f76-4543-a5fa-7af0eeb21402" data-select2-id="43">One in a self contain with shared kitchen( Block D only)</option>
+                                            <option value="f1435b5f-0acc-4325-ac0b-8b0f06896a0e" data-select2-id="44">Facility three in a room </option>
+                                            <option value="70747921-02cf-47cf-bbd2-8c6ff9d11130" data-select2-id="45">Facility Two in a Room self Contained (Chamber and Hall) </option>
+                                            <option value="045cefda-90f1-42b1-b700-8ed2f57b745f" data-select2-id="46">Facility one with shared bathroom</option>
+                                            <option value="1de2d8be-3741-4897-b0e3-9b68ffb3fce3" data-select2-id="47">BARBER SHOP REMODELLING</option>
+                                            <option value="04115cac-e216-46c1-81f6-9cd7ff2c4d3d" data-select2-id="48">REFUNDS ROOM (THIS IS NOT A ROOM PLEASE DONT MAKE ANY PAYMNET</option>
+                                            <option value="ab617d60-b123-44ad-8632-9fbdf8bf5f3f" data-select2-id="49">Two in a Room Self-Contained With airconditioned and Kitchen</option>
+                                            <option value="c1d1d2ad-de03-4966-88fd-a2f028d0ef73" data-select2-id="50">Four in a room self-contained with Balcony Kitchenette (Perseverance Block- New Bani Block))</option>
+                                            <option value="c36da8dd-872d-499c-be43-a6a0e2512f64" data-select2-id="51">ONE IN A ROOM - SHARED KITCHEN (JCR &amp; common area maintenance fees inclusive -Blk D)</option>
+                                            <option value="f27c4a3b-d3a8-4b4f-9fed-bb05630918d7" data-select2-id="52">TWO IN A ROOM - self contain with balcony kitchen (JCR &amp; common area maintenance fees inclusive)</option>
+                                            <option value="a204054d-3bc1-44aa-b21c-bc5c32fb53c9" data-select2-id="53">ONE IN A ROOM SELF-CONTAINED WITH BALCONY KITCHENETTE (PERSEVERANCE BLOCK)</option>
+                                            <option value="e728cc56-5ba1-40aa-acd9-be3f10fe3ff3" data-select2-id="54">Facility One in a room self contain with Air-condition and Kitchen</option>
+                                            <option value="50c6259c-3019-4680-95c8-c98120e7329f" data-select2-id="55">Facility two in a room self contain with kitchen, Gas and stove</option>
+                                            <option value="9b932203-f07d-4812-be09-d174a2c4d726" data-select2-id="56">Facility One in a room self contain  with Air-condition and shared  kitchen</option>
+                                            <option value="991a10d2-1f4a-4017-9d95-d19d7cefaa74" data-select2-id="57">ONE IN A ROOM - self contained with Kitchennete(Block A &amp; B Only)</option>
+                                            <option value="5df5c0dc-8077-4f93-8418-d2ab85326c7b" data-select2-id="58">TWO IN A ROOM - self contain with kitchen,tv and fridge (JCR &amp; common area fees inclusive)</option>
+                                            <option value="5baccd58-13d5-413f-b4d5-d38e58845fdc" data-select2-id="59">Facility Four in a room self contain (big room)</option>
+                                            <option value="801cdef7-5392-4739-b543-e027a313bb33" data-select2-id="60">TWO IN A SELF-CONTAINED WITH BALCONY KITCHENETTE (PERSEVERANCE BLOCK-NEW BANI)</option>
+                                            <option value="6fbe6b18-2209-4021-89fb-f1a3028193b8" data-select2-id="61">FOUR IN A ROOM - Self contain with balcony kitchennete (JCR &amp; common area fees inclusive)</option>
+                                            <option value="fb3b671a-64ec-446d-9765-fa8764a67b1c" data-select2-id="62">Three in a room self-contained with balcony kitchennete</option>
+                                            <option value="1bcbc3d9-c3d4-475f-852a-fc00ce21a626" data-select2-id="63">Facility Four in a room- self contain -chamber and hall</option>
+                                    </select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" data-select2-id="3" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-roomTypeID-container"><span class="select2-selection__rendered" id="select2-roomTypeID-container" role="textbox" aria-readonly="true" title="Please select">Please select</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+
+                                </div>
+
+                                <div class="form-group" data-select2-id="65">
+                                    <label for="inputName">Room<b class="red">*</b></label>
+                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" id="roomID" data-select2-id="roomID" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="6"></option>
+
+                                    </select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" data-select2-id="5" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-roomID-container"><span class="select2-selection__rendered" id="select2-roomID-container" role="textbox" aria-readonly="true"></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputName">Number of Beds <b class="red">*</b></label>
+                                    <div>
+                                        <input autocomplete="off" class="form-control text-box single-line" id="numOFBirds" name="numOFBirds" placeholder=" Enter Capacity" type="text" value="">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="numOFBirds" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName">Room Category<b class="red">*</b></label>
+                                    <div>
+
+
+                                        <select class="form-control" id="roomType" name="roomType"><option value="">&lt;&lt;Please select&gt;&gt;</option>
+<option value="REGULAR">REGULAR</option>
+</select>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary showloader float-left" id="AddDataReserve">Reserve</button>
+
+                                <a href="/Reservation" class="btn btn-sm btn-secondary showloader float-right">Back to List</a>
+                            </div>
+</form>
+
+                    </div>
+                </div>
+                <!-- /.card -->
+
+
+            </div>
+            <!--/.col (left) -->
+            <div class="col-md-3">
+            </div>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</section>
+
+
+    </div>
+{% endblock %}

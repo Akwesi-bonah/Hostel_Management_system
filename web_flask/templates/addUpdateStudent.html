@@ -1,0 +1,104 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="pagetitle">
+  <h1>Add Student</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('views.base')}}">Home</a></li>
+      <li class="breadcrumb-item active">Add Student</li>
+    </ol>
+  </nav>
+</div>
+<!-- End Page Title -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Add New Students</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <div role="form">
+            <form action="" method="post" name="addstudent">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="inputName"> Student ID <b class="red">*</b></label>
+                  <div>
+                    <input id="inputName" autocomplete="off" class="form-control text-box single-line"
+                      id="studentNumber" name="studentNumber" placeholder=" Enter Student ID" type="text" value="" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputName">
+                    First Name <b class="red">*</b></label>
+                  <div>
+                    <input id="" autocomplete="off" class="form-control text-box single-line" id="firstName"
+                      name="inputName" placeholder=" Enter First Name" type="text" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputName">Last Name <b class="red">*</b></label>
+                  <div>
+                    <input autocomplete="off" class="form-control text-box single-line" id="lastName" name="lastName"
+                      placeholder=" Enter Last Name" type="text" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputName">Other Name <b class="red">*</b></label>
+                  <div>
+                    <input autocomplete="off" class="form-control text-box single-line" id="otherName" name="otherName"
+                      placeholder=" Enter Other Name" type="text" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputStatus">Level</label>
+
+                  <select class="form-control" data-val="true"
+                    data-val-number="The field studentLevel must be a number."
+                    data-val-required="The studentLevel field is required." id="studentLevel" name="studentLevel">
+                    <option value="">&lt;&lt;Please select&gt;&gt;</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="300">300</option>
+                    <option value="400">400</option>
+                    <option value="500">500</option>
+                    <option value="600">600</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="inputStatus">Gender</label>
+
+                  <select class="form-control" id="gender" name="gender">
+                    <option value="">&lt;&lt;Please select&gt;&gt;</option>
+                    <option value="FEMALE">FEMALE</option>
+                    <option selected="selected" value="MALE">MALE</option>
+                  </select>
+                </div>
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary showloader float-left" id="AddData">
+                  Submit
+                </button>
+
+                <a href="/Studnet" class="btn btn-sm btn-secondary showloader float-right">Back to List</a>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!--/.col (left) -->
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+{% endblock %}

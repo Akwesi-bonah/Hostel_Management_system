@@ -1,0 +1,98 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Allotment</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('views.dashboard')}}">Home</a></li>
+      <li class="breadcrumb-item active">Rooms management</li>
+    </ol>
+  </nav>
+</div>
+<section class="content">
+<div class="col-12">
+  <div class="card recent-sales overflow-auto">
+    
+
+    <div class="card-body">
+      <h5 class="card-title"><span>Rooms List</span></h5>
+
+      <table class="table table-border datatable">
+       <thead>
+                                <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 18.7px;" aria-sort="ascending" aria-label="#: activate to sort column descending">#</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 69.35px;" aria-label="
+                                        Category
+                                    : activate to sort column ascending">
+                                        Category
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 120.867px;" aria-label="
+                                        Room Type
+                                    : activate to sort column ascending">
+                                        Room Type
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 85.3833px;" aria-label="
+                                        Block
+                                    : activate to sort column ascending">
+                                        Block
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 80.8833px;" aria-label="
+                                        Room Name
+                                    : activate to sort column ascending">
+                                        Room Name
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 88.0167px;" aria-label="
+                                        Description
+                                    : activate to sort column ascending">
+                                        Description
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 66.7px;" aria-label="
+                                        Capacity
+                                    : activate to sort column ascending">
+                                        Capacity
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 96.0167px;" aria-label="
+                                        Gender
+                                    : activate to sort column ascending">
+                                        Gender
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 39.9833px;" aria-label="
+                                        Floor
+                                    : activate to sort column ascending">
+                                        Floor
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 39.1167px;" aria-label="
+                                        Beds Avl.
+                                    : activate to sort column ascending">
+                                        Beds Avl.
+                                    
+                                    </th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 55px;" aria-label="
+                                        Action
+                                    : activate to sort column ascending">
+                                        Action
+                                    </th></tr>
+                            </thead>
+        {% for room in rooms %}
+          <tr>
+              <td></td>
+            <td>{{ room.category }}</td>
+            <td>{{ room.room_type }}</td>
+            <td>{{ room.room }}</td>
+            <td>{{ room.room_name }}</td>
+            <td>{{ room.description }}</td>
+            <td>{{ room.capacity }}</td>
+              <td>{{ room.Gender }}</td>
+            <td>{{ room.floor }}</td>
+              <td>{{ room.beds_alv }}</td>
+
+            <td>
+              <a href="" class="btn btn-sm btn-info showloader">Edit</a>
+              <a href="" class="btn btn-sm btn-danger showloader">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+        
+        </tbody>
+      </table>
+    </div>
+      <div class="card-footer">
+
+                        <a href="{{url_for('manage.room_add')}}"
+                           class="btn btn-sm btn-info showloader float-right">Create New</a>
+                    </div>
+  </div>
+</div>
+  <!-- /.row -->
+</section>
+{% endblock %}
