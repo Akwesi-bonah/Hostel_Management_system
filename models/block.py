@@ -13,6 +13,7 @@ class Block(BaseModel, Base):
         name = Column(String(128), nullable=True)
         description = Column(String(128), nullable=True)
     else:
+        campus = ""
         name = ""
         description = ""
 

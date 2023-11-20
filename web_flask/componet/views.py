@@ -1,16 +1,17 @@
 #!/usr/bin/python3
+""" Default staff view"""
 
-from flask import Blueprint, render_template, request, redirect, url_for
+from web_flask.componet import staff_view
+from flask import render_template, request, redirect, url_for
+from flask_login import login_required
 
-views = Blueprint('views', __name__)
 
-
-@views.route('/')
+@staff_view.route('/')
 def base():
-    return render_template('login.html')
+    return render_template('default.html')
 
 
-@views.route('/user', methods=['GET', 'POST'])
+@staff_view.route('/user', methods=['GET', 'POST'])
 def dashboard():
     user = None
     if request.method == 'POST':
@@ -18,15 +19,15 @@ def dashboard():
         pwd = request.form.get('password')
         if user == "arhinbonnah@gmail.com" and pwd == "wolf":
             # Redirect to the same route using GET
-            return redirect(url_for('views.dashboard', username=user))
+            return redirect(url_for('staff_view.dashboard', username=user))
         else:
             error_message = "Invalid credentials"
-            return render_template('login.html', error=error_message)
+            return render_template('default.html', error=error_message)
 
     return render_template('base.html',  name=user)
 
 
-@views.route('/allotment')
+@staff_view.route('/allotment')
 def allotment():
     import random
 
@@ -74,9 +75,6 @@ def allotment():
             'Status': random.choice(['Paid', 'Pending', 'Unpaid'])
         }
         allotment_data.append(new_record)
-
-
-
     return render_template('allotment.html', allotment=allotment_data)
 
 

@@ -30,6 +30,7 @@ classes = {
     "Reservation": Reservation
 }
 
+
 class DBStorage:
     """interaacts with the MySQL database"""
     __engine = None
@@ -48,6 +49,16 @@ class DBStorage:
                                              HBNB_MYSQL_HOST,
                                              HBNB_MYSQL_DB))
         Base.metadata.drop_all(self.__engine)
+
+    def get_user_id(self, email=None):
+        """ get user id using email """
+        if email is None:
+            return None
+        all_users = self.all(Staff)
+        for user in all_users.values():
+            if user.email == email:
+                return user.id
+        return None
 
     def all(self, cls=None):
         """query on the current database session"""

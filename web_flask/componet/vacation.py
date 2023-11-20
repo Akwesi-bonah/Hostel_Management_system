@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 
 from flask import Blueprint, render_template
+from web_flask.componet import staff_view
 
-vacation = Blueprint('vacation', __name__)
 
-
-@vacation.route('/vacation')
+@staff_view.route('/vacation')
 def vacation_stay():
     return render_template('vacation.html')

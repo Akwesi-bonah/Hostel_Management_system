@@ -3,7 +3,7 @@
   <ul class="sidebar-nav" id="sidebar-nav">
     <!-- Dashboard Nav -->
     <li class="nav-item">
-      <a class="nav-link" href="{{url_for('views.dashboard')}}">
+      <a class="nav-link" href="{{url_for('staff_view.dashboard')}}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -27,7 +27,7 @@
         data-bs-parent="#sidebar-nav"
       >
         <li>
-          <a href="{{ url_for('staff.users')}}">
+          <a href="{{ url_for('staff_view.users')}}">
             <i class="bi bi-circle"></i><span>Manage Staff</span>
           </a>
           <ul
@@ -37,22 +37,22 @@
           ></ul>
         </li>
         <li>
-          <a href="{{ url_for('manage.BlockManage')}}">
+          <a href="{{ url_for('staff_view.BlockManage')}}">
             <i class="bi bi-circle"></i><span>Manage Block</span>
           </a>
         </li>
         <li>
-          <a href="{{ url_for('manage.rooms')}}">
+          <a href="{{ url_for('staff_view.rooms')}}">
             <i class="bi bi-circle"></i><span>Manage Rooms</span>
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="{{ url_for('staff_view.room_type')}}">
             <i class="bi bi-circle"></i><span>Room Types</span>
           </a>
         </li>
         <li>
-         <a href="{{ url_for('manage.configure')}}">
+         <a href="{{ url_for('staff_view.configure')}}">
             <i class="bi bi-circle"></i><span>Configure</span>
           </a>
         </li>
@@ -61,7 +61,7 @@
     </li>
     <!-- End Setting -->
     <li class="nav-item">
-      <a class="nav-link" href="{{ url_for('views.allotment')}}">
+      <a class="nav-link" href="{{ url_for('staff_view.allotment')}}">
         <i class="bi bi-grid"></i>
         <span>Allotment</span>
       </a>
@@ -85,12 +85,12 @@
         data-bs-parent="#sidebar-nav"
       >
         <li>
-          <a href="{{ url_for('reservation.reserve')}}">
+          <a href="{{ url_for('staff_view.reserve')}}">
             <i class="bi bi-circle"></i><span>Reserve Bed</span>
           </a>
         </li>
         <li>
-          <a href="{{ url_for('reservation.AssignBed')}}">
+          <a href="{{ url_for('staff_view.AssignBed')}}">
             <i class="bi bi-circle"></i><span>Assign Bed</span>
           </a>
         </li>
@@ -148,12 +148,12 @@
         data-bs-parent="#sidebar-nav"
       >
         <li>
-          <a href="{{ url_for('student.add_students')}} ">
+          <a href="{{ url_for('staff_view.add_students')}} ">
             <i class="bi bi-circle"></i><span>Add Students</span>
           </a>
         </li>
         <li>
-          <a href="{{ url_for('student.student_list') }}">
+          <a href="{{ url_for('staff_view.student_list') }}">
             <i class="bi bi-circle"></i><span>Students List</span>
           </a>
         </li>
@@ -164,7 +164,7 @@
     <li class="nav-heading">Pages</li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ url_for('profile.profile_info') }}">
+      <a class="nav-link collapsed" href="{{ url_for('staff_view.profile_info') }}">
         <i class="bi bi-person"></i>
         <span>Profile</span>
       </a>

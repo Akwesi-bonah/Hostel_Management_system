@@ -1,12 +1,13 @@
 #!/usr/bin/python3
+""" Block and Room management"""
 
+from web_flask.componet import staff_view
 from flask import Blueprint, render_template
 from models.block import Block
 from models import storage
-manage = Blueprint('manage', __name__)
 
 
-@manage.route('/block')
+@staff_view.route('/block')
 def BlockManage():
     blocks = [
         {
@@ -38,11 +39,12 @@ def BlockManage():
     return render_template('manageBlock.html', blocks=blocks)
 
 
-@manage.route('/block/edit')
+@staff_view.route('/block/edit')
 def edit_block():
     return render_template('addEditBlock.html')
 
-@manage.route('/rooms')
+
+@staff_view.route('/rooms')
 def rooms():
     blocks = [
         {
@@ -156,22 +158,41 @@ def rooms():
             "beds_alv": 2
         }
     ]
-
-    # You can use this extended 'blocks' list in your template with 10 sets of data.
     return render_template('rooms.html', rooms=blocks)
 
 
-@manage.route('/rooms/add')
+@staff_view.route('/rooms/add')
 def room_add():
     return render_template('AddEditRooms.html')
 
 
-@manage.route('/configure')
+@staff_view.route('/roomtype', methods=['GET'], strict_slashes=False)
+def room_type():
+    """ display all room types """
+    dummy_room_types = [
+        {
+            "name": f"Room Type {i}",
+            "description": f"Description for Room Type {i}",
+            "price": 100 + i * 10,
+            "status": "active" if i % 2 == 0 else "inactive"
+        }
+        for i in range(1, 11)
+    ]
+    return render_template('roomType.html', room_type=dummy_room_types)
+
+
+@staff_view.route('/roomtype/add_edit')
+def room_type_add_edit():
+    """" add or edit room type """
+    return render_template('addEditRoomType.html')
+
+
+@staff_view.route('/configure')
 def configure():
     return render_template('configure.html')
 
 
-@manage.route('/expiry')
+@staff_view.route('/expiry')
 def expiry():
     return render_template('expiry.html')
 

@@ -1,16 +1,15 @@
 #!/usr/bin/python3
 
-from flask import Blueprint, render_template
+from flask import render_template
+from web_flask.componet import staff_view
 
-student = Blueprint('student', __name__)
 
-
-@student.route('/addStudent')
+@staff_view.route('/addStudent')
 def add_students():
     return render_template('addUpdateStudent.html')
 
 
-@student.route('/studentsList')
+@staff_view.route('/studentsList')
 def student_list():
     import random
     import string

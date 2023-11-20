@@ -1,15 +1,16 @@
-{% extends 'base.html' %} {% block content %}
-<div class="pagetitle">
-  <h1>Allotment</h1>
-  <nav>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="{{ url_for('staff_view.dashboard')}}">Home</a>
-      </li>
-      <li class="breadcrumb-item active">Block List</li>
-    </ol>
-  </nav>
-</div>
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Room type</h1>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
 <section class="content">
   <div class="col-12">
     <div class="card recent-sales overflow-auto">
@@ -42,7 +43,7 @@
                                        Campus
                                     : activate to sort column ascending"
               >
-                Campus
+                Name
               </th>
               <th
                 class="sorting"
@@ -55,7 +56,7 @@
                                         Name
                                     : activate to sort column ascending"
               >
-                Name
+                Description
               </th>
               <th
                 class="sorting"
@@ -68,9 +69,22 @@
                                         Description
                                     : activate to sort column ascending"
               >
-                Description
+                price
               </th>
               <th
+                class="sorting"
+                tabindex="0"
+                aria-controls="DataTables_Table_0"
+                rowspan="1"
+                colspan="1"
+                style="width: 96.3px"
+                aria-label="
+                                        Action
+                                    : activate to sort column ascending"
+              >
+                status
+              </th>
+                <th
                 class="sorting"
                 tabindex="0"
                 aria-controls="DataTables_Table_0"
@@ -87,24 +101,26 @@
           </thead>
 
           <tbody>
-            {% for block in blocks %}
+          {% if room_type %} {% for type in room_type %}
             <tr>
-              <td>{{ block.id }}</td>
-              <td>{{ block.campus }}</td>
-              <td>{{ block.name }}</td>
-              <td>{{ block.description }}</td>
+              <td></td>
+              <td>{{ type.name }}</td>
+              <td>{{ type.description }}</td>
+              <td>{{ type.price }}</td>
+              <td>{{ type.status }}</td>
               <td>
                 <a href="" class="btn btn-sm btn-info showloader">Edit</a>
                 <a href="" class="btn btn-sm btn-danger showloader">Delete</a>
               </td>
             </tr>
-            {% endfor %}
+          {% endfor %} {% endif %}
+
           </tbody>
         </table>
       </div>
       <div class="card-footer">
         <a
-          href="{{url_for('staff_view.edit_block')}}"
+          href="{{url_for('staff_view.room_type_add_edit')}}"
           class="btn btn-sm btn-info showloader float-right"
           >Create New</a
         >
@@ -113,4 +129,5 @@
   </div>
   <!-- /.row -->
 </section>
+
 {% endblock %}

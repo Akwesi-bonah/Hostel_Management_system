@@ -5,7 +5,7 @@
   <h1>Allotment</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url_for('views.dashboard')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ url_for('staff_view.dashboard')}}">Home</a></li>
       <li class="breadcrumb-item active">Rooms management</li>
     </ol>
   </nav>
@@ -88,7 +88,7 @@
     </div>
       <div class="card-footer">
 
-                        <a href="{{url_for('manage.room_add')}}"
+                        <a href="{{url_for('staff_view.room_add')}}"
                            class="btn btn-sm btn-info showloader float-right">Create New</a>
                     </div>
   </div>

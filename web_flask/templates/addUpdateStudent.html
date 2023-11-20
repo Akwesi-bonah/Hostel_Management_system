@@ -4,7 +4,7 @@
   <h1>Add Student</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url_for('views.base')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ url_for('staff_view.base')}}">Home</a></li>
       <li class="breadcrumb-item active">Add Student</li>
     </ol>
   </nav>
@@ -88,7 +88,7 @@
                   Submit
                 </button>
 
-                <a href="/Studnet" class="btn btn-sm btn-secondary showloader float-right">Back to List</a>
+                <a href="{{url_for('staff_view.student_list')}}" class="btn btn-sm btn-secondary showloader float-right">Back to List</a>
               </div>
             </form>
           </div>

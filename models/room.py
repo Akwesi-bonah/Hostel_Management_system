@@ -4,7 +4,8 @@ import models
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 
-class Room(BaseModel):
+
+class Room(BaseModel, Base):
     """ represent room in hostel """
     if models.storage_t == "db":
         __tablename__ = "rooms"

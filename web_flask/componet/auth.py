@@ -1,5 +1,12 @@
 #!/usr/bin/python3
+"""authication user"""
 
-from flask import Blueprint
+import models
+from flask_login import LoginManager
+login_manager = LoginManager()
 
-auth = Blueprint('auth', __name__)
+
+@login_manager.user_loader
+def load_user(user_email):
+    """load user_id from database"""
+    return models.storage.get_user_id(user_email)
