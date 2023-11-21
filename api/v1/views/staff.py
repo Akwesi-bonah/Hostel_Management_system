@@ -28,10 +28,13 @@ def get_staff(staff_id):
 def delete_staff(staff_id):
     """Delete staff object"""
     staff = storage.get(Staff, staff_id)
-    storage.delete(staff)
-    storage.save()
 
-    return make_response(jsonify({}), 200)
+    if staff:
+        storage.delete(staff)
+        storage.save()
+        return make_response(jsonify({}), 200)
+    else:
+        return make_response(jsonify({'error': 'Staff not found'}), 404)
 
 
 @views.route('/staff', methods=['POST'], strict_slashes=False)

@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ Default staff view"""
-from werkzeug.security import check_password_hash, generate_password_hash
-
+from werkzeug.security import check_password_hash
 from web_flask.componet import staff_view
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, login_user
@@ -21,6 +20,7 @@ def dashboard():
         hash_pwd = models.storage.get_user_pwd(user)
 
         if user and hash_pwd and check_password_hash(hash_pwd, pwd):
+            # login_user(user)
             return redirect(url_for('staff_view.dashboard', username=user))
         else:
             error_message = "Invalid credentials"

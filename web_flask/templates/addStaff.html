@@ -27,25 +27,37 @@
           <!-- /.card-header -->
           <!-- form start -->
           <div role="form">
+              {% if error %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong> {{ error }}</strong> You should check in on some of those fields
+      below.
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endif %}
             <form
-              action="/Staff/Add"
+              action="{{ url_for('staff_view.add_user')}}"
               class="agnet-contact-form"
               id="FormPost"
               method="post"
             >
               <div class="card-body">
                 <div class="form-group">
-                  <label for="inputName">Campus<b class="red">*</b></label>
+                  <label for="campuses">Campus<b class="red">*</b></label>
                   <div>
-                    <select class="form-control" id="campusID" name="campusID">
-                      <option value="">&lt;&lt;Please select&gt;&gt;</option>
-                      <option value="">
+                    <select class="form-control" id="campuses" name="campus">
+                      <option value="0">&lt;&lt;Please select&gt;&gt;</option>
+                      <option value="North Campus">
                         North Campus
                       </option>
-                      <option value="">
-                        South Campus
+                      <option value="Central Campus">
+                        Central Campus
                       </option>
-                      <option value="">
+                      <option value="3">
                         South Campus
                       </option>
                     </select>
@@ -77,20 +89,21 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="staffEmail">Email<b class="red">*</b></label>
+                  <label for="staffEmail"> Email <b class="red">*</b></label>
                   <div>
                     <input
-                      class="text-box single-line"
+                      autocomplete="off"
+                      class="form-control text-box single-line"
                       data-val="true"
-                      data-val-maxlength="The field staffEmail must be a string or array type with a maximum length of '100'."
+                      data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
                       data-val-maxlength-max="100"
-                      data-val-required="The staffEmail field is required."
+                      data-val-required="The staffName field is required."
                       id="staffEmail"
                       name="staffEmail"
-                      type="email"
+                      placeholder=" Enter  Email"
+                      type="Email"
                       value=""
                     />
-
                     <span
                       class="field-validation-valid text-danger"
                       data-valmsg-for="staffEmail"
@@ -98,6 +111,30 @@
                     ></span>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="staffPhone"> Phone <b class="red">*</b></label>
+                  <div>
+                    <input
+                      autocomplete="off"
+                      class="form-control text-box single-line"
+                      data-val="true"
+                      data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
+                      data-val-maxlength-max="100"
+                      data-val-required="The staffName field is required."
+                      id="staffPhone"
+                      name="staffPhone"
+                      placeholder=" Enter  Phone"
+                      type="phone"
+                      value=""
+                    />
+                    <span
+                      class="field-validation-valid text-danger"
+                      data-valmsg-for="staffPhone"
+                      data-valmsg-replace="true"
+                    ></span>
+                  </div>
+                </div>
+
                  <div class="form-group">
                   <label for="UserPwd"> Password<b class="red">*</b></label>
                   <div>
@@ -108,15 +145,15 @@
                       data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
                       data-val-maxlength-max="100"
                       data-val-required="The staffName field is required."
-                      id="UserPwd"
-                      name="staffpwd"
+                      id="userPwd"
+                      name="userPwd"
                       placeholder=" Enter  Password"
-                      type="text"
+                      type="password"
                       value=""
                     />
                     <span
                       class="field-validation-valid text-danger"
-                      data-valmsg-for="staffName"
+                      data-valmsg-for="staffpwd"
                       data-valmsg-replace="true"
                     ></span>
                   </div>
@@ -127,22 +164,22 @@
                     <select
                       class="form-control"
                       id="roleName"
-                      name="Role"
+                      name="role"
                     >
-                      <option value="">&lt;&lt;Please select&gt;&gt;</option>
-                      <option value="">
+                      <option value="0">&lt;&lt;Please select&gt;&gt;</option>
+                      <option value="JCR">
                         JCR
                       </option>
-                      <option value="">
+                      <option value="Porter">
                         Porter
                       </option>
-                      <option value="">
+                      <option value="Facility Manager">
                         Facility Manager
                       </option>
-                      <option value="">
+                      <option value="Administrator">
                         Administrator
                       </option>
-                      <option value="">
+                      <option value="Account Officer">
                         Account Officer
                       </option>
                     </select>
@@ -159,9 +196,9 @@
                       id="status"
                       name="status"
                     >
-                      <option value="">&lt;&lt;Please select&gt;&gt;</option>
-                      <option value="1">Active</option>
-                      <option value="0">Inactive</option>
+                      <option value="O">&lt;&lt;Please select&gt;&gt;</option>
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
                     </select>
                   </div>
                 </div>
@@ -193,5 +230,95 @@
   </div>
   <!-- /.container-fluid -->
 </section>
+<!-- Add jQuery library -->
+
+<script>
+  $(document).ready(function() {
+    // Function to validate the form
+    function validateForm() {
+      var isValid = true;
+
+      // Validate campus selection
+      var campus = $('#campuses').val();
+      if (campus === '0') {
+        alert('Please select a campus.');
+        isValid = false;
+      }
+
+      // Validate name field
+      var name = $('#staffName').val();
+      if (!name.trim()) {
+        alert('Please enter a name.');
+        isValid = false;
+      }
+
+      // Validate email field
+      var email = $('#staffEmail').val();
+      if (!email.trim()) {
+        alert('Please enter an email.');
+        isValid = false;
+      }
+
+      // Validate password field
+      var password = $('#UserPwd').val();
+      if (!password.trim()) {
+        alert('Please enter a password.');
+        isValid = false;
+      }
+
+      // Validate role selection
+      var role = $('#roleName').val();
+      if (role === '0') {
+        alert('Please select a role.');
+        isValid = false;
+      }
+
+      // Validate status selection
+      var status = $('#status').val();
+      if (status === 'O') {
+        alert('Please select a status.');
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    // Event listener for submit button click
+    $('#AddData').click(function(event) {
+      // Prevent the default form submission
+      event.preventDefault();
+
+      // Call the validateForm function
+      if (validateForm()) {
+        // If form is valid, submit the form
+        $('#FormPost').submit();
+      }
+    });
+  });
+</script>
+<!-- Your custom JavaScript -->
+<script>
+    // Wait for the DOM to be ready
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the form and the submit button by their IDs
+        const myForm = document.getElementById('myForm');
+        const submitButton = document.getElementById('submitButton');
+
+        // Add event listener for the form submission
+        myForm.addEventListener('submit', function (event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Trigger SweetAlert notification
+            Swal.fire({
+                title: 'Form Submitted!',
+                text: 'Your form has been submitted successfully.',
+                icon: 'success',
+                confirmButtonText: 'Okay'
+            });
+        });
+    });
+</script>
+
 
 {% endblock %}

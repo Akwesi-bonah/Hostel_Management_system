@@ -89,7 +89,7 @@
           <tbody>
             {% for block in blocks %}
             <tr>
-              <td>{{ block.id }}</td>
+              <td></td>
               <td>{{ block.campus }}</td>
               <td>{{ block.name }}</td>
               <td>{{ block.description }}</td>
@@ -104,7 +104,7 @@
       </div>
       <div class="card-footer">
         <a
-          href="{{url_for('staff_view.edit_block')}}"
+          href="{{url_for('staff_view.new_block')}}"
           class="btn btn-sm btn-info showloader float-right"
           >Create New</a
         >

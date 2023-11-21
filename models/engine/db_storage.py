@@ -52,7 +52,6 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
 
-
     def get_user_id(self, email=None):
         """ get user id using email """
         if email is None:

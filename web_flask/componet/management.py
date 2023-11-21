@@ -2,46 +2,55 @@
 """ Block and Room management"""
 
 from web_flask.componet import staff_view
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, redirect, url_for
 from models.block import Block
 from models import storage
 
 
-@staff_view.route('/block')
+@staff_view.route('/blocks')
 def BlockManage():
-    blocks = [
-        {
-            "id": 1,
-            "campus": "Campus A",
-            "name": "Block 1",
-            "description": "This is the first block."
-        },
-        {
-            "id": 2,
-            "campus": "Campus B",
-            "name": "Block 2",
-            "description": "A description for block 2."
-        },
-        {
-            "id": 3,
-            "campus": "Campus C",
-            "name": "Block 3",
-            "description": "The third block's description."
-        },
-        {
-            "id": 4,
-            "campus": "Campus A",
-            "name": "Block 4",
-            "description": "Description for block 4."
-        }
-    ]
+    """ display all blocks """
+    all_bocks = storage.all(Block).values()
+    blocks = [block.to_dict() for block in all_bocks]
 
     return render_template('manageBlock.html', blocks=blocks)
 
 
-@staff_view.route('/block/edit')
+@staff_view.route('/blocks/add', methods=['GET'], strict_slashes=False)
+def new_block():
+    """ Add new Block"""
+    return render_template('addBlock.html')
+
+
+@staff_view.route('/blocks', methods=['POST'], strict_slashes=False)
+def add_block():
+    """ Add new Block"""
+    if request.method == 'POST':
+        """ Retrieve individual form fields """
+        campus = request.form.get('campus')
+        name = request.form.get('blockName')
+        description = request.form.get('blockDescription')
+        status = request.form.get('status')
+
+        if name and description and status and campus:
+            # Assuming you have a Block model with these attributes
+            try:
+                new_block = Block(name=name, description=description, campus=campus, status=status)
+                new_block.save()
+                return redirect(url_for('staff_view.BlockManage'))
+            except Exception as e:
+                error_message = "ALll fields are required"
+                return render_template('addBlock.html', error=error_message)
+        else:
+            error_message = "Invalid credentials"
+            return render_template('addBlock.html', error=error_message)
+
+    return render_template('addBlock.html')
+
+
+@staff_view.route('/blocks/edit', methods=['GET'])
 def edit_block():
-    return render_template('addEditBlock.html')
+    return render_template('addBlock.html')
 
 
 @staff_view.route('/rooms')

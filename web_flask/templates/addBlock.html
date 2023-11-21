@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 <div class="pagetitle">
-  <h1>Allotment</h1>
+  <h1>Block Management</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -24,9 +24,23 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
+              {% if error %}
           <div role="form">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong> {{ error }}</strong> You should check in on some of those fields
+      below.
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+
+    </div>
+            {% endif %}
+
             <form
-              action="/Block/Add"
+              action="{{ url_for('staff_view.add_block')}}"
               class="agnet-contact-form"
               id="FormPost"
               method="post"
@@ -34,10 +48,10 @@
 
               <div class="card-body">
                 <div class="form-group">
-                  <label for="inputName">Campus<b class="red">*</b></label>
+                  <label for="campus">Campus<b class="red">*</b></label>
                   <div>
-                    <select class="form-control" id="campusID" name="campusID">
-                      <option value="">&lt;&lt;Please select&gt;&gt;</option>
+                    <select class="form-control" id="campus" name="campus">
+                      <option value="O">&lt;&lt;Please select&gt;&gt;</option>
                       <option value="north_campus">
                         North Campus
                       </option>
@@ -58,14 +72,14 @@
                       autocomplete="off"
                       class="form-control text-box single-line"
                       id="block_name"
-                      name="name"
+                      name="blockName"
                       placeholder=" Enter Block Name"
                       type="text"
                       value=""
                     />
                     <span
                       class="field-validation-valid text-danger"
-                      data-valmsg-for="name"
+                      data-valmsg-for="blockName"
                       data-valmsg-replace="true"
                     ></span>
                   </div>
@@ -79,7 +93,7 @@
                       class="form-control"
                       cols="100"
                       id="description"
-                      name="description"
+                      name="blockDescription"
                       placeholder="Description"
                       rows="2"
                     ></textarea>
@@ -93,7 +107,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="inputStatus">Status</label>
+                  <label for="status">Status</label>
                   <div>
                     <select
                       class="form-control"
@@ -103,9 +117,9 @@
                       id="status"
                       name="status"
                     >
-                      <option value="">&lt;&lt;Please select&gt;&gt;</option>
-                      <option value="1">Active</option>
-                      <option value="0">Inactive</option>
+                      <option value="O">&lt;&lt;Please select&gt;&gt;</option>
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
                     </select>
                   </div>
                 </div>

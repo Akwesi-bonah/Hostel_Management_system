@@ -1,0 +1,104 @@
+img{
+    height: 300px;
+}
+h3{
+    margin-bottom: 10vh;
+    padding-right: 30px;
+}
+image{
+padding-right: 30px;
+}
+.letter{
+    font-size: 15px;
+}
+.pent{
+    font-size: 20px;
+    padding-left:40px
+
+}
+p{
+    color: #ffff;
+}
+
+input{
+
+    display: block; /* Make labels block-level for stacking */
+      margin-bottom: 5px; /* Adjust the value as needed */
+    margin-bottom: 40px;
+    height: 40px;
+    width:70% ;
+
+}
+
+button{
+    height:  40px;
+    width: 60%;
+    border: 1px solid #ffff;
+    background-color:#0a7e8c ;
+    color: black;
+    cursor: pointer;
+
+}
+.cent{
+    border: 0.1px solid black;
+    padding-top: 11vh;
+    padding-left: 10vh;
+    padding-bottom: 12vh;
+    background-color: #483d8b ;
+    box-shadow: 2px 2px 2px 2px;
+}
+.mint{
+
+    padding-top: 3.5vh;
+    padding-bottom: 4vh;
+    padding-left: 10vh;
+    box-shadow: 2px 2px 2px 2px;
+}
+a{
+    color: white;
+
+}
+.bent{
+    box-shadow: 0 0 100px rgba(1, 1, 1, 0.1);
+
+}
+.crent{
+    padding-right: 20px;
+}
+.btn{
+    height: 50px;
+    width: 30%;
+
+
+}
+.letter{
+    color: black;
+}
+.pent{
+    color: black;
+}
+.signupform,input{
+    width: 60%;
+}
+.signupform,button{
+    width: 40%;
+}
+.flex-container {
+    display: flex;
+    margin-bottom: 30px;
+}
+.flex-container input {
+    margin-right: 50px;
+}
+.signupForm{
+    margin-top: 30px;
+
+}
+.container{
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: 150vh;
+    margin: 0;
+
+}

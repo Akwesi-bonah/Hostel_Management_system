@@ -2,23 +2,25 @@
 """ Define Staff class """
 from hashlib import md5
 from werkzeug.security import generate_password_hash
-
+from flask_login import UserMixin
 from models.base_model import BaseModel, Base
 import models
 from sqlalchemy import Column, String
 
 
-class Staff(BaseModel, Base):
+class Staff(BaseModel, Base, UserMixin):
     """ Represent staff in hostel """
     if models.storage_t == "db":
         __tablename__ = "staff"
-        name = Column(String(128), nullable=False)
-        email = Column(String(128), nullable=False)
-        phone = Column(String(128), nullable=True)
+        campus = Column(String(255),nullable=True)
+        name = Column(String(255), nullable=False)
+        email = Column(String(255), nullable=False, unique=True)
+        phone = Column(String(255), nullable=True, unique=True)
         password = Column(String(1000), nullable=False)
         role = Column(String(128), nullable=False)
         status = Column(String(128), nullable=True)
     else:
+        campus = ""
         name = ""
         email = ""
         phone = ""

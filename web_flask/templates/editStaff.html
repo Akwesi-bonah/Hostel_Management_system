@@ -1,0 +1,306 @@
+
+{% extends 'base.html' %}
+{% block content %}
+  <div class="pagetitle">
+  <h1>Block Management</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{{ url_for('staff_view.dashboard')}}">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Block List</li>
+    </ol>
+  </nav>
+</div>
+<br>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Add/Update Staff</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <div role="form">
+              {% if error %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong> {{ error }}</strong> You should check in on some of those fields
+      below.
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endif %}
+            <form
+              action="{{ url_for('staff_view.add_user')}}"
+              class="agnet-contact-form"
+              id="FormPost"
+              method="PUT"
+            >
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="campuses">Campus<b class="red">*</b></label>
+                  <div>
+                   <select class="form-control" id="campuses" name="campus">
+  <option value="0">&lt;&lt;Please select&gt;&gt;</option>
+  <option value="North Campus" {% if campus == 'North Campus' %} selected {% endif %}>North Campus</option>
+  <option value="Central Campus" {% if campus == 'Central Campus' %} selected {% endif %}>Central Campus</option>
+  <option value="3" {% if campus == '3' %} selected {% endif %}>South Campus</option>
+</select>
+
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="staffName"> Name <b class="red">*</b></label>
+                  <div>
+                    <input
+                      autocomplete="off"
+                      class="form-control text-box single-line"
+                      data-val="true"
+                      data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
+                      data-val-maxlength-max="100"
+                      data-val-required="The staffName field is required."
+                      id="staffName"
+                      name="staffName"
+                      placeholder=" Enter  Name"
+                      type="text"
+                      value="{{ name }}"
+                    />
+                    <span
+                      class="field-validation-valid text-danger"
+                      data-valmsg-for="staffName"
+                      data-valmsg-replace="true"
+                    ></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="staffEmail"> Email <b class="red">*</b></label>
+                  <div>
+                    <input
+                      autocomplete="off"
+                      class="form-control text-box single-line"
+                      data-val="true"
+                      data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
+                      data-val-maxlength-max="100"
+                      data-val-required="The staffName field is required."
+                      id="staffEmail"
+                      name="staffEmail"
+                      placeholder=" Enter  Email"
+                      type="Email"
+                      value="{{ name }}"
+                    />
+                    <span
+                      class="field-validation-valid text-danger"
+                      data-valmsg-for="staffEmail"
+                      data-valmsg-replace="true"
+                    ></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="staffPhone"> Phone <b class="red">*</b></label>
+                  <div>
+                    <input
+                      autocomplete="off"
+                      class="form-control text-box single-line"
+                      data-val="true"
+                      data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
+                      data-val-maxlength-max="100"
+                      data-val-required="The staffName field is required."
+                      id="staffPhone"
+                      name="staffPhone"
+                      placeholder=" Enter  Phone"
+                      type="phone"
+                      value="{{ phone}}"
+                    />
+                    <span
+                      class="field-validation-valid text-danger"
+                      data-valmsg-for="staffPhone"
+                      data-valmsg-replace="true"
+                    ></span>
+                  </div>
+                </div>
+
+                 <div class="form-group">
+                  <label for="UserPwd"> Password<b class="red">*</b></label>
+                  <div>
+                    <input
+                      autocomplete="off"
+                      class="form-control text-box single-line"
+                      data-val="true"
+                      data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
+                      data-val-maxlength-max="100"
+                      data-val-required="The staffName field is required."
+                      id="userPwd"
+                      name="userPwd"
+                      placeholder=" Enter  Password"
+                      type="password"
+                      value=""
+                    />
+                    <span
+                      class="field-validation-valid text-danger"
+                      data-valmsg-for="staffpwd"
+                      data-valmsg-replace="true"
+                    ></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="roleName">Role<b class="red">*</b></label>
+                  <div>
+                   <select class="form-control" id="roleName" name="role">
+  <option value="0">&lt;&lt;Please select&gt;&gt;</option>
+  <option value="JCR" {% if role == 'JCR' %} selected {% endif %}>JCR</option>
+  <option value="Porter" {% if role == 'Porter' %} selected {% endif %}>Porter</option>
+  <option value="Facility Manager" {% if role == 'Facility Manager' %} selected {% endif %}>Facility Manager</option>
+  <option value="Administrator" {% if role == 'Administrator' %} selected {% endif %}>Administrator</option>
+  <option value="Account Officer" {% if role == 'Account Officer' %} selected {% endif %}>Account Officer</option>
+</select>
+
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status</label>
+                  <div>
+                    <select
+                      class="form-control"
+                      data-val="true"
+                      data-val-number="The field status must be a number."
+                      data-val-required="The status field is required."
+                      id="status"
+                      name="status"
+                    >
+                      <option value="O">&lt;&lt;Please select&gt;&gt;</option>
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <button
+                  type="submit"
+                  class="btn btn-primary showloader float-left"
+                  id="AddData"
+                >
+                  Submit
+                </button>
+
+                <a
+                  href="{{url_for('staff_view.users')}}"
+                  class="btn btn-sm btn-secondary showloader float-right"
+                  >Back to List</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!--/.col (left) -->
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- Add jQuery library -->
+
+<script>
+  $(document).ready(function() {
+    // Function to validate the form
+    function validateForm() {
+      var isValid = true;
+
+      // Validate campus selection
+      var campus = $('#campuses').val();
+      if (campus === '0') {
+        alert('Please select a campus.');
+        isValid = false;
+      }
+
+      // Validate name field
+      var name = $('#staffName').val();
+      if (!name.trim()) {
+        alert('Please enter a name.');
+        isValid = false;
+      }
+
+      // Validate email field
+      var email = $('#staffEmail').val();
+      if (!email.trim()) {
+        alert('Please enter an email.');
+        isValid = false;
+      }
+
+      // Validate password field
+      var password = $('#UserPwd').val();
+      if (!password.trim()) {
+        alert('Please enter a password.');
+        isValid = false;
+      }
+
+      // Validate role selection
+      var role = $('#roleName').val();
+      if (role === '0') {
+        alert('Please select a role.');
+        isValid = false;
+      }
+
+      // Validate status selection
+      var status = $('#status').val();
+      if (status === 'O') {
+        alert('Please select a status.');
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    // Event listener for submit button click
+    $('#AddData').click(function(event) {
+      // Prevent the default form submission
+      event.preventDefault();
+
+      // Call the validateForm function
+      if (validateForm()) {
+        // If form is valid, submit the form
+        $('#FormPost').submit();
+      }
+    });
+  });
+</script>
+<!-- Your custom JavaScript -->
+<script>
+    // Wait for the DOM to be ready
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the form and the submit button by their IDs
+        const myForm = document.getElementById('myForm');
+        const submitButton = document.getElementById('submitButton');
+
+        // Add event listener for the form submission
+        myForm.addEventListener('submit', function (event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Trigger SweetAlert notification
+            Swal.fire({
+                title: 'Form Submitted!',
+                text: 'Your form has been submitted successfully.',
+                icon: 'success',
+                confirmButtonText: 'Okay'
+            });
+        });
+    });
+</script>
+
+
+{% endblock %}
