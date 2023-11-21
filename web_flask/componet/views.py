@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """ Default staff view"""
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from web_flask.componet import staff_view
 from flask import render_template, request, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, login_user
+import models
 
 
 @staff_view.route('/')
@@ -13,18 +15,18 @@ def base():
 
 @staff_view.route('/user', methods=['GET', 'POST'])
 def dashboard():
-    user = None
     if request.method == 'POST':
         user = request.form.get('email')
         pwd = request.form.get('password')
-        if user == "arhinbonnah@gmail.com" and pwd == "wolf":
-            # Redirect to the same route using GET
+        hash_pwd = models.storage.get_user_pwd(user)
+
+        if user and hash_pwd and check_password_hash(hash_pwd, pwd):
             return redirect(url_for('staff_view.dashboard', username=user))
         else:
             error_message = "Invalid credentials"
             return render_template('default.html', error=error_message)
 
-    return render_template('base.html',  name=user)
+    return render_template('base.html', name=None)
 
 
 @staff_view.route('/allotment')

@@ -28,6 +28,7 @@ def get_staff(staff_id):
 def delete_staff(staff_id):
     """Delete staff object"""
     staff = storage.get(Staff, staff_id)
+    storage.delete(staff)
     storage.save()
 
     return make_response(jsonify({}), 200)

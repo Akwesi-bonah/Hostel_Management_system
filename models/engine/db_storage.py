@@ -48,7 +48,10 @@ class DBStorage:
                                              HBNB_MYSQL_PWD,
                                              HBNB_MYSQL_HOST,
                                              HBNB_MYSQL_DB))
-        Base.metadata.drop_all(self.__engine)
+        if HBNB_ENV == "test":
+            Base.metadata.drop_all(self.__engine)
+
+
 
     def get_user_id(self, email=None):
         """ get user id using email """
@@ -60,6 +63,16 @@ class DBStorage:
                 return user.id
         return None
 
+    def get_user_pwd(self, email=None):
+        """ get user id using email """
+        if email is None:
+            return None
+        all_users = self.all(Staff)
+        for user in all_users.values():
+            if user.email == email:
+                return user.password
+        return None
+
     def all(self, cls=None):
         """query on the current database session"""
         new_dict = {}
@@ -69,7 +82,7 @@ class DBStorage:
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj
-        return (new_dict)
+        return new_dict
 
     def new(self, obj):
         """add the object to the current database session"""
