@@ -29,10 +29,14 @@ def get_block(block_id):
 def delete_block(block_id):
     """Delete block object"""
     block = storage.get(Block, block_id)
+    if not block:
+        abort(404)
+
     storage.delete(block)
     storage.save()
 
-    return jsonify({}, 200)
+    return jsonify({})
+
 
 @views.route('/block', methods=['POST'], strict_slashes=False)
 def add_block():
@@ -73,4 +77,4 @@ def update_block(block_id):
         if key not in ignore:
             setattr(block, key, value)
     storage.save()
-    return jsonify(block.to_dict(), 200)
+    return jsonify(block.to_dict())

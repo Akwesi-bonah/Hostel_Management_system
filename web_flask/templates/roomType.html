@@ -109,7 +109,7 @@
               <td>{{ type.price }}</td>
               <td>{{ type.status }}</td>
               <td>
-                <a href="" class="btn btn-sm btn-info showloader">Edit</a>
+                <a href="{{ url_for('staff_view.room_type_edit', room_type_id=type.id) }}" class="btn btn-sm btn-info showloader">Edit</a>
                 <a href="" class="btn btn-sm btn-danger showloader">Delete</a>
               </td>
             </tr>
@@ -120,7 +120,7 @@
       </div>
       <div class="card-footer">
         <a
-          href="{{url_for('staff_view.room_type_add_edit')}}"
+          href="{{url_for('staff_view.room_type_add')}}"
           class="btn btn-sm btn-info showloader float-right"
           >Create New</a
         >

@@ -14,7 +14,7 @@ from web_flask.student_model import student_views
 def create_app():
     app = Flask(__name__)
     # database connection
-    app.config['SECRET_KEY'] = 'hard to guess string'
+    app.config['SECRET_KEY'] = 'hard to guess asdiohlkn,adugj;kan,msdhstring'
     login_manager = LoginManager()
     login_manager.init_app(app)
 

@@ -17,9 +17,10 @@ def get_staffs():
 @views.route('/staff/<staff_id>', methods=['GET'], strict_slashes=False)
 def get_staff(staff_id):
     """Retrieves a staff"""
+
     staff = storage.get(Staff, staff_id)
-    if not Staff:
-        abort(404)
+    if Staff:
+        abort(400, description="Staff Not Found")
 
     return jsonify(staff.to_dict())
 
@@ -56,10 +57,26 @@ def add_staff():
     if 'role' not in request.get_json():
         abort(400, description="Name missing")
 
-    data = request.get_json()
-    instance = Staff(**data)
-    instance.save()
-    return make_response(jsonify(instance.to_dict()), 201)
+    if 'status' not in request.get_json():
+        abort(400, description="status Missing")
+
+    email = request.get_json()['email']
+    staff = storage.get_user_email(email)
+    if staff:
+        abort(400, description="email already exist")
+
+    Estaff = storage.get_user_phone(email)
+    if Estaff:
+        abort(400, description="phone already exist")
+
+
+    try:
+        data = request.get_json()
+        instance = Staff(**data)
+        instance.save()
+        return make_response(jsonify(instance.to_dict()), 201)
+    except Exception as e:
+        abort(400, description=" Error Occurred  email or phone already exist")
 
 
 @views.route('/staff/<staff_id>', methods=['PUT'], strict_slashes=False)
@@ -71,7 +88,7 @@ def update_staff(staff_id):
 
     staff = storage.get(Staff, staff_id)
     if not Staff:
-        abort(404)
+        abort(400, description="Staff Not Found")
 
     ignore = ['id',  'created_at', 'updated_at']
 

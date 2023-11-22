@@ -94,7 +94,7 @@
               <td>{{ block.name }}</td>
               <td>{{ block.description }}</td>
               <td>
-                <a href="" class="btn btn-sm btn-info showloader">Edit</a>
+                <a href="{{ url_for('staff_view.edit_block', block_id=block.id) }}" class="btn btn-sm btn-info showloader">Edit</a>
                 <a href="" class="btn btn-sm btn-danger showloader">Delete</a>
               </td>
             </tr>

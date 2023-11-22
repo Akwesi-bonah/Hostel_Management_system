@@ -31,7 +31,7 @@ def delete_room_type(room_type_id):
     storage.delete(room_type)
     storage.save()
 
-    return jsonify({}), 200
+    return jsonify({})
 
 
 @views.route('/room_type', methods=['POST'], strict_slashes=False)
@@ -50,7 +50,7 @@ def add_room_type():
     data = request.get_json()
     instance = RoomType(**data)
     instance.save()
-    return jsonify(instance.to_dict(), 201)
+    return jsonify(instance.to_dict())
 
 
 @views.route('/room_type/<room_type_id>', methods=['PUT'], strict_slashes=False)
