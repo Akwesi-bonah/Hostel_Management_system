@@ -13,6 +13,15 @@
   </nav>
 </div>
 <br>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
 <section class="content">
   <div class="container-fluid">
     <div class="row">
@@ -121,68 +130,10 @@
 <!-- Add jQuery library -->
 
 <script>
-  $(document).ready(function() {
-    // Function to validate the form
-    function validateForm() {
-      var isValid = true;
-
-      // Validate campus selection
-      var campus = $('#campuses').val();
-      if (campus === '0') {
-        alert('Please select a campus.');
-        isValid = false;
-      }
-
-      // Validate name field
-      var name = $('#staffName').val();
-      if (!name.trim()) {
-        alert('Please enter a name.');
-        isValid = false;
-      }
-
-      // Validate email field
-      var email = $('#staffEmail').val();
-      if (!email.trim()) {
-        alert('Please enter an email.');
-        isValid = false;
-      }
-
-      // Validate password field
-      var password = $('#UserPwd').val();
-      if (!password.trim()) {
-        alert('Please enter a password.');
-        isValid = false;
-      }
-
-      // Validate role selection
-      var role = $('#roleName').val();
-      if (role === '0') {
-        alert('Please select a role.');
-        isValid = false;
-      }
-
-      // Validate status selection
-      var status = $('#status').val();
-      if (status === 'O') {
-        alert('Please select a status.');
-        isValid = false;
-      }
-
-      return isValid;
-    }
-
-    // Event listener for submit button click
-    $('#AddData').click(function(event) {
-      // Prevent the default form submission
-      event.preventDefault();
-
-      // Call the validateForm function
-      if (validateForm()) {
-        // If form is valid, submit the form
-        $('#FormPost').submit();
-      }
-    });
-  });
+ $(document).ready(function(){
+        $('#bd-example-modal-lg"').modal('show')
+      alert("klen");
+      });
 </script>
 <!-- Your custom JavaScript -->
 <script>

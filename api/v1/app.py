@@ -2,12 +2,14 @@
 """ API Blueprint"""
 
 from flask import Flask, make_response, jsonify
+from flask_cors import CORS
+
 from api.v1.views import views
 from models import storage
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.register_blueprint(views)
-# cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 

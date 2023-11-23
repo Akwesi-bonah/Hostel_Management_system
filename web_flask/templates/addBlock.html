@@ -15,7 +15,7 @@
   <div class="container-fluid">
     <div class="row">
       <!-- left column -->
-      <div class="col-md-3"></div>
+      <div class="col-md-3">
       <div class="col-md-6">
         <!-- general form elements -->
         <div class="card card-primary">
@@ -39,11 +39,11 @@
     </div>
             {% endif %}
 
-     <form action="{{ url_for('staff_view.add_block') }}" class="agnet-contact-form" id="FormPost" method="post">
+     <form action="" class="agnet-contact-form" id="FormPost" method="post">
     {{ form.hidden_tag() }}
     <div class="card-body">
         <div class="form-group">
-            <label for="campus">Campus<b class="red">*</b></label>
+            <label >Campus<b class="red">*</b></label>
             <div>
                 {{ form.campus(class="form-control", id="campus") }}
                 {% for error in form.campus.errors %}
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group">
-            <label for="name">Name <b class="red">*</b></label>
+            <label >Name <b class="red">*</b></label>
             <div>
                 {{ form.name(class="form-control", id="name", placeholder="Enter Name") }}
                 {% for error in form.name.errors %}
@@ -63,7 +63,7 @@
         </div>
 
         <div class="form-group">
-            <label for="description">Description<b class="red">*</b></label>
+            <label >Description<b class="red">*</b></label>
             <div>
                 {{ form.description(class="form-control", id="description", placeholder="Description", rows="5") }}
                 {% for error in form.description.errors %}
@@ -73,7 +73,7 @@
         </div>
 
         <div class="form-group">
-            <label for="status">Status</label>
+            <label >Status</label>
             <div>
                 {{ form.status(class="form-control", id="status") }}
                 {% for error in form.status.errors %}
@@ -86,7 +86,6 @@
 
     <div class="card-footer">
         {{ form.submit(class="btn btn-primary showloader float-left", id="AddData") }}
-        <a href="{{ url_for('staff_view.BlockManage') }}" class="btn btn-sm btn-secondary showloader float-right">Back to List</a>
     </div>
 </form>
 
@@ -99,8 +98,6 @@
       <!--/.col (left) -->
       <div class="col-md-3"></div>
     </div>
-  </div>
-  <!-- /.container-fluid -->
 </section>
 
 {% endblock %}

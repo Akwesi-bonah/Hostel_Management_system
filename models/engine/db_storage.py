@@ -51,7 +51,6 @@ class DBStorage:
         if HBNB_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
-
     def get_user_id(self, email=None):
         """ get user id using email """
         if email is None:
@@ -82,14 +81,11 @@ class DBStorage:
                 return user.password
         return False
 
-    def get_user_phone(self, email=None):
-        """ get user id using email """
-        if email is None:
-            return None
-        all_users = self.all(Staff)
-        for user in all_users.values():
-            if user.email == email:
-                return True
+    def get_user_phone(self, phone=None):
+        """Get user phone using email"""
+        phone = self.__session.query(Staff).filter_by(phone=phone).first()
+        if phone:
+            return True
         return False
 
     def all(self, cls=None):

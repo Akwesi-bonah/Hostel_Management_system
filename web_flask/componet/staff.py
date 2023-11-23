@@ -11,9 +11,11 @@ from models import storage
 @staff_view.route('/staff', methods=['GET'], strict_slashes=False)
 def users():
     """ staff management"""
+    form = StaffForm()
     all_staff = storage.all(Staff).values()
     staff = [staff.to_dict() for staff in all_staff]
-    return render_template('manageStaff.html', users=staff)
+    return render_template('manageStaff.html',
+                           users=staff, form=form)
 
 
 @staff_view.route('/staff/addEdit', methods=['GET'], strict_slashes=False)

@@ -11,13 +11,15 @@ from web_flask.forms.rooms import RoomForm
 from models import storage
 
 
-@staff_view.route('/blocks')
+@staff_view.route('/block')
 def BlockManage():
     """ display all blocks """
+    form = AddBlock()
     all_bocks = storage.all(Block).values()
     blocks = [block.to_dict() for block in all_bocks]
 
-    return render_template('manageBlock.html', blocks=blocks)
+    return render_template('manageBlock.html',
+                           blocks=blocks, form=form)
 
 
 @staff_view.route('/blocks/add', methods=['GET'], strict_slashes=False)
@@ -76,10 +78,13 @@ def update_block():
 @staff_view.route('/rooms')
 def rooms():
     """ display all rooms """
+
+    form = RoomForm()
     all_rooms = storage.all(Room).values()
     room = [room.to_dict() for room in all_rooms]
 
-    return render_template('rooms.html', rooms=room)
+    return render_template('rooms.html',
+                           rooms=room, form=form)
 
 
 @staff_view.route('/rooms/add', methods=['GET'], strict_slashes=False)
@@ -116,8 +121,6 @@ def new_room():
 
     # If the form does not validate, render the form page again with the form and errors
     return render_template('add_room.html', form=form)
-
-
 
 
 @staff_view.route('/roomtype', methods=['GET'], strict_slashes=False)

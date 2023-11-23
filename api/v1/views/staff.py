@@ -65,8 +65,9 @@ def add_staff():
     if staff:
         abort(400, description="email already exist")
 
-    Estaff = storage.get_user_phone(email)
-    if Estaff:
+    Dphone = request.get_json()['phone']
+    phone = storage.get_user_phone(Dphone)
+    if phone:
         abort(400, description="phone already exist")
 
 
