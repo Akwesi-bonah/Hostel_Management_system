@@ -11,19 +11,21 @@ class Student(BaseModel, Base):
 
     if models.storage_t == "db":
         __tablename__ = "students"
-        full_name = Column(String(128), nullable=False)
+        first_name = Column(String(128), nullable=False)
+        last_name = Column(String(128), nullable=False)
+        other_name = Column(String(128))
         date_of_birth = Column(Date, nullable=False)
         gender = Column(String(128), nullable=False)
-        student_number = Column(String(128), nullable=False)
-        program = Column(String(128), nullable=False)
-        level = Column(String(128), nullable=False)
-        email = Column(String(128), nullable=False)
-        address = Column(String(128), nullable=False)
-        phone = Column(String(128), nullable=False)
-        guardian_name = Column(String(128), nullable=False)
-        guardian_phone = Column(String(128), nullable=False)
-        password = Column(String(128), nullable=False)
-        disability = Column(String(128), nullable=False)
+        student_number = Column(String(128), unique=True)
+        program = Column(String(128))
+        level = Column(String(128))
+        email = Column(String(128), unique=True)
+        address = Column(String(128))
+        phone = Column(String(128), unique=True)
+        guardian_name = Column(String(128))
+        guardian_phone = Column(String(128))
+        password = Column(String(128))
+        disability = Column(String(128))
     else:
         full_name = ""
         date_of_birth = ""

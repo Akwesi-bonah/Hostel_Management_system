@@ -114,74 +114,148 @@
               </th>
             </tr>
           </thead>
-
-          <tbody>
-        {% for user in users %}
+<tbody>
+            {% for user in users %}
             <tr>
-        <td></td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-                <td>{{ user.phone }}</td>
-            <td>{{ user.role }}</td>
-                <td>{{ user.status}}</td>
+              <td></td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phone }}</td>
+              <td>{{ user.role }}</td>
+              <td>{{ user.status }}</td>
               <td>
-        <a href="{{ url_for('staff_view.edit_staff', staff_id=user.id) }}" class="btn btn-sm btn-info showloader">Edit</a>
-        <a href="" class="btn btn-sm btn-danger showloader delete-user" data-user-id="{{ user.id }}">Delete</a>
-      </td>
+                <a
+                  href="#"
+                  class="btn btn-sm btn-info showloader edit-user"
+                  data-user-id="{{ user.id }}"
+                  >Edit</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-sm btn-danger showloader delete-user"
+                  data-user-id="{{ user.id }}"
+                  >Delete</a
+                >
+              </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
       <div class="card-footer">
-        <a
-          href="{{url_for('staff_view.add_staff')}}"
-          class="btn btn-sm btn-info showloader float-right"
-          >Create New</a
-        >
+          <button type="button" class="btn btn-primary"
+               data-bs-toggle="modal"
+               data-bs-target="#staffCreateUpdate">
+  Create New
+</button>
       </div>
     </div>
   </div>
   <!-- /.row -->
 </section>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    // Event listener for delete buttons
-    $('.delete-user').click(function(e) {
-      e.preventDefault();
-      var userId = $(this).data('user-id');
-      var rowToDelete = $(this).closest('tr'); // Get the row to delete
 
-      // Show confirmation dialog using SweetAlert
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'You are about to delete this user. This action cannot be undone.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Perform AJAX request to delete the user
-          $.ajax({
-            url: '/staff/' + userId, // Endpoint to delete user
-            method: 'DELETE',
-            success: function(response) {
-              // Handle success (remove the row from the table)
-              rowToDelete.remove(); // Remove the deleted row from the table
-              Swal.fire('Deleted!', 'The user has been deleted.', 'success');
-            },
-            error: function(xhr, status, error) {
-              // Handle error
-              Swal.fire('Error!', 'Failed to delete the user.', 'error');
-            }
-          });
-        }
-      });
-    });
-  });
-</script>
+<div class="modal fade md-col2" id="staffCreateUpdate" tabindex="-1" aria-labelledby="staffUpdateCreate" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="staffUpdateCreate">Add/Update Staff</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body ">
+         <form action="" class="agnet-contact-form" id="staffFrom" method="post">
+          {{ form.hidden_tag() }}
+          <div class="card-body">
+            <div class="form-group">
+              <label>Campus<b class="red">*</b></label>
+              <div>{{ form.campus(class="form-control", id="campus") }}</div>
+            </div>
+
+            <div class="form-group">
+              <label> Name <b class="red">*</b></label>
+              <div>
+                {{ form.staffName(class="form-control text-box single-line",
+                id="staffName", placeholder="Enter Name") }} {% for error in
+                form.staffName.errors %}
+                <span
+                  class="field-validation-valid text-danger"
+                  data-valmsg-for="staffName"
+                  data-valmsg-replace="true"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label> Email <b class="red">*</b></label>
+              <div>
+                {{ form.staffEmail(class="form-control text-box single-line",
+                id="staffEmail", placeholder="Enter Email") }} {% for error in
+                form.staffEmail.errors %}
+                <span
+                  class="field-validation-valid text-danger"
+                  data-valmsg-for="staffEmail"
+                  data-valmsg-replace="true"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label> Phone <b class="red">*</b></label>
+              <div>
+                {{ form.staffPhone(class="form-control text-box single-line",
+                id="staffPhone", placeholder="Enter Phone") }} {% for error in
+                form.staffPhone.errors %}
+                <span
+                  class="field-validation-valid text-danger"
+                  data-valmsg-for="staffPhone"
+                  data-valmsg-replace="true"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label> Password <b class="red">*</b></label>
+              <div>
+                {{ form.userPwd(class="form-control text-box single-line",
+                id="staffPassword", placeholder="Enter Password") }}
+                <span
+                  class="field-validation-valid text-danger"
+                  data-valmsg-for="staffPwd"
+                  data-valmsg-replace="true"
+                ></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Role<b class="red">*</b></label>
+              <div>{{ form.role(class="form-control", id="staffRole") }}</div>
+            </div>
+
+            <div class="form-group">
+              <label>Status</label>
+              <div>{{ form.status(class="form-control", id="status") }}</div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            {{ form.submit(class="btn btn-primary showloader float-left",
+            id="Addstaff") }}
+          </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
 
 {% endblock %}

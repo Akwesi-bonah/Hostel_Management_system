@@ -9,9 +9,9 @@ class Block(BaseModel, Base):
     """ Represent block in hostel """
     if models.storage_t == "db":
         __tablename__ = "blocks"
-        campus = Column(String(128), nullable=False)
-        name = Column(String(128), nullable=True)
-        description = Column(String(128), nullable=True)
+        campus = Column(String(128) )
+        name = Column(String(128), nullable=True, unique=True)
+        description = Column(String(128))
     else:
         campus = ""
         name = ""

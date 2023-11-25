@@ -48,9 +48,13 @@ class DBStorage:
                                              HBNB_MYSQL_PWD,
                                              HBNB_MYSQL_HOST,
                                              HBNB_MYSQL_DB))
-        if HBNB_ENV == "test":
-            Base.metadata.drop_all(self.__engine)
+        # if HBNB_ENV == "test":
+        # Base.metadata.drop_all(self.__engine)
 
+    @property
+    def session(self):
+        """Return sessions object"""
+        return self.__session
 
     def get_user_id(self, email=None):
         """ get user id using email """
@@ -62,6 +66,16 @@ class DBStorage:
                 return user.id
         return None
 
+    def get_user_email(self, email=None):
+        """ check if email exist """
+        if email is None:
+            return None
+        all_users = self.all(Staff)
+        for user in all_users.values():
+            if user.email == email:
+                return True
+        return False
+
     def get_user_pwd(self, email=None):
         """ get user id using email """
         if email is None:
@@ -70,7 +84,15 @@ class DBStorage:
         for user in all_users.values():
             if user.email == email:
                 return user.password
-        return None
+        return False
+
+    def get_user_phone(self, phone=None):
+        """Get user phone using email"""
+        phone = (self.__session.query(Staff).
+                 filter_by(phone=phone).first())
+        if phone:
+            return True
+        return False
 
     def all(self, cls=None):
         """query on the current database session"""

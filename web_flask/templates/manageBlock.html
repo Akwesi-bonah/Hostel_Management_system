@@ -86,31 +86,110 @@
             </tr>
           </thead>
 
-          <tbody>
-            {% for block in blocks %}
-            <tr>
-              <td></td>
-              <td>{{ block.campus }}</td>
-              <td>{{ block.name }}</td>
-              <td>{{ block.description }}</td>
-              <td>
-                <a href="" class="btn btn-sm btn-info showloader">Edit</a>
-                <a href="" class="btn btn-sm btn-danger showloader">Delete</a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
+<tbody>
+  {% for block in blocks %}
+  <tr>
+    <td></td>
+    <td>{{ block.campus }}</td>
+    <td>{{ block.name }}</td>
+    <td>{{ block.description }}</td>
+    <td>
+      <a href="#"
+         class="btn btn-sm btn-info showloader blockEditBtn"
+         data-block-id="{{ block.id }}"
+      >Edit
+      </a>
+      <a href="#"
+         class="btn btn-sm btn-danger showloader blockDeleteBtn"
+         data-block-id="{{ block.id }}">
+        Delete
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+
         </table>
       </div>
       <div class="card-footer">
-        <a
-          href="{{url_for('staff_view.new_block')}}"
-          class="btn btn-sm btn-info showloader float-right"
-          >Create New</a
-        >
+       <button type="button" class="btn btn-primary"
+               data-bs-toggle="modal"
+               data-bs-target="#createUpdate">
+  Create New
+</button>
+
       </div>
     </div>
   </div>
-  <!-- /.row -->
 </section>
+
+<!-- Modal -->
+
+<div class="modal fade md-col2" id="createUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add/Update Block</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body ">
+        <!-- Your form content goes here -->
+        <form action="" class="agnet-contact-form" id="FormPost" method="post">
+          {{ form.hidden_tag() }}
+          <div class="card-body">
+            <div class="mb-3">
+              <label class="form-label">Campus <b class="red">*</b></label>
+              <div>
+                {{ form.campus(class="form-control", id="campus") }}
+                {% for error in form.campus.errors %}
+                <span class="field-validation-valid text-danger">{{ error }}</span>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label  class="form-label">Name <b class="red">*</b></label>
+              <div>
+                {{ form.name(class="form-control", id="name", placeholder="Enter Name") }}
+                {% for error in form.name.errors %}
+                <span class="field-validation-valid text-danger">{{ error }}</span>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Description <b class="red">*</b></label>
+              <div>
+                {{ form.description(class="form-control", id="description", placeholder="Description", rows="8") }}
+                {% for error in form.description.errors %}
+                <span class="field-validation-valid text-danger">{{ error }}</span>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label  class="form-label">Status</label>
+              <div>
+                {{ form.status(class="form-control", id="status") }}
+                {% for error in form.status.errors %}
+                <span class="field-validation-valid text-danger">{{ error }}</span>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            {{ form.submit(class="btn btn-primary showloader float-left", id="AddData") }}
+          </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}

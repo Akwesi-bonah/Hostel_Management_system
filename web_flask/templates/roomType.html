@@ -109,8 +109,18 @@
               <td>{{ type.price }}</td>
               <td>{{ type.status }}</td>
               <td>
-                <a href="" class="btn btn-sm btn-info showloader">Edit</a>
-                <a href="" class="btn btn-sm btn-danger showloader">Delete</a>
+                <a
+                  href="#"
+                  class="btn btn-sm btn-info showloader edit-type"
+                  data-type-id="{{ type.id }}"
+                  >Edit</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-sm btn-danger showloader delete-type"
+                  data-type-id="{{ type.id }}"
+                  >Delete</a
+                >
               </td>
             </tr>
           {% endfor %} {% endif %}
@@ -119,15 +129,80 @@
         </table>
       </div>
       <div class="card-footer">
-        <a
-          href="{{url_for('staff_view.room_type_add_edit')}}"
-          class="btn btn-sm btn-info showloader float-right"
-          >Create New</a
-        >
+         <button type="button" class="btn btn-primary"
+               data-bs-toggle="modal"
+               data-bs-target="#RoomTypeCU">
+  Create New
+</button>
       </div>
     </div>
   </div>
   <!-- /.row -->
 </section>
+
+<div class="modal fade md-col2"
+     id="RoomTypeCU" tabindex="-1"
+     aria-labelledby="RoomTypeUpdateCreate"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="RoomTypeUpdateCreate">Add/Update Room Type</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body ">
+        <form action="" class="agnet-contact-form" id="roomTypeForm" method="post">
+    {{ form.csrf_token }}
+  <br>
+
+    <div class="card-body">
+        <div class="form-group">
+            {{ form.name.label }}<b class="red">*</b>
+            {{ form.name(class="form-control text-box single-line", id="name", placeholder="Enter Room Type Name") }}
+            {% for error in form.name.errors %}
+                <span class="field-validation-valid text-danger" data-valmsg-for="name" data-valmsg-replace="true">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.price.label }}<b class="red">*</b>
+            {{ form.price(class="form-control text-box single-line", id="amount", placeholder="Enter Amount") }}
+            {% for error in form.price.errors %}
+                <span class="field-validation-valid text-danger" data-valmsg-for="amount" data-valmsg-replace="true">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            {{ form.description.label }}<b class="red">*</b>
+            {{ form.description(class="form-control", id="description", placeholder="Description", rows="2") }}
+            {% for error in form.description.errors %}
+                <span class="field-validation-valid text-danger" data-valmsg-for="description" data-valmsg-replace="true">{{ error }}</span>
+            {% endfor %}
+        </div>
+  <br>
+
+        <div class="form-group">
+            {{ form.status.label }}
+            {{ form.status(class="form-control", id="status") }}
+            {% for error in form.status.errors %}
+                <span class="field-validation-valid text-danger" data-valmsg-for="status" data-valmsg-replace="true">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- /.card-body -->
+  <br>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary showloader float-left" id="addRoomType">Submit</button>
+    </div>
+</form>
+
+      </div>
+      </div>
+    </div>
+  </div>
+
 
 {% endblock %}

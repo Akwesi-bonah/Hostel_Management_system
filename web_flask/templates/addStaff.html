@@ -13,6 +13,15 @@
   </nav>
 </div>
 <br>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
 <section class="content">
   <div class="container-fluid">
     <div class="row">
@@ -29,8 +38,7 @@
           <div role="form">
               {% if error %}
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong> {{ error }}</strong> You should check in on some of those fields
-      below.
+      <strong> {{ error }}</strong>
       <button
         type="button"
         class="btn-close"
@@ -39,187 +47,76 @@
       ></button>
     </div>
     {% endif %}
-            <form
-              action="{{ url_for('staff_view.add_user')}}"
-              class="agnet-contact-form"
-              id="FormPost"
-              method="post"
-            >
-              <div class="card-body">
-                <div class="form-group">
-                  <label for="campuses">Campus<b class="red">*</b></label>
-                  <div>
-                    <select class="form-control" id="campuses" name="campus">
-                      <option value="0">&lt;&lt;Please select&gt;&gt;</option>
-                      <option value="North Campus">
-                        North Campus
-                      </option>
-                      <option value="Central Campus">
-                        Central Campus
-                      </option>
-                      <option value="3">
-                        South Campus
-                      </option>
-                    </select>
-                  </div>
-                </div>
+            <form action="{{ url_for('staff_view.add_user')}}" class="agnet-contact-form" id="FormPost" method="post">
+    {{ form.hidden_tag() }}
+    <div class="card-body">
+        <div class="form-group">
+            <label >Campus<b class="red">*</b></label>
+            <div>
+                {{ form.campus(class="form-control", id="campus") }}
+            </div>
+        </div>
 
-                <div class="form-group">
-                  <label for="staffName"> Name <b class="red">*</b></label>
-                  <div>
-                    <input
-                      autocomplete="off"
-                      class="form-control text-box single-line"
-                      data-val="true"
-                      data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
-                      data-val-maxlength-max="100"
-                      data-val-required="The staffName field is required."
-                      id="staffName"
-                      name="staffName"
-                      placeholder=" Enter  Name"
-                      type="text"
-                      value=""
-                    />
-                    <span
-                      class="field-validation-valid text-danger"
-                      data-valmsg-for="staffName"
-                      data-valmsg-replace="true"
-                    ></span>
-                  </div>
-                </div>
+        <div class="form-group">
+            <label > Name <b class="red">*</b></label>
+            <div>
+                {{ form.staffName(class="form-control text-box single-line", id="staffName", placeholder="Enter Name") }}
+                            {% for error in form.staffName.errors %}
+                <span class="field-validation-valid text-danger" data-valmsg-for="staffName" data-valmsg-replace="true">{{ error }}</span>
+            {% endfor %}
+            </div>
+        </div>
 
-                <div class="form-group">
-                  <label for="staffEmail"> Email <b class="red">*</b></label>
-                  <div>
-                    <input
-                      autocomplete="off"
-                      class="form-control text-box single-line"
-                      data-val="true"
-                      data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
-                      data-val-maxlength-max="100"
-                      data-val-required="The staffName field is required."
-                      id="staffEmail"
-                      name="staffEmail"
-                      placeholder=" Enter  Email"
-                      type="Email"
-                      value=""
-                    />
-                    <span
-                      class="field-validation-valid text-danger"
-                      data-valmsg-for="staffEmail"
-                      data-valmsg-replace="true"
-                    ></span>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="staffPhone"> Phone <b class="red">*</b></label>
-                  <div>
-                    <input
-                      autocomplete="off"
-                      class="form-control text-box single-line"
-                      data-val="true"
-                      data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
-                      data-val-maxlength-max="100"
-                      data-val-required="The staffName field is required."
-                      id="staffPhone"
-                      name="staffPhone"
-                      placeholder=" Enter  Phone"
-                      type="phone"
-                      value=""
-                    />
-                    <span
-                      class="field-validation-valid text-danger"
-                      data-valmsg-for="staffPhone"
-                      data-valmsg-replace="true"
-                    ></span>
-                  </div>
-                </div>
+        <div class="form-group">
+            <label > Email <b class="red">*</b></label>
+            <div>
+                {{ form.staffEmail(class="form-control text-box single-line", id="staffEmail", placeholder="Enter Email") }}
+                            {% for error in form.staffEmail.errors %}
+                <span class="field-validation-valid text-danger" data-valmsg-for="staffEmail" data-valmsg-replace="true">{{ error }}</span>
+            {% endfor %}
+            </div>
+        </div>
 
-                 <div class="form-group">
-                  <label for="UserPwd"> Password<b class="red">*</b></label>
-                  <div>
-                    <input
-                      autocomplete="off"
-                      class="form-control text-box single-line"
-                      data-val="true"
-                      data-val-maxlength="The field staffName must be a string or array type with a maximum length of '100'."
-                      data-val-maxlength-max="100"
-                      data-val-required="The staffName field is required."
-                      id="userPwd"
-                      name="userPwd"
-                      placeholder=" Enter  Password"
-                      type="password"
-                      value=""
-                    />
-                    <span
-                      class="field-validation-valid text-danger"
-                      data-valmsg-for="staffpwd"
-                      data-valmsg-replace="true"
-                    ></span>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="roleName">Role<b class="red">*</b></label>
-                  <div>
-                    <select
-                      class="form-control"
-                      id="roleName"
-                      name="role"
-                    >
-                      <option value="0">&lt;&lt;Please select&gt;&gt;</option>
-                      <option value="JCR">
-                        JCR
-                      </option>
-                      <option value="Porter">
-                        Porter
-                      </option>
-                      <option value="Facility Manager">
-                        Facility Manager
-                      </option>
-                      <option value="Administrator">
-                        Administrator
-                      </option>
-                      <option value="Account Officer">
-                        Account Officer
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="status">Status</label>
-                  <div>
-                    <select
-                      class="form-control"
-                      data-val="true"
-                      data-val-number="The field status must be a number."
-                      data-val-required="The status field is required."
-                      id="status"
-                      name="status"
-                    >
-                      <option value="O">&lt;&lt;Please select&gt;&gt;</option>
-                      <option value="Active">Active</option>
-                      <option value="Inactive">Inactive</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                <button
-                  type="submit"
-                  class="btn btn-primary showloader float-left"
-                  id="AddData"
-                >
-                  Submit
-                </button>
+        <div class="form-group">
+            <label > Phone <b class="red">*</b></label>
+            <div>
+                {{ form.staffPhone(class="form-control text-box single-line", id="staffPhone", placeholder="Enter Phone") }}
+                {% for error in form.staffPhone.errors %}
+                <span class="field-validation-valid text-danger" data-valmsg-for="staffPhone" data-valmsg-replace="true">{{ error }}</span>
+            {% endfor %}
+            </div>
+        </div>
 
-                <a
-                  href="{{url_for('staff_view.users')}}"
-                  class="btn btn-sm btn-secondary showloader float-right"
-                  >Back to List</a
-                >
-              </div>
-            </form>
+        <div class="form-group">
+            <label > Password <b class="red">*</b></label>
+            <div>
+                {{ form.userPwd(class="form-control text-box single-line", id="userPwd", placeholder="Enter Password") }}
+                <span class="field-validation-valid text-danger" data-valmsg-for="staffPwd" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Role<b class="red">*</b></label>
+            <div>
+                {{ form.role(class="form-control", id="role") }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label >Status</label>
+            <div>
+                {{ form.status(class="form-control", id="status") }}
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        {{ form.submit(class="btn btn-primary showloader float-left", id="AddData") }}
+        <a href="{{ url_for('staff_view.users') }}" class="btn btn-sm btn-secondary showloader float-right">Back to List</a>
+    </div>
+</form>
+
           </div>
         </div>
         <!-- /.card -->
@@ -233,68 +130,10 @@
 <!-- Add jQuery library -->
 
 <script>
-  $(document).ready(function() {
-    // Function to validate the form
-    function validateForm() {
-      var isValid = true;
-
-      // Validate campus selection
-      var campus = $('#campuses').val();
-      if (campus === '0') {
-        alert('Please select a campus.');
-        isValid = false;
-      }
-
-      // Validate name field
-      var name = $('#staffName').val();
-      if (!name.trim()) {
-        alert('Please enter a name.');
-        isValid = false;
-      }
-
-      // Validate email field
-      var email = $('#staffEmail').val();
-      if (!email.trim()) {
-        alert('Please enter an email.');
-        isValid = false;
-      }
-
-      // Validate password field
-      var password = $('#UserPwd').val();
-      if (!password.trim()) {
-        alert('Please enter a password.');
-        isValid = false;
-      }
-
-      // Validate role selection
-      var role = $('#roleName').val();
-      if (role === '0') {
-        alert('Please select a role.');
-        isValid = false;
-      }
-
-      // Validate status selection
-      var status = $('#status').val();
-      if (status === 'O') {
-        alert('Please select a status.');
-        isValid = false;
-      }
-
-      return isValid;
-    }
-
-    // Event listener for submit button click
-    $('#AddData').click(function(event) {
-      // Prevent the default form submission
-      event.preventDefault();
-
-      // Call the validateForm function
-      if (validateForm()) {
-        // If form is valid, submit the form
-        $('#FormPost').submit();
-      }
-    });
-  });
+ $(document).ready(function(){
+        $('#bd-example-modal-lg"').modal('show')
+      alert("klen");
+      });
 </script>
 <!-- Your custom JavaScript -->
 <script>

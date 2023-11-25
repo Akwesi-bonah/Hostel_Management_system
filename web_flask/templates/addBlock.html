@@ -15,7 +15,7 @@
   <div class="container-fluid">
     <div class="row">
       <!-- left column -->
-      <div class="col-md-3"></div>
+      <div class="col-md-3">
       <div class="col-md-6">
         <!-- general form elements -->
         <div class="card card-primary">
@@ -39,108 +39,58 @@
     </div>
             {% endif %}
 
-            <form
-              action="{{ url_for('staff_view.add_block')}}"
-              class="agnet-contact-form"
-              id="FormPost"
-              method="post"
-            >
+     <form action="" class="agnet-contact-form" id="FormPost" method="post">
+    {{ form.hidden_tag() }}
+    <div class="card-body">
+        <div class="form-group">
+            <label >Campus<b class="red">*</b></label>
+            <div>
+                {{ form.campus(class="form-control", id="campus") }}
+                {% for error in form.campus.errors %}
+                    <span class="field-validation-valid text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
 
-              <div class="card-body">
-                <div class="form-group">
-                  <label for="campus">Campus<b class="red">*</b></label>
-                  <div>
-                    <select class="form-control" id="campus" name="campus">
-                      <option value="O">&lt;&lt;Please select&gt;&gt;</option>
-                      <option value="north_campus">
-                        North Campus
-                      </option>
-                      <option value="central_campus">
-                        Central Campus
-                      </option>
-                      <option value="north_campus">
-                        South Campus
-                      </option>
-                    </select>
-                  </div>
-                </div>
+        <div class="form-group">
+            <label >Name <b class="red">*</b></label>
+            <div>
+                {{ form.name(class="form-control", id="name", placeholder="Enter Name") }}
+                {% for error in form.name.errors %}
+                    <span class="field-validation-valid text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
 
-                <div class="form-group">
-                  <label for="block_name" > Name <b class="red">*</b></label>
-                  <div>
-                    <input
-                      autocomplete="off"
-                      class="form-control text-box single-line"
-                      id="block_name"
-                      name="blockName"
-                      placeholder=" Enter Block Name"
-                      type="text"
-                      value=""
-                    />
-                    <span
-                      class="field-validation-valid text-danger"
-                      data-valmsg-for="blockName"
-                      data-valmsg-replace="true"
-                    ></span>
-                  </div>
-                </div>
+        <div class="form-group">
+            <label >Description<b class="red">*</b></label>
+            <div>
+                {{ form.description(class="form-control", id="description", placeholder="Description", rows="5") }}
+                {% for error in form.description.errors %}
+                    <span class="field-validation-valid text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
 
-                <div class="form-group">
-                  <label for="description">Description<b class="red">*</b></label>
-                  <div>
-                    <textarea
-                      autocomplete="off"
-                      class="form-control"
-                      cols="100"
-                      id="description"
-                      name="blockDescription"
-                      placeholder="Description"
-                      rows="2"
-                    ></textarea>
+        <div class="form-group">
+            <label >Status</label>
+            <div>
+                {{ form.status(class="form-control", id="status") }}
+                {% for error in form.status.errors %}
+                    <span class="field-validation-valid text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
 
-                    <span
-                      class="field-validation-valid text-danger"
-                      data-valmsg-for="description"
-                      data-valmsg-replace="true"
-                    ></span>
-                  </div>
-                </div>
+    <div class="card-footer">
+        {{ form.submit(class="btn btn-primary showloader float-left", id="AddData") }}
+    </div>
+</form>
 
-                <div class="form-group">
-                  <label for="status">Status</label>
-                  <div>
-                    <select
-                      class="form-control"
-                      data-val="true"
-                      data-val-number="The field status must be a number."
-                      data-val-required="The status field is required."
-                      id="status"
-                      name="status"
-                    >
-                      <option value="O">&lt;&lt;Please select&gt;&gt;</option>
-                      <option value="Active">Active</option>
-                      <option value="Inactive">Inactive</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                <button
-                  type="submit"
-                  class="btn btn-primary showloader float-left"
-                  id="AddData"
-                >
-                  Submit
-                </button>
 
-                <a
-                  href=""
-                  class="btn btn-sm btn-secondary showloader float-right"
-                  >Back to List</a
-                >
-              </div>
-            </form>
+
           </div>
         </div>
         <!-- /.card -->
@@ -148,8 +98,6 @@
       <!--/.col (left) -->
       <div class="col-md-3"></div>
     </div>
-  </div>
-  <!-- /.container-fluid -->
 </section>
 
 {% endblock %}

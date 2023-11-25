@@ -7,3 +7,5 @@ from api.v1.views.index import *
 from api.v1.views.students import *
 from api.v1.views.block import *
 from api.v1.views.staff import *
+from api.v1.views.room_type import *
+from api.v1.views.room import *

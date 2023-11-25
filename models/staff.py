@@ -8,7 +8,7 @@ import models
 from sqlalchemy import Column, String
 
 
-class Staff(BaseModel, Base, UserMixin):
+class Staff(BaseModel, Base):
     """ Represent staff in hostel """
     if models.storage_t == "db":
         __tablename__ = "staff"

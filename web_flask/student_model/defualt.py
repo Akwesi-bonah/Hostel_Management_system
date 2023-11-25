@@ -7,7 +7,7 @@ def default():
     """
      Display default site student
     """
-    return render_template('default.html')
+    return render_template('Sdefault.html')
 
 
 @student_views.route('/default/student', methods=['GET'])
