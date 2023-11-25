@@ -7,6 +7,18 @@ from api.v1.views import views
 from flask import jsonify, abort, request
 
 
+def validate_block_data(data):
+    """validate required fields"""
+    required_fields = ['campus', 'name',
+                       'description']
+
+    for field in required_fields:
+        if field not in data:
+            return False, f"{field.capitalize().replace('_', ' ')} is missing"
+
+    return True, None
+
+
 @views.route('/block', methods=['GET'], strict_slashes=False)
 def get_blocks():
     """ Retrieves the list of all Student objects """
@@ -20,8 +32,7 @@ def get_block(block_id):
     """Retrieves a block"""
     block = storage.get(Block, block_id)
     if not block:
-        abort(404)
-
+        abort(404, description="Not Found")
     return jsonify(block.to_dict())
 
 
@@ -31,10 +42,8 @@ def delete_block(block_id):
     block = storage.get(Block, block_id)
     if not block:
         abort(404)
-
     storage.delete(block)
     storage.save()
-
     return jsonify({})
 
 
@@ -43,21 +52,24 @@ def add_block():
     """create new block object"""
 
     if not request.get_json():
-        abort(400, description="Not a JSON")
+        return jsonify({'error': 'Not'}), 400
 
-    if 'campus' not in request.get_json():
-        abort(400, description="campus missing")
+    is_valid, error_message = validate_block_data(request.get_json())
+    if not is_valid:
+        return jsonify({'error': error_message}), 400
 
-    if 'name' not in request.get_json():
-        abort(400, description="name missing")
-
-    if 'description' not in request.get_json():
-        abort(400, description="description missing")
+    check_name = request.get_json()['name']
+    if storage.session.query(Block).filter_by(name=check_name).first():
+        return jsonify({'error': 'Name already exist'}), 400
 
     data = request.get_json()
-    instance = Block(**data)
-    instance.save()
-    return jsonify(instance.to_dict(), 201)
+    try:
+        instance = Block(**data)
+        instance.save()
+        return jsonify(instance.to_dict(), 201)
+    except Exception as e:
+        return jsonify({'Error': "some Error Occurred"})
+
 
 
 @views.route('/block/<block_id>', methods=['PUT'], strict_slashes=False)

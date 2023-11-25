@@ -3,7 +3,7 @@
 from werkzeug.security import check_password_hash
 from web_flask.componet import staff_view
 from flask import render_template, request, redirect, url_for
-from flask_login import login_required, login_user
+from flask_login import login_required, login_user, logout_user
 import models
 from web_flask.forms.login import Login
 
@@ -15,6 +15,12 @@ def base():
     return render_template('default.html', form=form)
 
 
+@staff_view.route('/logout')
+def logout():
+    logout_user()
+    return redirect('url_for(staff_view.base')
+
+
 @staff_view.route('/user', methods=['GET', 'POST'])
 def dashboard():
     form = Login()
@@ -24,15 +30,15 @@ def dashboard():
         user = form.email.data
         pwd = form.password.data
         hash_pwd = models.storage.get_user_pwd(user)
-        print(hash_pwd)
-        print(pwd)
-        if user and hash_pwd and check_password_hash(hash_pwd, pwd):
-            # login_user(user)
+        if check_password_hash(hash_pwd, pwd):
+            login_user(user)
             return redirect(url_for('staff_view.dashboard', username=user))
         else:
             error_message = "Invalid credentials"
 
-    return render_template('base.html', form=form, error=error_message)
+    return render_template('default.html',
+                           form=form,
+                           error=error_message)
 
 
 @staff_view.route('/allotment')

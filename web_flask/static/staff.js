@@ -115,10 +115,9 @@ function editUser() {
           });
         },
         error: function (xhr, status, error) {
-          console.error("Error updating user:", error);
           Swal.fire({
             title: "Error!",
-            text: "There was an error updating the user.",
+            text: error,
             icon: "error",
             confirmButtonColor: "#d33",
             confirmButtonText: "OK",

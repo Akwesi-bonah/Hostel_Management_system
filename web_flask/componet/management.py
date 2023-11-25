@@ -125,16 +125,19 @@ def new_room():
 
 @staff_view.route('/roomtype', methods=['GET'], strict_slashes=False)
 def room_type():
+    form = AddRoomType()
     """ display all room types """
     all_types = storage.all(RoomType).values()
     types = [room_type.to_dict() for room_type in all_types]
 
-    return render_template('roomType.html', room_type=types)
+    return render_template('roomType.html',
+                           room_type=types,
+                           form=form)
 
 
 @staff_view.route('/roomtype', methods=['POST'], strict_slashes=False)
 def add_room_type():
-    form = AddRoomType(request.form)  # Create an instance of the AddRooType form
+    form = AddRoomType(request.form)
 
     if request.method == 'POST' and form.validate():
         name = form.name.data

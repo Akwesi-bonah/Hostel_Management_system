@@ -48,8 +48,13 @@ class DBStorage:
                                              HBNB_MYSQL_PWD,
                                              HBNB_MYSQL_HOST,
                                              HBNB_MYSQL_DB))
-        if HBNB_ENV == "test":
-            Base.metadata.drop_all(self.__engine)
+        # if HBNB_ENV == "test":
+        # Base.metadata.drop_all(self.__engine)
+
+    @property
+    def session(self):
+        """Return sessions object"""
+        return self.__session
 
     def get_user_id(self, email=None):
         """ get user id using email """
@@ -83,7 +88,8 @@ class DBStorage:
 
     def get_user_phone(self, phone=None):
         """Get user phone using email"""
-        phone = self.__session.query(Staff).filter_by(phone=phone).first()
+        phone = (self.__session.query(Staff).
+                 filter_by(phone=phone).first())
         if phone:
             return True
         return False

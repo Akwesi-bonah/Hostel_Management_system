@@ -43,8 +43,6 @@ def add_user():
         try:
             # check if email already exists
             email_check = storage.get_user_id(email)
-            print(email_check)
-            print(email_check)
             if email_check:
                 error_message = "Email already exists"
                 return render_template('addStaff.html', form=form, error=error_message)

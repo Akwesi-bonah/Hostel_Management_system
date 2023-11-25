@@ -75,7 +75,7 @@ $('#AddData').on('click', function(event) {
           // Show SweetAlert error message or handle the error appropriately
           Swal.fire({
             title: 'Error!',
-            text: 'There was an error submitting the form.',
+            text: error,
             icon: 'error',
             showCancelButton: false,
             confirmButtonColor: '#d33',
@@ -87,8 +87,6 @@ $('#AddData').on('click', function(event) {
   });
 });
 
-// Edit button click event
-// Edit button click event to populate modal fields with block data
 // Edit button click event to populate modal fields with block data and show modal
 $('.blockEditBtn').on('click', function(event) {
   event.preventDefault();

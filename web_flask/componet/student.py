@@ -2,6 +2,7 @@
 
 from flask import render_template
 from web_flask.componet import staff_view
+from models import storage
 
 
 @staff_view.route('/addStudent')

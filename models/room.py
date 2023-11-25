@@ -11,7 +11,7 @@ class Room(BaseModel, Base):
         __tablename__ = "rooms"
         block_id = Column(String(255), ForeignKey('blocks.id'), nullable=False)
         room_type_id = Column(String(255), ForeignKey('room_types.id'), nullable=False)
-        room_name = Column(String(128), nullable=False)
+        room_name = Column(String(128), nullable=False, unique=True)
         gender = Column(String(128), nullable=False)
         floor = Column(String(128), nullable=False)
         no_of_beds = Column(Integer, nullable=False)
