@@ -6,11 +6,26 @@ from models.room import Room
 from models import storage
 
 
+
+def validate_room_data(data):
+    """validate required fields"""
+    required_fields = ['room_name', 'room_type_id',
+                       'gender',
+                       'block_id']
+
+    for field in required_fields:
+        if field not in data:
+            return False, f"{field.capitalize().replace('_', ' ')} is missing"
+
+    return True, None
+
+
 @views.route('/room', methods=['GET'], strict_slashes=False)
 def room():
     """ Get all rooms """
     all_rooms = storage.all(Room).values()
-    rooms = [room.to_dict() for room in all_rooms]
+    rooms = [room.to_dict() for
+             room in all_rooms]
     return jsonify(rooms)
 
 
@@ -38,21 +53,24 @@ def delete_room(room_id):
 def add_room():
     """ Create new room """
     if not request.get_json():
-        abort(400, description="Not a JSON")
-    if 'room_name' not in request.get_json():
-        abort(400, description="Name missing")
-    if 'room_type_id' not in request.get_json():
-        abort(400, description="room type ID missing")
-    if 'block_id' not in request.get_json():
-        abort(400, description="Block id missing")
+        return jsonify({'error': 'Not JSON'}), 400
 
-    if 'no_of_beds' not in request.get_json():
-        abort(400, description="Block id missing")
+    is_valid, error_message = validate_room_data(request.get_json())
+    if not is_valid:
+        return jsonify({'error': error_message}), 400
 
-    data = request.get_json()
-    instance = Room(**data)
-    instance.save()
-    return jsonify(instance.to_dict())
+    check_name = storage.session.query(Room).filter_by(
+        room_name=request.get_json()['room_name']).first()
+    if check_name:
+        return jsonify({'error': 'Room name already exists'}), 400
+
+    try:
+        data = request.get_json()
+        instance = Room(**data)
+        instance.save()
+        return jsonify(instance.to_dict())
+    except Exception as e:
+        return jsonify({'error': e}), 400
 
 
 @views.route('/room/<room_id>', methods=['PUT'], strict_slashes=False)

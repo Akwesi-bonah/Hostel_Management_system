@@ -13,8 +13,9 @@ class Room(BaseModel, Base):
         room_type_id = Column(String(255), ForeignKey('room_types.id'), nullable=False)
         room_name = Column(String(128), nullable=False, unique=True)
         gender = Column(String(128), nullable=False)
-        floor = Column(String(128), nullable=False)
+        floor = Column(String(128))
         no_of_beds = Column(Integer, nullable=False)
+        booked_beds = Column(Integer, nullable=False, default=0)
     else:
         block = ""
         room_type = ""

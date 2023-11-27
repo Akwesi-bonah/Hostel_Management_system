@@ -1,285 +1,255 @@
 {% extends 'Sbase.html' %}
 {% block content %}
-<div class="app-content content">
-        <div class="content-overlay"></div>
-        <div class="content-wrapper">
+<section class="content">
 
-            <div class="content-body">
+    <div class="card recent-sales overflow-auto">
 
 
-
-
-
-
-<div class="shopping-cart">
-
-
-
-    <div class="tab-content pt-1">
-        <div role="tabpanel" class="tab-pane active" id="shop-cart-tab" aria-expanded="true" aria-labelledby="shopping-cart">
+          <div role="tabpanel" class="tab-pane active" id="shop-cart-tab" aria-expanded="true"
+            aria-labelledby="shopping-cart">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">My Allotment</h4>
-                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                    <div class="heading-elements">
-                        <ul class="list-inline mb-0">
-                            <li><a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right" href="#">Quick Book</a></li>
-                        </ul>
-                    </div>
-                    <h4 class="card-title mt-2 btn btn-sm btn-danger">Notice</h4>
-                    <ul class="list-inline mb-0">
-                            <li> I <b>ADU LOVE ADOMA</b> am aware that I must pay my hostel fees in full to secure a bed in Bani Hostel for the 2023/2024 academic year. I have agreed to complete my installment payment by 5th October 2023, or else my bed space will be sold and <b>80%</b> of the payment made refunded back to me.</li>
-                        </ul>
+              <div class="card-header">
+                <h4 class="card-title">My Allotment</h4>
+                  <br>
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                <div class="heading-elements">
+                  <ul class="list-inline mb-0">
+                    <li><a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right" href="#">Quick
+                        Book</a></li>
+                  </ul>
                 </div>
+                <h4 class="card-title mt-2 btn btn-sm btn-danger">Notice</h4>
+                <ul class="list-inline mb-0">
+                  <li> I <b>ADU LOVE ADOMA</b> am aware that I must pay my hostel fees in full to secure a bed in Bani
+                    Hostel for the 2023/2024 academic year. I have agreed to complete my installment payment by 5th
+                    October 2023, or else my bed space will be sold and <b>80%</b> of the payment made refunded back to
+                    me.</li>
+                </ul>
+              </div>
 
-                <div class="card-content">
+              <div class="card-content">
 
-                    <div class="table-responsive">
-                        <table id="recentbeds" class="table table-hover table-xl mb-0 ps">
-                            <thead>
-                                <tr>
+                <div class="table-responsive">
+                  <table id="recentbeds" class="table table-hover table-xl mb-0 ps">
+                    <thead>
+                      <tr>
 
-                                    <th class="border-top-0">#</th>
+                        <th class="border-top-0">#</th>
 
-                                    <th class="border-top-0">Action</th>
-                                    <th class="border-top-0">View Payments</th>
-                                    <th class="border-top-0">Stud ID</th>
-                                    <th class="border-top-0">Stud Name</th>
-                                    <th class="border-top-0">Block</th>
-                                    <th class="border-top-0">Category</th>
-                                    <th class="border-top-0">Room Type</th>
-                                    <th class="border-top-0">Room</th>
-                                    <th class="border-top-0">Bill</th>
-                                    <th class="border-top-0">Paid</th>
-                                    <th class="border-top-0">Balance</th>
-                                    <th class="border-top-0">Status</th>
+                        <th class="border-top-0">Action</th>
+                        <th class="border-top-0">View Payments</th>
+                        <th class="border-top-0">Stud ID</th>
+                        <th class="border-top-0">Stud Name</th>
+                        <th class="border-top-0">Block</th>
+                        <th class="border-top-0">Category</th>
+                        <th class="border-top-0">Room Type</th>
+                        <th class="border-top-0">Room</th>
+                        <th class="border-top-0">Bill</th>
+                        <th class="border-top-0">Paid</th>
+                        <th class="border-top-0">Balance</th>
+                        <th class="border-top-0">Status</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-
-
-                                <tr>
+                      </tr>
+                    </thead>
+                    <tbody>
 
 
-
-                                    <td>1</td>
-
-                                    <td>
-
-
-                                            <a class="btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right quickpay" href="#" data-id="dfe69033-6443-44c1-851c-6a4238ce36eb" data-balance="1000" data-count="2">Quick Pay</a>
-
-                                    </td>
-                                    <td>
-                                            <a href="/Student/AllotmentDetail/dfe69033-6443-44c1-851c-6a4238ce36eb" class="btn btn-sm btn-info box-shadow-2 round btn-min-width" title="View all payment transactions">View Details<i class="fas fa-eye"></i></a>
-                                    </td>
-                                    <td>
-                                        11356690
-                                    </td>
-                                    <td>
-
-                                        <a href="{{url_for('student_views.booking_details')}}" class="nav-link showloader">
-                                            ADU &nbsp; LOVE &nbsp; ADOMA
-                                        </a>
+                      <tr>
 
 
 
-                                    </td>
-                                    <td>
-                                        Block D
-                                    </td>
-                                    <td>
-                                        REGULAR
-                                    </td>
-                                    <td>
-                                        FOUR IN A ROOM - Self contain with balcony kitchennete (JCR &amp; common area fees inclusive)
-                                    </td>
-                                    <td>
-                                        D114
-                                    </td>
-                                    <td>
-                                        6100
-                                    </td>
-                                    <td>
-                                        5100
-                                    </td>
-                                    <td>
+                        <td>1</td>
 
-                                        1000
-                                    </td>
-                                    <td>
+                        <td>
 
 
-                                            <span class="badge badge-warning">Pending</span>
-                                    </td>
+                          <a class="btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right quickpay" href="#"
+                            data-id="dfe69033-6443-44c1-851c-6a4238ce36eb" data-balance="1000" data-count="2">Quick
+                            Pay</a>
 
-                                    <td>
-                                    </td>
+                        </td>
+                        <td>
+                          <a href="/Student/AllotmentDetail/dfe69033-6443-44c1-851c-6a4238ce36eb"
+                            class="btn btn-sm btn-info box-shadow-2 round btn-min-width"
+                            title="View all payment transactions">View Details<i class="fas fa-eye"></i></a>
+                        </td>
+                        <td>
+                          11356690
+                        </td>
+                        <td>
 
-                                </tr>
-                                <tr>
+                          <a href="{{url_for('student_views.booking_details')}}" class="nav-link showloader">
+                            ADU &nbsp; LOVE &nbsp; ADOMA
+                          </a>
 
 
 
-                                    <td>2</td>
+                        </td>
+                        <td>
+                          Block D
+                        </td>
+                        <td>
+                          REGULAR
+                        </td>
+                        <td>
+                          FOUR IN A ROOM - Self contain with balcony kitchennete (JCR &amp; common area fees inclusive)
+                        </td>
+                        <td>
+                          D114
+                        </td>
+                        <td>
+                          6100
+                        </td>
+                        <td>
+                          5100
+                        </td>
+                        <td>
 
-                                    <td>
-
-
-
-                                    </td>
-                                    <td>
-                                            <a href="{{url_for('student_views.booking_details')}}"  class="btn btn-sm btn-info box-shadow-2 round btn-min-width" title="View all payment transactions">View Details<i class="fas fa-eye"></i></a>
-                                    </td>
-                                    <td>
-                                        11356690
-                                    </td>
-                                    <td>
-
-                                        <a href="/Student/AllotmentDetail/cfb3a5e0-6a78-4389-9860-878018fb0a1b" class="nav-link showloader">
-                                            ADU &nbsp; LOVE &nbsp; ADOMA
-                                        </a>
-
-
-
-                                    </td>
-                                    <td>
-                                        Block D
-                                    </td>
-                                    <td>
-                                        REGULAR
-                                    </td>
-                                    <td>
-                                        FOUR IN A ROOM - Self contain with balcony kitchennete (JCR &amp; common area fees inclusive)
-                                    </td>
-                                    <td>
-                                        D108
-                                    </td>
-                                    <td>
-                                        5600
-                                    </td>
-                                    <td>
-                                        5600
-                                    </td>
-                                    <td>
-
-                                        0
-                                    </td>
-                                    <td>
+                          1000
+                        </td>
+                        <td>
 
 
-                                    </td>
+                          <span class="badge badge-warning">Pending</span>
+                        </td>
 
-                                    <td>
-                                    </td>
+                        <td>
+                        </td>
 
-                                </tr>
-                                <tr>
+                      </tr>
+                      <tr>
 
 
 
-                                    <td>3</td>
+                        <td>2</td>
 
-                                    <td>
-
-
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-                                        11356690
-                                    </td>
-                                    <td>
-
-                                        <a href="/Student/AllotmentDetail/2bdfe0f2-4ed7-4756-864f-980e11cec761" class="nav-link showloader">
-                                            ADU &nbsp; LOVE &nbsp; ADOMA
-                                        </a>
+                        <td>
 
 
 
-                                    </td>
-                                    <td>
-                                        Block D
-                                    </td>
-                                    <td>
-                                        REGULAR
-                                    </td>
-                                    <td>
-                                        FOUR IN A ROOM - Self contain with balcony kitchennete (JCR &amp; common area fees inclusive)
-                                    </td>
-                                    <td>
-                                        D108
-                                    </td>
-                                    <td>
-                                        6100
-                                    </td>
-                                    <td>
-                                        0
-                                    </td>
-                                    <td>
+                        </td>
+                        <td>
+                          <a href="{{url_for('student_views.booking_details')}}"
+                            class="btn btn-sm btn-info box-shadow-2 round btn-min-width"
+                            title="View all payment transactions">View Details<i class="fas fa-eye"></i></a>
+                        </td>
+                        <td>
+                          11356690
+                        </td>
+                        <td>
 
-                                        6100
-                                    </td>
-                                    <td>
+                          <a href="/Student/AllotmentDetail/cfb3a5e0-6a78-4389-9860-878018fb0a1b"
+                            class="nav-link showloader">
+                            ADU &nbsp; LOVE &nbsp; ADOMA
+                          </a>
 
 
-                                            <span class="badge badge-info">Expired</span>
-                                    </td>
 
-                                    <td>
-                                    </td>
+                        </td>
+                        <td>
+                          Block D
+                        </td>
+                        <td>
+                          REGULAR
+                        </td>
+                        <td>
+                          FOUR IN A ROOM - Self contain with balcony kitchennete (JCR &amp; common area fees inclusive)
+                        </td>
+                        <td>
+                          D108
+                        </td>
+                        <td>
+                          5600
+                        </td>
+                        <td>
+                          5600
+                        </td>
+                        <td>
 
-                                </tr>
+                          0
+                        </td>
+                        <td>
 
-                            </tbody>
 
-                        </table>
-                    </div>
+                        </td>
+
+                        <td>
+                        </td>
+
+                      </tr>
+                      <tr>
+
+
+
+                        <td>3</td>
+
+                        <td>
+
+
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                          11356690
+                        </td>
+                        <td>
+
+                          <a href="/Student/AllotmentDetail/2bdfe0f2-4ed7-4756-864f-980e11cec761"
+                            class="nav-link showloader">
+                            ADU &nbsp; LOVE &nbsp; ADOMA
+                          </a>
+
+
+
+                        </td>
+                        <td>
+                          Block D
+                        </td>
+                        <td>
+                          REGULAR
+                        </td>
+                        <td>
+                          FOUR IN A ROOM - Self contain with balcony kitchennete (JCR &amp; common area fees inclusive)
+                        </td>
+                        <td>
+                          D108
+                        </td>
+                        <td>
+                          6100
+                        </td>
+                        <td>
+                          0
+                        </td>
+                        <td>
+
+                          6100
+                        </td>
+                        <td>
+
+
+                          <span class="badge badge-info">Expired</span>
+                        </td>
+
+                        <td>
+                        </td>
+
+                      </tr>
+
+                    </tbody>
+
+                  </table>
                 </div>
+              </div>
             </div>
+
+          </div>
 
         </div>
-
     </div>
-</div>
+  </div>
+  <!-- /.row -->
+</section>
 
-
-<div class="modal fade" id="mycheckin" tabindex="-1" role="dialog" aria-labelledby="more-infoLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="col-md-12">
-                    <label>Enter Checkin Date<i style="color:red;">(YYYY-MM-DD)</i></label>
-                    <div class="form-group">
-                        <input type="text" name="mycheckindate" id="mycheckindate" class="form-control " placeholder="YYYY-MM-DD" autocomplete="off">
-                    </div>
-                </div>
-                <div class="col-md-12" id="studholder" style="display:none;">
-                    <label>Student Name </label>
-                    <div class="form-group">
-
-                        <input type="text" id="studname" class="form-control" style="display:none;" autocomplete="off" readonly="">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default dismiss pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success pull-right " id="btncheckin" style="display:none;">Check In</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
-
-
-
-            </div>
-        </div>
-    </div>
 {% endblock  %}

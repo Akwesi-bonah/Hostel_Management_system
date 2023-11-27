@@ -1,13 +1,28 @@
 #!/usr/bin/python3
 
-from flask import render_template
+from flask import render_template, request
 from web_flask.componet import staff_view
 from models import storage
+from web_flask.forms.student import StudentForm
 
 
-@staff_view.route('/addStudent')
+@staff_view.route('/addStudent', methods=['GET', 'POST'])
 def add_students():
-    return render_template('addUpdateStudent.html')
+    """ Add new student """
+    form = StudentForm()
+
+    if form.validate_on_submit():
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        email = form.email.data
+        phone = form.phone.data
+        guidian = form.guidian.data
+        program = form.program.data
+
+
+
+
+    return render_template('addUpdateStudent.html', form=form)
 
 
 @staff_view.route('/studentsList')

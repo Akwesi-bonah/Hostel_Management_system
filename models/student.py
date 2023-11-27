@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Define Student class """
+from werkzeug.security import generate_password_hash
 
 from models.base_model import BaseModel, Base
 import models
@@ -41,21 +42,22 @@ class Student(BaseModel, Base):
         password = ""
         disability = ""
 
-
-def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """initialization of Student class"""
         super().__init__(*args, **kwargs)
-        self.full_name = ""
-        self.date_of_birth = ""
-        self.gender = ""
-        self.student_number = ""
-        self.program = ""
-        self.level = ""
-        self.email = ""
-        self.address = ""
-        self.phone = ""
-        self.guardian_name = ""
-        self.guardian_phone = ""
-        self.password = ""
-        self.disability = ""
+
+    def __setattr__(self, name, value):
+        """sets a password with md5 encryption"""
+        if name == "password":
+            value = generate_password_hash(value)
+        super().__setattr__(name, value)
+
+    def __str__(self):
+        """returns a string representation of the object"""
+        return self.first_name + " " + self.last_name
+
+    def get_id(self):
+        """returns the id of the object"""
+        return str(self.id)
+
 

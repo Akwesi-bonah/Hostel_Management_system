@@ -2,17 +2,17 @@
 """Define Booking class"""
 import models
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, ForeignKey
 
 
 class Booking(BaseModel, Base):
     """Represent booking in hostel"""
     if models.storage_t == "db":
         __tablename__ = "bookings"
-        room_name = Column(String(128), nullable=False)
-        room_type = Column(String(128), nullable=False)
-        paid = Column(String(128), nullable=False)
-        status = Column(String(128), nullable=False)
+        room_id = Column(String(60), ForeignKey('rooms.id'), nullable=False)
+        # student_id = Column(String(60), ForeignKey('students.id'), nullable=False)
+        paid = Column(String(128), default=0)
+        status = Column(String(128), default="pending")
     else:
         room_name = ""
         room_type = ""

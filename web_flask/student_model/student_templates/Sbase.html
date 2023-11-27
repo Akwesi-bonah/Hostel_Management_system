@@ -193,10 +193,12 @@
         ***********************************-->
     <main>
 
+
       <div class="content-body">
-        {% block content %}
         <div class="container-fluid">
           <div class="row page-titles mx-0">
+                          {% block content %}
+
             <div class="col-sm-6 p-md-0">
               <div class="welcome-text">
                 <h4>Hi, welcome back!</h4>
@@ -325,13 +327,11 @@
     <script src="{{ url_for('static', filename='vendor2/global/global.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js2/quixnav-init.js')}}"></script>
     <script src="{{ url_for('static', filename='js2/custom.min.js')}}"></script>
-
     <script src="{{ url_for('static', filename='vendor2/chartist/js/chartist.min.js')}}"></script>
-
     <script src="{{ url_for('static', filename='vendor2/moment/moment.min.js')}}"></script>
     <script src="{{ url_for('static',  filename='vendor2/pg-calendar/js/pignose.calendar.min.js')}}"></script>
-
     <script src="{{ url_for('static',filename='js2/dashboard/dashboard-2.js')}}"></script>
+  <script src="{{ url_for('static', filename='blookings.js') }}"></script>
 
 
 <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

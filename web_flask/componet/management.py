@@ -75,16 +75,6 @@ def update_block():
     return redirect(url_for('staff_view.BlockManage'))
 
 
-@staff_view.route('/rooms')
-def rooms():
-    """ display all rooms """
-
-    form = RoomForm()
-    all_rooms = storage.all(Room).values()
-    room = [room.to_dict() for room in all_rooms]
-
-    return render_template('rooms.html',
-                           rooms=room, form=form)
 
 
 @staff_view.route('/rooms/add', methods=['GET'], strict_slashes=False)

@@ -13,27 +13,26 @@ $(document).ready(function() {
         confirmButtonText: 'OK'
       });
     }
-
+    
     // Event listener for form submission
-    $('#AddRoomData').on('click', function(event) {
-      event.preventDefault(); // Prevent default form submission
-
+    $('#AddStudent').on('click', function(event) {
+      event.preventDefault();
+    
       // Check form validation
-      var form = $('#RoomForm')[0];
+      var form = $('#studentForm')[0];
       if (!form.checkValidity()) {
-        form.reportValidity();
+        form.reportValidity(); // Trigger HTML5 form validation
         return;
       }
-
+    
+      // Construct JSON object from form data
       var formData = {
-      room_name: $("#roomNo").val(),
-      room_type_id: $("#roomType").val(),
-      block_id: $("#blockId").val(),
-      gender: $("#gender").val(),
-      floor: $("#floor").val(),
-      no_of_beds: $("#noOfBeds").val()
+        name: $('#name').val(),
+        price: $('#amount').val(),
+        description: $('#description').val(),
+        status: $('#status').val()
       };
-
+    
       // Show confirmation dialog using SweetAlert
       Swal.fire({
         title: 'Are you sure?',
@@ -45,16 +44,17 @@ $(document).ready(function() {
         confirmButtonText: 'Yes, submit it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log('Form data:', formData);
           // If confirmed, proceed with form submission
           $.ajax({
-            url: "http://127.0.0.1:5003/api/v1/room",
+            url: 'http://127.0.0.1:5003/api/v1/room_type',
             type: 'POST',
             data: JSON.stringify(formData),
             contentType: 'application/json',
             success: function(response) {
+              // On successful response, handle the success
               console.log('Success:', response);
-
+    
+              // Show SweetAlert success message or redirect to success page
               Swal.fire({
                 title: 'Form Submitted!',
                 text: 'Your form has been submitted successfully.',
@@ -69,9 +69,10 @@ $(document).ready(function() {
               });
             },
             error: function(xhr, status, error) {
+             
               Swal.fire({
                 title: 'Error!',
-                text: "Room name already exists",
+                text: error,
                 icon: 'error',
                 showCancelButton: false,
                 confirmButtonColor: '#d33',
@@ -82,24 +83,22 @@ $(document).ready(function() {
         }
       });
     });
-
-    $('.edit-room').on('click', function(event) {
+    
+    $('.edit-type').on('click', function(event) {
       event.preventDefault();
-
-      var roomId = $(this).data('room-id');
-
+    
+      var typeId = $(this).data('type-id');
+    
       $.get({
-        url: 'http://127.0.0.1:5003/api/v1/room/' + roomId,
-        success: function(room) {
-          $('#roomNo').val(room.no_of_beds);
-          $('#roomNo').val(room.no_of_beds);
-          $('#roomType').val(room.room_type_id);
-          $('#amount').val(room.price);
+        url: 'http://127.0.0.1:5003/api/v1/room_type/' + typeId, 
+        success: function(block) {
+          $('#name').val(block.name);
+          $('#amount').val(block.price);
           $('#description').val(block.name);
           $('#status').val(block.status)
-
+    
           // show form
-          $('#roomCreateUpdate').modal('show');
+          $('#RoomTypeCU').modal('show');
         },
         error: function(xhr, status, error) {
             Swal.fire({
@@ -112,8 +111,8 @@ $(document).ready(function() {
         }
       });
     });
-
-
+    
+    
     // Delete button click event
     $('.delete-type').on('click', function(event) {
      event.preventDefault();
