@@ -76,6 +76,11 @@ class DBStorage:
                 return True
         return False
 
+    def get_id(self):
+        """returns user id"""
+        all_users = self.all(Staff).values()
+        return all_users
+
     def get_user_pwd(self, email=None):
         """ get user id using email """
         if email is None:

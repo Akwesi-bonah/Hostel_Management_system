@@ -1,152 +1,83 @@
 {% extends 'Sbase.html' %}
 {% block content %}
- <div class="card" style="width: 90%;">
-      <div class="">
-
-          <div class="shopping-cart">
-            <ul class="nav nav-tabs nav-justified">
-              <li class="nav-item btn-info">
-                <select id="blockid" name="blockid" class="form-control">
-                  <option value="none" selected="" disabled="">
-                    ---Filter Block---
-                  </option>
+<section class="content">
+  <div class="col-12">
+    <div class="card recent-sales overflow-auto">
 
 
-                  <option value="a7aaff90-2090-4717-b3c4-19fe7790e427">
-                    Block B
-                  </option>
-                  <option value="02fc1f2b-62da-4749-b7f0-4f2af158bac8">
-                    Block C
+      <div class="card-body">
+        <h5 class="card-title"><span>Available Rooms</span></h5>
+          <div class="filter-section mb-3">
+            <label for="blockFilter">Filter by Block:</label>
+            <select id="blockFilter" class="form-select">
+              <option value="">All Blocks</option>
+              {% for block in blocks %}
+                <option value="{{ block.id }}">{{ block.name }}</option>
+                {% endfor %}
+            </select>
 
-                </select>
-              </li>
-              <li class="nav-item btn-primary">
-                <select id="roomtypeid" name="roomtypeid" class="form-control" widget="20%">
-                  <option value="none" selected="" disabled="">
-                    ---Filter Room Type---
-                  </option>
-
-                  <option value="641ba2ae-848b-42f5-a7c9-0b1c60f4d753">
-                    TWO IN A ROOM - Bunk Bed with kitchen (JCR &amp; common area
-                    maintenance fees inclusive)
-                  </option>
-                  <option value="7569adbd-7730-491c-ad78-155e5b34f508">
-                    ANNEX ONE IN AROOM
-                  </option>
-                  <option value="129e28aa-159d-4142-9dd1-16227079c3f8">
-                    Three in a room with Balcony Kitchenette
-                  </option>
-                  <option value="355b21d1-527e-4117-a585-16fa26e46f3b">
-                    TWO IN A ROOM - self contain with kitchen- Annex A (JCR
-                    &amp; common area maintenance fees inclusive)
-                  </option>
-
-                </select>
-              </li>
-            </ul>
-            <div class="tab-content pt-1">
-              <div
-                role="tabpanel"
-                class="tab-pane active"
-                id="shop-cart-tab"
-                aria-expanded="true"
-                aria-labelledby="shopping-cart"
-              >
-                <div class="card">
-                  <div class="card-header">
-                    <h4 class="card-title">Available Rooms</h4>
-                    <a class="heading-elements-toggle"
-                      ><i class="la la-ellipsis-v font-medium-3"></i
-                    ></a>
-                    <div class="heading-elements">
-                      <ul class="list-inline mb-0">
-                        <li>
-                          <input
-                            type="text"
-                            id="myInput"
-                            placeholder="Search for Room.."
-                            title="Type in a name"
-                          />
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="card-content">
-                    <div class="table-responsive">
-                      <table
-                        id="recentbeds"
-                        class="table table-hover table-xl mb-0 ps"
-                      >
-                        <thead>
-                          <tr>
-                            <th class="border-top-0">Block</th>
-                            <th class="border-top-0" style="max-width: 300px">
-                              Room type
-                            </th>
-                            <th class="border-top-0">Floor</th>
-                            <th class="border-top-0">Gender</th>
-                            <th class="border-top-0">Room #</th>
-                            <th class="border-top-0">Available Beds</th>
-                            <th class="border-top-0">Amount</th>
-                            <th class="border-top-0"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-
-
-                        </tr>
-                          <tr>
-                            <td class="text-truncate">
-                              <a href="#">Block C</a>
-                            </td>
-                            <td class="" style="max-width: 300px">
-                              FOUR IN A ROOM - Self contain with balcony
-                              kitchennete (JCR &amp; common area fees inclusive)
-                            </td>
-                            <td class="text-truncate">First Floor</td>
-                            <td class="text-truncate">FEMALE</td>
-                            <td>
-                              <div class="product-color">
-                                <strong>Room # : </strong> C212
-                              </div>
-                              <div class="product-size">
-                                <strong>Description : </strong>
-                              </div>
-                            </td>
-                            <td class="">
-                              <button
-                                type="button"
-                                class="btn btn-sm btn-outline-info round"
-                              >
-                                2
-                              </button>
-                            </td>
-
-                            <td class="text-truncate">6100</td>
-
-                            <td>
-                              <div>
-                                <a
-                                  href="#0"
-                                  class="btn btn-info btn-glow round px-2 bkrm studbook"
-                                  data-id="b3e671a9-8712-44c3-9cf9-c56111bd9f81"
-                                  data-staffname="C212"
-                                  data-block="02fc1f2b-62da-4749-b7f0-4f2af158bac8"
-                                  >Book Now</a
-                                >
-                              </div>
-                            </td>
-                          </tr>
-
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <label for="roomTypeFilter">Filter by Room Type:</label>
+            <select id="roomTypeFilter" class="form-select">
+              <option value="">All Room Types</option>
+              {% for room_type in room_types %}
+                <option value="{{ room_type.id }}">{{ room_type.name }}</option>
+                {% endfor %}
+            </select>
           </div>
+
+<table class="table table-border datatable">
+  <thead>
+    <tr>
+      <th class="border-top-0">Block</th>
+      <th class="border-top-0" style="max-width: 300px">Room type</th>
+      <th class="border-top-0">Floor</th>
+      <th class="border-top-0">Gender</th>
+      <th class="border-top-0">Room #</th>
+      <th class="border-top-0">Available Beds</th>
+      <th class="border-top-0">Amount</th>
+      <th class="border-top-0"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for room in rooms %}
+    <tr>
+      <td class="text-truncate">
+        <a >{{ room.block_name }}</a>
+      </td>
+      <td class="" style="max-width: 300px">
+        {{ room.room_type_name }}
+      </td>
+      <td class="text-truncate">{{ room.floor }}</td>
+      <td class="text-truncate">{{ room.gender }}</td>
+      <td>
+        <div class="product-color">
+          <strong>Room # :</strong> {{ room.room_name }}
         </div>
+      </td>
+      <td class="">
+        <button type="button" class="btn btn-sm btn-outline-info round">
+          {{ room.no_of_beds }}
+        </button>
+      </td>
+      <td class="text-truncate">GHC <span>{{ room.price }}</span></td>
+      <td>
+        <div>
+          <a href="#0" class="btn btn-info btn-glow round px-2 bkrm studbook"
+            data-room-id="{{ room.id }}"
+            data-block-name="{{ room.block }}"
+            data-block="{{ room.block_id }}">Book Now</a>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
       </div>
+    </div>
+  </div>
+  <!-- /.row -->
+</section>
+
 
 {% endblock %}

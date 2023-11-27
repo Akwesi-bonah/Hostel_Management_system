@@ -51,10 +51,7 @@ $('#AddData').on('click', function(event) {
         data: JSON.stringify(formData),
         contentType: 'application/json',
         success: function(response) {
-          // On successful response, handle the success
-          console.log('Success:', response);
 
-          // Show SweetAlert success message or redirect to success page
           Swal.fire({
             title: 'Form Submitted!',
             text: 'Your form has been submitted successfully.',
@@ -64,7 +61,7 @@ $('#AddData').on('click', function(event) {
             confirmButtonText: 'OK'
           }).then((result) => {
             if (result.isConfirmed) {
-              window.location.href = '/blocks'; // Redirect to success page
+                 location.reload();
             }
           });
         },
@@ -75,7 +72,7 @@ $('#AddData').on('click', function(event) {
           // Show SweetAlert error message or handle the error appropriately
           Swal.fire({
             title: 'Error!',
-            text: error,
+            text: "Block Name already exists",
             icon: 'error',
             showCancelButton: false,
             confirmButtonColor: '#d33',

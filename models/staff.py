@@ -16,9 +16,9 @@ class Staff(BaseModel, Base):
         name = Column(String(255), nullable=False)
         email = Column(String(255), nullable=False, unique=True)
         phone = Column(String(255), nullable=True, unique=True)
-        password = Column(String(1000), nullable=False)
-        role = Column(String(128), nullable=False)
-        status = Column(String(128), nullable=True)
+        password = Column(String(1000))
+        role = Column(String(128))
+        status = Column(String(128),)
     else:
         campus = ""
         name = ""
@@ -37,5 +37,18 @@ class Staff(BaseModel, Base):
         if name == "password":
             value = generate_password_hash(value)
         super().__setattr__(name, value)
+
+    def __str__(self):
+        """returns a string representation of the object"""
+        return self.name
+
+    def get_id(self):
+        """returns the id of the object"""
+        return self.id
+
+    def is_active(self):
+        return True
+    def is_authenticated(self):
+        return True
 
 
