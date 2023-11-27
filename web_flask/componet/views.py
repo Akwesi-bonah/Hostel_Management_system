@@ -34,10 +34,12 @@ def dashboard():
         user_id = models.storage.get_user_id(user)
         if not hash_pwd:
             error_message = "Invalid credentials"
-            return redirect(url_for('staff_view.base', error=error_message))
+            return redirect(url_for('staff_view.base',
+                                    error=error_message))
         if check_password_hash(hash_pwd, pwd):
-            login_user(Staff, remember=True, force=True, fresh=True)
-            return redirect(url_for('staff_view.dashboard', username=user))
+           # login_user(Staff, remember=True, force=True, fresh=True)
+            return redirect(url_for('staff_view.dashboard',
+                                    username=user))
         else:
             error_message = "Invalid credentials"
 
@@ -48,7 +50,6 @@ def dashboard():
 def allotment():
     import random
 
-    # Your existing data
     allotment_data = [
         {
             'id': 1,
@@ -74,11 +75,9 @@ def allotment():
             'Paid': 300,
             'Status': 'Pending'
         }
-        # Existing records
     ]
 
-    # Generate 20 new random records
-    for i in range(1, 100):  # Start with ID 3 and end with ID 22
+    for i in range(1, 100):
         new_record = {
             'id': i,
             'studName': 'Student' + str(i),
@@ -92,6 +91,7 @@ def allotment():
             'Status': random.choice(['Paid', 'Pending', 'Unpaid'])
         }
         allotment_data.append(new_record)
-    return render_template('allotment.html', allotment=allotment_data)
+    return render_template('allotment.html',
+                           allotment=allotment_data)
 
 
