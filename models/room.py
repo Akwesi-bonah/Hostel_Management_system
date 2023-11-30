@@ -9,8 +9,8 @@ class Room(BaseModel, Base):
     """ Represent room in hostel """
     if models.storage_t == "db":
         __tablename__ = "rooms"
-        block_id = Column(String(255), ForeignKey('blocks.id'), nullable=False)
-        room_type_id = Column(String(255), ForeignKey('room_types.id'), nullable=False)
+        block_id = Column(String(255), ForeignKey('blocks.id', ondelete="CASCADE"), nullable=False)
+        room_type_id = Column(String(255), ForeignKey('room_types.id', ondelete="CASCADE"), nullable=False)
         room_name = Column(String(128), nullable=False, unique=True)
         gender = Column(String(128), nullable=False)
         floor = Column(String(128))
