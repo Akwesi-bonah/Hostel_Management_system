@@ -47,6 +47,12 @@ def add_room_type():
     if 'description' not in request.get_json():
         abort(400, description="Description missing")
 
+    name = request.get_json()['name']
+
+    check_name = storage.session.query(RoomType).filter_by(name=name).first()
+    if check_name:
+        return jsonify({"error": "RoomType already exists"}), 400
+
     data = request.get_json()
     instance = RoomType(**data)
     instance.save()

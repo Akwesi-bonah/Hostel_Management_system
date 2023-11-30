@@ -1,3 +1,4 @@
+from web_flask.forms.student import StudentForm
 from web_flask.student_model import student_views
 from flask import render_template
 from models import storage
@@ -11,7 +12,10 @@ def default():
     """
      Display default site student
     """
-    return render_template('Sdefault.html')
+    #login = LoginForm()
+    form = StudentForm()
+
+    return render_template('Sdefault.html', form=form)
 
 
 @student_views.route('/default/student', methods=['GET'])
@@ -34,7 +38,7 @@ def booking():
     room_types = storage.all(RoomType).values()
     room_type = [room_type.to_dict() for room_type in room_types]
 
-    room = (storage.session.query(Room.id, Room.room_name, Room.no_of_beds, Room.floor, Room.gender,
+    room = (storage.session.query(Room.id, Room.room_name, Room.booked_beds, Room.floor, Room.gender,
                                    RoomType.name.label('room_type_name'), RoomType.price,
                                    Block.name.label('block_name'))
              .join(Block, Room.block_id == Block.id)
@@ -43,7 +47,7 @@ def booking():
 
     rooms = []
     for result_tuple in room:
-        id, room_name, no_of_beds,floor, gender, room_type_name,price, block_name = result_tuple
+        id, room_name, no_of_beds, floor, gender, room_type_name,price, block_name = result_tuple
 
         result_dict = {
             'id': id,

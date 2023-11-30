@@ -15,7 +15,7 @@ class Room(BaseModel, Base):
         gender = Column(String(128), nullable=False)
         floor = Column(String(128))
         no_of_beds = Column(Integer, nullable=False)
-        booked_beds = Column(Integer, nullable=False, default=0)
+        booked_beds = Column(Integer)
     else:
         block = ""
         room_type = ""

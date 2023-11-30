@@ -96,7 +96,7 @@ function editUser() {
         role: $("#role").val(),
         status: $("#status").val(),
       };
-      var userId = getUserIdSomehow(); // Replace this with your way of getting the user ID
+      var userId =  $(this).data('staff-id');;
       $.ajax({
         url: "http://127.0.0.1:5003/api/v1/staff/" + userId,
         type: "PUT",
@@ -202,7 +202,70 @@ function deleteUser() {
       }
     });
   });
+function selfUser() {
+    $("#uStaff").on("click", function (event) {
+        event.preventDefault();
+        var form = $("#staffFrom")[0];
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
 
+        var formData = {
+            campus: $("#campus").val(),
+            name: $("#name").val(),
+            email: $("#email").val(),
+            phone: $("#phone").val(),
+        };
+
+        var userId = $(this).data('staff-id');
+
+        // Show confirmation dialog using SweetAlert
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to update the user. Confirm?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, update it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Proceed with the AJAX request
+                $.ajax({
+                    url: "http://127.0.0.1:5003/api/v1/staff/" + userId,
+                    type: "PUT",
+                    data: JSON.stringify(formData),
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log("User updated:", response);
+                        Swal.fire({
+                            title: "Success!",
+                            text: "User has been updated successfully.",
+                            icon: "success",
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                        }).then(() => {
+                            $("#staffCreateUpdate").modal("hide");
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            title: "Error!",
+                            text: error,
+                            icon: "error",
+                            confirmButtonColor: "#d33",
+                            confirmButtonText: "OK",
+                        });
+                    },
+                });
+            }
+        });
+    });
+}
+
+
+selfUser();
   editUser();
   updateUser();
   deleteUser();

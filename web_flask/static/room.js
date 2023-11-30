@@ -31,7 +31,8 @@ $(document).ready(function() {
       block_id: $("#blockId").val(),
       gender: $("#gender").val(),
       floor: $("#floor").val(),
-      no_of_beds: $("#noOfBeds").val()
+      no_of_beds: $("#noOfBeds").val(),
+      booked_beds: $("#noOfBeds").val()
       };
 
       // Show confirmation dialog using SweetAlert

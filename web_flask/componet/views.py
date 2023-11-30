@@ -4,47 +4,49 @@ from werkzeug.security import check_password_hash
 
 from models.staff import Staff
 from web_flask.componet import staff_view
-from flask import render_template, request, redirect, url_for
-from flask_login import login_required, login_user, logout_user
+from flask import render_template, request, redirect, url_for, session
 import models
 from web_flask.forms.login import Login
 
 
-@staff_view.route('/')
+@staff_view.route('/', methods=['GET', 'POST'])
 def base():
-    """default page"""
-    form = Login()
-    return render_template('default.html', form=form, error=None)
-
-
-@staff_view.route('/logout')
-def logout():
-    return redirect('url_for(staff_view.base')
-
-
-@staff_view.route('/user', methods=['GET', 'POST'])
-def dashboard():
+    """Default page - Login"""
     form = Login()
     error_message = None
 
     if form.validate_on_submit():
+        session.pop('user_id', None)
         user = form.email.data
         pwd = form.password.data
         hash_pwd = models.storage.get_user_pwd(user)
         user_id = models.storage.get_user_id(user)
-        if not hash_pwd:
+
+        if not user_id or not hash_pwd or not check_password_hash(hash_pwd, pwd):
             error_message = "Invalid credentials"
-            return redirect(url_for('staff_view.base',
-                                    error=error_message))
-        if check_password_hash(hash_pwd, pwd):
-           # login_user(Staff, remember=True, force=True, fresh=True)
-            return redirect(url_for('staff_view.dashboard',
-                                    username=user))
         else:
-            error_message = "Invalid credentials"
+            session['user_id'] = user_id
+            session['user'] = user
+            return redirect(url_for('staff_view.dashboard', user=session['user']))
 
-    return redirect(url_for('staff_view.base', error=error_message))
+    return render_template('default.html', form=form, error=error_message)
 
+
+@staff_view.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    session.pop('user', None)
+    return redirect(url_for('staff_view.base'))
+
+
+@staff_view.route('/user', methods=['GET'])
+def dashboard():
+    if 'user_id' not in session:
+        return redirect(url_for('staff_view.base'))
+
+    user = session['user']
+
+    return render_template('base.html', user=user)
 
 @staff_view.route('/allotment')
 def allotment():

@@ -10,7 +10,7 @@ class Booking(BaseModel, Base):
     if models.storage_t == "db":
         __tablename__ = "bookings"
         room_id = Column(String(60), ForeignKey('rooms.id'), nullable=False)
-        # student_id = Column(String(60), ForeignKey('students.id'), nullable=False)
+        student_id = Column(String(60), ForeignKey('students.id'), nullable=False)
         paid = Column(String(128), default=0)
         status = Column(String(128), default="pending")
     else:

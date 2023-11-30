@@ -25,7 +25,7 @@ class Student(BaseModel, Base):
         phone = Column(String(128), unique=True)
         guardian_name = Column(String(128))
         guardian_phone = Column(String(128))
-        password = Column(String(128))
+        password = Column(String(1000))
         disability = Column(String(128))
     else:
         full_name = ""
@@ -56,6 +56,7 @@ class Student(BaseModel, Base):
         """returns a string representation of the object"""
         return self.first_name + " " + self.last_name
 
+    @property
     def get_id(self):
         """returns the id of the object"""
         return str(self.id)

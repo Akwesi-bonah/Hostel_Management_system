@@ -6,7 +6,6 @@ from models.room import Room
 from models import storage
 
 
-
 def validate_room_data(data):
     """validate required fields"""
     required_fields = ['room_name', 'room_type_id',

@@ -4,7 +4,7 @@
   <h1>Add Student</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url_for('staff_view.base')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ url_for('staff_view.dashboard')}}">Home</a></li>
       <li class="breadcrumb-item active">Add Student</li>
     </ol>
   </nav>
@@ -38,7 +38,7 @@
                     <!-- Other personal info fields -->
                     <div class="col-md-4">
                       {{ form.first_name.label(class="form-label") }}
-                      {{ form.first_name(class="form-control") }}
+                      {{ form.first_name(class="form-control", id="first_name") }}
                     </div>
                     {% if form.first_name.errors %}
                     <div class="invalid-feedback">
@@ -50,7 +50,7 @@
 
                     <div class="col-md-4">
                       {{ form.last_name.label(class="form-label") }}
-                      {{ form.last_name(class="form-control") }}
+                      {{ form.last_name(class="form-control", id="last_name") }}
                     </div>
                     {% if form.last_name.errors %}
                     <div class="invalid-feedback">
@@ -61,11 +61,11 @@
                     {% endif %}
                     <div class="col-md-4">
                       {{ form.other_name.label(class="form-label") }}
-                      {{ form.other_name(class="form-control") }}
+                      {{ form.other_name(class="form-control", id="other_name") }}
                     </div>
                     <div class="col-md-4">
                       {{ form.email.label(class="form-label") }}
-                      {{ form.email(class="form-control") }}
+                      {{ form.email(class="form-control", id="email") }}
                     </div>
                     {% if form.email.errors %}
                     <div class="invalid-feedback">
@@ -79,7 +79,7 @@
 
                     <div class="col-md-4">
                       {{ form.phone.label(class="form-label") }}
-                      {{ form.phone(class="form-control") }}
+                      {{ form.phone(class="form-control", id="phone") }}
                     </div>
                     {% if form.phone.errors %}
                     <div class="invalid-feedback">
@@ -90,7 +90,7 @@
                     {% endif %}
                     <div class="col-md-4">
                       {{ form.date_of_birth.label(class="form-label") }}
-                      {{ form.date_of_birth(class="form-control") }}
+                      {{ form.date_of_birth(class="form-control", id="date_of_birth") }}
                     </div>
                     {% if form.date_of_birth.errors %}
                     <div class="invalid-feedback">
@@ -100,8 +100,19 @@
                     </div>
                     {% endif %}
                     <div class="col-md-4">
+                      {{ form.address.label(class="form-label") }}
+                      {{ form.address(class="form-control", id="address") }}
+                    </div>
+                    {% if form.address.errors %}
+                    <div class="invalid-feedback">
+                      {% for error in form.address.errors %}
+                      <span>{{ error }}</span><br>
+                      {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="col-md-4">
                       {{ form.gender.label(class="form-label") }}
-                      {{ form.gender(class="form-control") }}
+                      {{ form.gender(class="form-control", id="gender") }}
                     </div>
                     {% if form.gender.errors %}
                     <div class="invalid-feedback">
@@ -112,7 +123,7 @@
                     {% endif %}
                     <div class="col-md-4">
                       {{ form.disability.label(class="form-label") }}
-                      {{ form.disability(class="form-control") }}
+                      {{ form.disability(class="form-control", id="disability") }}
                     </div>
                     {% if form.disability.errors %}
                     <div class="invalid-feedback">
@@ -123,7 +134,7 @@
                     {% endif %}
                     <div class="col-md-4">
                       {{ form.password.label(class="form-label") }}
-                      {{ form.password(class="form-control") }}
+                      {{ form.password(class="form-control", id="password") }}
                     </div>
                     {% if form.password.errors %}
                     <div class="invalid-feedback">
@@ -154,11 +165,11 @@
                     <!-- Other guardian info fields -->
                     <div class="col-md-4">
                       {{ form.guardian_name.label(class="form-label") }}
-                      {{ form.guardian_name(class="form-control") }}
+                      {{ form.guardian_name(class="form-control", id="guardian_name") }}
                     </div>
                     <div class="col-md-4">
                       {{ form.guardian_phone.label(class="form-label") }}
-                      {{ form.guardian_phone(class="form-control") }}
+                      {{ form.guardian_phone(class="form-control", id="guardian_phone") }}
                     </div>
                   </div>
                 </div>
@@ -183,15 +194,15 @@
                     <!-- Other guardian info fields -->
                     <div class="col-md-4">
                       {{ form.student_number.label(class="form-label") }}
-                      {{ form.student_number(class="form-control") }}
+                      {{ form.student_number(class="form-control", id="student_number") }}
                     </div>
                     <div class="col-md-4">
                       {{ form.program.label(class="form-label") }}
-                      {{ form.program(class="form-control") }}
+                      {{ form.program(class="form-control", id="program") }}
                     </div>
                     <div class="col-md-4">
                       {{ form.level.label(class="form-label") }}
-                      {{ form.level(class="form-control") }}
+                      {{ form.level(class="form-control", id="level") }}
                     </div>
                   </div>
                 </div>
@@ -199,7 +210,7 @@
             </div>
           </div>
           <!-- Profile Picture Upload -->
-          <div class="mt-3">
+          <!-- <div class="mt-3">
 
             {{ form.profile_picture.label(class="form-label") }}
             {{ form.profile_picture(class="form-control", id="profile_picture") }}
@@ -212,9 +223,9 @@
               {% endfor %}
             </div>
             {% endif %}
-          </div>
+          </div> -->
 
-          <script>
+          <!-- <script>
             document.getElementById('profile_picture').addEventListener('change', function (event) {
               var input = event.target;
               var preview = document.getElementById('preview');
@@ -230,7 +241,7 @@
                 reader.readAsDataURL(input.files[0]);
               }
             });
-          </script>
+          </script> -->
 
           <div class="mt-3">
               {{ form.submit(id="AddStudent", class="btn btn-primary") }}

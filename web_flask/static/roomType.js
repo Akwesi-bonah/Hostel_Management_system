@@ -72,7 +72,7 @@ $(document).ready(function() {
              
               Swal.fire({
                 title: 'Error!',
-                text: error,
+                text: "Room Type already exist",
                 icon: 'error',
                 showCancelButton: false,
                 confirmButtonColor: '#d33',

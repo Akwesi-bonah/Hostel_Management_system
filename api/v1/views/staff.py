@@ -19,8 +19,8 @@ def get_staff(staff_id):
     """Retrieves a staff"""
 
     staff = storage.get(Staff, staff_id)
-    if Staff:
-        abort(400, description="Staff Not Found")
+    if not Staff:
+        return jsonify({"error " : "Staff Not Found"})
 
     return jsonify(staff.to_dict())
 
@@ -94,8 +94,11 @@ def update_staff(staff_id):
     ignore = ['id',  'created_at', 'updated_at']
 
     data = request.get_json()
-    for key, value in data.items():
-        if key not in ignore:
-            setattr(staff, key, value)
-    storage.save()
-    return make_response(jsonify(staff.to_dict()), 200)
+    try:
+        for key, value in data.items():
+            if key not in ignore:
+                setattr(staff, key, value)
+        storage.save()
+        return make_response(jsonify(staff.to_dict()), 200)
+    except Exception as e:
+        return jsonify({"error": " Error Occurred"})

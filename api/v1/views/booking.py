@@ -61,7 +61,7 @@ def add_booking():
     room_id = request.get_json().get('room_id')
     # student_id = request.get_json().get('student_id')
 
-    avilable_beds = storage.session.query(Room.no_of_beds).filter(Room.id == room_id).scalar()
+    avilable_beds = storage.session.query(Room.booked_beds).filter(Room.id == room_id).scalar()
     if avilable_beds == 0:
         return jsonify({'error': 'No avilable beds'}), 400
 
@@ -69,7 +69,7 @@ def add_booking():
         'room_id': room_id,
         # 'student_id': student_id,
         'status': 'pending',
-        'no_of_beds': avilable_beds - 1,
+        'no_of_beds': int(avilable_beds) - 1,
     }
 
 

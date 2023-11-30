@@ -1,158 +1,209 @@
 $(document).ready(function() {
-    // Function to show validation errors using SweetAlert
-    function showValidationErrors(errors) {
-      var errorMessage = 'Please check the following fields:\n\n';
-      for (var i = 0; i < errors.length; i++) {
-        errorMessage += '- ' + errors[i] + '\n';
-      }
-      Swal.fire({
-        title: 'Validation Error',
-        text: errorMessage,
-        icon: 'error',
-        confirmButtonColor: '#d33',
-        confirmButtonText: 'OK'
-      });
+  // Function to show validation errors using SweetAlert
+  function showValidationErrors(errors) {
+    var errorMessage = 'Please check the following fields:\n\n';
+    for (var i = 0; i < errors.length; i++) {
+      errorMessage += '- ' + errors[i] + '\n';
     }
-    
-    // Event listener for form submission
-    $('#AddStudent').on('click', function(event) {
-      event.preventDefault();
-    
-      // Check form validation
-      var form = $('#studentForm')[0];
-      if (!form.checkValidity()) {
-        form.reportValidity(); // Trigger HTML5 form validation
-        return;
-      }
-    
-      // Construct JSON object from form data
-      var formData = {
-        name: $('#name').val(),
-        price: $('#amount').val(),
-        description: $('#description').val(),
-        status: $('#status').val()
-      };
-    
-      // Show confirmation dialog using SweetAlert
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'Do you want to submit the form?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, submit it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // If confirmed, proceed with form submission
-          $.ajax({
-            url: 'http://127.0.0.1:5003/api/v1/room_type',
-            type: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json',
-            success: function(response) {
-              // On successful response, handle the success
-              console.log('Success:', response);
-    
-              // Show SweetAlert success message or redirect to success page
-              Swal.fire({
-                title: 'Form Submitted!',
-                text: 'Your form has been submitted successfully.',
-                icon: 'success',
-                showCancelButton: false,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK'
-              }).then((result) => {
-                if (result.isConfirmed) {
-                 location.reload();
-                }
-              });
-            },
-            error: function(xhr, status, error) {
-             
-              Swal.fire({
-                title: 'Error!',
-                text: error,
-                icon: 'error',
-                showCancelButton: false,
-                confirmButtonColor: '#d33',
-                confirmButtonText: 'OK'
-              });
-            }
-          });
-        }
-      });
+    Swal.fire({
+      title: 'Validation Error',
+      text: errorMessage,
+      icon: 'error',
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'OK'
     });
-    
-    $('.edit-type').on('click', function(event) {
-      event.preventDefault();
-    
-      var typeId = $(this).data('type-id');
-    
-      $.get({
-        url: 'http://127.0.0.1:5003/api/v1/room_type/' + typeId, 
-        success: function(block) {
-          $('#name').val(block.name);
-          $('#amount').val(block.price);
-          $('#description').val(block.name);
-          $('#status').val(block.status)
-    
-          // show form
-          $('#RoomTypeCU').modal('show');
-        },
-        error: function(xhr, status, error) {
+  }
+
+  // Event listener for form submission
+  $('#AddStudent').on('click', function(event) {
+    event.preventDefault();
+
+    // Check form validation
+    var form = $('#studentForm')[0];
+    if (!form.checkValidity()) {
+      form.reportValidity(); // Trigger HTML5 form validation
+      return;
+    }
+
+    var formData = {
+      first_name: $('#first_name').val(),
+      last_name: $('#last_name').val(),
+      other_name: $('#other_name').val(),
+      email: $('#email').val(),
+      phone: $('#phone').val(),
+      date_of_birth: $('#date_of_birth').val(),
+      gender: $('#gender').val(),
+      address: $('#address').val(),
+      disability: $('#disability').val(),
+      password: $('#password').val(),
+      guardian_name: $('#guardian_name').val(),
+      guardian_phone: $('#guardian_phone').val(),
+      student_number: $('#student_number').val(),
+      program: $('#program').val(),
+    };
+
+    // Show confirmation dialog using SweetAlert
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to submit the form?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, submit it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // If confirmed, proceed with form submission
+        $.ajax({
+          url: 'http://127.0.0.1:5003/api/v1/student', // Update the correct URL here
+          type: 'POST',
+          data: JSON.stringify(formData),
+          contentType: 'application/json',
+          success: function(response) {
             Swal.fire({
-                title: "Error!",
-                text: error,
-                icon: "error",
-                confirmButtonColor: "#d33",
-                confirmButtonText: "OK",
-              });
-        }
-      });
-    });
-    
-    
-    // Delete button click event
-    $('.delete-type').on('click', function(event) {
-     event.preventDefault();
-        var blockId = $(this).data("type-id");
-        Swal.fire({
-          title: "Are you sure?",
-          text: "You are about to delete this room Type. This action cannot be undone.",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#d33",
-          cancelButtonColor: "#3085d6",
-          confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            $.ajax({
-              url: "http://127.0.0.1:5003/api/v1/room_type/" + blockId,
-              method: "DELETE",
-              success: function (response) {
-                Swal.fire({
-                  title: "Deleted!",
-                  text: "The block has been deleted.",
-                  icon: "success",
-                  confirmButtonColor: "#3085d6",
-                  confirmButtonText: "OK",
-                }).then(() => {
-                  location.reload();
-                });
-              },
-              error: function (xhr, status, error) {
-                console.error("Error deleting block:", error);
-                Swal.fire({
-                  title: "Error!",
-                  text: error,
-                  icon: "error",
-                  confirmButtonColor: "#d33",
-                  confirmButtonText: "OK",
-                });
-              },
+              title: 'Form Submitted!',
+              text: 'Your form has been submitted successfully.',
+              icon: 'success',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'OK'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              }
+            });
+          },
+          error: function(xhr, status, error) {
+            Swal.fire({
+              title: 'Error!',
+              text: error,
+              icon: 'error',
+              showCancelButton: false,
+              confirmButtonColor: '#d33',
+              confirmButtonText: 'OK'
             });
           }
         });
-      });
+      }
     });
+  });
+
+  // Event listener for editing student data
+$('.edit-student').on('click', function(event) {
+    event.preventDefault();
+    var studentId = $(this).data('student-id');
+
+    Swal.fire({
+      title: 'Please wait',
+      text: 'Fetching student data...',
+      icon: 'info',
+      showConfirmButton: false,
+      allowOutsideClick: false
+    });
+
+    setTimeout(() => {
+      Swal.close(); // Close the "Please wait" alert after 5 seconds
+    }, 5000);
+
+    // Get student data from API
+    $.ajax({
+      url: 'http://127.0.0.1:5003/api/v1/student/' + studentId,
+      type: 'GET',
+      success: function(studentData) {
+        // Update the form fields with student data
+        $('#first_name').val(studentData.first_name);
+        $('#last_name').val(studentData.last_name);
+        $('#other_name').val(studentData.other_name);
+        $('#email').val(studentData.email);
+        $('#phone').val(studentData.phone);
+        $('#date_of_birth').val(studentData.date_of_birth);
+        $('#address').val(studentData.address);
+        $('#student_number').val(studentData.student_number);
+        $('#program').val(studentData.program);
+        $('#address').val(studentData.address);
+        $('#level').val(studentData.level);
+        $('#gender').val(studentData.gender);
+        $('#guardian_name').val(studentData.guardian_name);
+        $('#guardian_phone').val(studentData.guardian_phone);
+        $('#disability').val(studentData.disability);
+
+        $('#StudentUpdate').modal('show');
+        Swal.close();
+      },
+      error: function(xhr, status, error) {
+        Swal.close();
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to fetch student data. Please try again.',
+          icon: 'error',
+          confirmButtonColor: '#d33'
+        });
+      }
+    });
+  });
+
+  $('#updateStudent').submit(function(event) {
+    event.preventDefault();
+    var studentId = $(this).data('student-id');
+     var formData = {
+      first_name: $('#first_name').val(),
+      last_name: $('#last_name').val(),
+      other_name: $('#other_name').val(),
+      email: $('#email').val(),
+      phone: $('#phone').val(),
+      date_of_birth: $('#date_of_birth').val(),
+      gender: $('#gender').val(),
+      address: $('#address').val(),
+      disability: $('#disability').val(),
+      password: $('#password').val(),
+      guardian_name: $('#guardian_name').val(),
+      guardian_phone: $('#guardian_phone').val(),
+      student_number: $('#student_number').val(),
+      program: $('#program').val(),
+    };
+    console.log(formData);
+    Swal.fire({
+      title: 'Confirm Update',
+      text: 'Are you sure you want to update student information?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, update it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: 'http://127.0.0.1:5003/api/v1/student/' + studentId,
+          type: 'PUT',
+          contentType: 'application/json',
+          data: JSON.stringify(updatedData),
+          success: function(response) {
+            Swal.fire({
+              title: 'Success!',
+              text: 'Student information updated successfully.',
+              icon: 'success',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'OK'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              }
+            });
+          },
+          error: function(xhr, status, error) {
+            Swal.fire({
+              title: 'Error!',
+              text: 'Failed to update student information. Please try again.',
+              icon: 'error',
+              confirmButtonColor: '#d33',
+              confirmButtonText: 'OK'
+            });
+          }
+        });
+      }
+    });
+  });
+
+
+
+});

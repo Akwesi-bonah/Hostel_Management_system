@@ -55,7 +55,7 @@ def add_student():
     request_data = request.get_json()
 
     if not request_data:
-        return jsonify({'error': 'Request body is empty'}), 400
+        return jsonify({'error': 'Not JSON'}), 400
 
     is_valid, error_message = validate_student_data(request_data)
     if not is_valid:
@@ -78,13 +78,10 @@ def add_student():
     if check_number:
         return jsonify({'error': 'Student number already exists'})
 
-    try:
-
-        student = Student(**request_data)
-        student.save()
-        return jsonify(student.to_dict()), 201
-    except Exception as e:
-        return jsonify({'Error': "some Error Occurred"})
+    new_student = Student(**request_data)
+    storage.new(new_student)
+    storage.save()
+    return jsonify(new_student.to_dict()), 201
 
 
 @views.route('/student/<student_id>', methods=['PUT'], strict_slashes=False)
