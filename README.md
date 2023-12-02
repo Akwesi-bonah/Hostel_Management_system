@@ -43,10 +43,16 @@ To run the Hostel Management System locally, follow these steps:
    ```
 
 3. Set up the database:
-   - Modify `config.py` to configure your database connection.
+   - Modify [setup_db.sql](setup_db.sql) to configure your database connection.
    - Run migrations to create the database schema:
      ```bash
      flask db upgrade
+     ```
+4. set up the environment variables
+   - create a .env file in the root directory
+   - add the following variables to the .env file
+     ```bash
+
      ```
 
 ## Usage
@@ -80,10 +86,12 @@ The Hostel Management System provides APIs for interacting with the system progr
 ## Contributing
 
 Contributions are welcome! If you want to contribute to this project, please fork the repository and create a pull request.
-
+- [George Arhin-Bonnah](https://github.com/Akwesi-bonah)
+- [Godwin Dogbey](https://github.com/GodwinDogbey )
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
 
 ---
 

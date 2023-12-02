@@ -10,3 +10,4 @@ from api.v1.views.staff import *
 from api.v1.views.room_type import *
 from api.v1.views.room import *
 from api.v1.views.booking import *
+from api.v1.views.reservation import *

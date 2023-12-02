@@ -31,20 +31,27 @@ $(document).ready(function () {
           confirmButtonText: "OK",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/staff"; // Redirect to success page
+            location.reload();
           }
         });
       },
       error: function (xhr, status, error) {
         console.error("Error:", error);
-        Swal.fire({
-          title: "Error!",
-          text: "There was an error submitting the form.",
-          icon: "error",
-          showCancelButton: false,
-          confirmButtonColor: "#d33",
-          confirmButtonText: "OK",
-        });
+
+  let errorMessage = "An error occurred. Please try again.";
+
+  if (xhr.responseJSON && xhr.responseJSON.message) {
+    errorMessage = xhr.responseJSON.message;
+  }
+
+  Swal.fire({
+    title: "Error!",
+    text: errorMessage,
+    icon: "error",
+    showCancelButton: false,
+    confirmButtonColor: "#d33",
+    confirmButtonText: "OK",
+  });
       },
     });
   }

@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """ Default staff view"""
+from sqlalchemy import func
 from werkzeug.security import check_password_hash
 
+from models.room import Room
 from models.staff import Staff
 from web_flask.componet import staff_view
 from flask import render_template, request, redirect, url_for, session
@@ -10,6 +12,11 @@ from web_flask.forms.login import Login
 
 
 @staff_view.route('/', methods=['GET', 'POST'])
+def landing_page():
+    """landing page for the project"""
+    return render_template('landingPage.html')
+
+@staff_view.route('/login', methods=['GET', 'POST'])
 def base():
     """Default page - Login"""
     form = Login()
@@ -46,7 +53,22 @@ def dashboard():
 
     user = session['user']
 
-    return render_template('base.html', user=user)
+    total_beds = models.storage.session.query(func.sum(Room.no_of_beds)).scalar()
+    total_rooms = models.storage.session.query(func.count(Room.id)).scalar()
+    female_beds = (
+        models.storage.session.query(func.sum(Room.no_of_beds))
+        .filter(Room.gender == 'female')
+        .scalar()
+    )
+    male_beds = (
+        models.storage.session.query(func.sum(Room.no_of_beds))
+        .filter(Room.gender == 'male')
+        .scalar()
+    )
+    return render_template('base.html', user=user,
+                           total_beds=total_beds, total_rooms=total_rooms,
+                           female_beds=female_beds, male_beds=male_beds)
+
 
 @staff_view.route('/allotment')
 def allotment():
@@ -95,5 +117,4 @@ def allotment():
         allotment_data.append(new_record)
     return render_template('allotment.html',
                            allotment=allotment_data)
-
 

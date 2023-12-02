@@ -16,6 +16,8 @@ class Room(BaseModel, Base):
         floor = Column(String(128))
         no_of_beds = Column(Integer, nullable=False)
         booked_beds = Column(Integer)
+        reserved_beds = Column(Integer, default=0)
+        status = Column(String(128),  default="Available")
     else:
         block = ""
         room_type = ""

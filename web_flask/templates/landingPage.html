@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Project landing page</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/landingStyle.css')}}" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+</head>
+
+<body>
+  <div id="page-wrapper">
+    <header id="header">
+      <div class="logo">
+        <h4><a href="#">Academy Haven</a></h4>
+        <p>Discover Comfort and Excellence</p>
+      </div>
+
+      <nav id="nav-bar">
+        <ul>
+          <li><a class="nav-link" href="#hero">Home</a></li>
+          <li><a class="nav-link" href="#features">Features</a></li>
+          <li><a class="nav-link" href="#about-us">About Us</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container"></div>
+
+    <section id="hero">
+      <div class="container">
+        <h2>Project Overview</h2>
+        <p>
+          This landing page is part of the final portfolio project developed as part of the ALX Software Engineering
+          program.
+          The Hostel Management System is a holistic software solution tailored for managing hostel facilities,
+          catering to both administrative staff and residents. Our system offers an intuitive interface, ensuring
+          efficiency
+          in managing bookings, rooms, student profiles, messaging, and more.
+
+        </p>
+
+        <br>
+        <a href="#features" class="btn btn-primary">Explore More</a>
+      </div>
+
+    </section>
+
+    <div class="container">
+      <section id="features">
+        <h4>Key Features</h4>
+        <div class="grid">
+
+          <div class="icon"><i class="fas fa-3x fa-user"></i></div>
+          <div class="desc">
+            <h2>Student View</h2>
+            <p>Access your profile, make new bookings, and view past bookings easily.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="icon"><i class="fas fa-3x fa-user-cog"></i></div>
+          <div class="desc">
+            <h2>Staff View</h2>
+            <p>Manage blocks, room types, rooms, and students. Make reservations and handle messaging.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="icon"><i class="fas fa-3x fa-bed"></i></div>
+          <div class="desc">
+            <h2>Room Management</h2>
+            <p>Efficiently manage rooms, including block and room type settings.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="icon"><i class="fas fa-3x fa-address-book"></i></div>
+          <div class="desc">
+            <h2>Student Management</h2>
+            <p>Handle student-related tasks such as profiles, bookings, and communication.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="icon"><i class="fas fa-3x fa-calendar-alt"></i></div>
+          <div class="desc">
+            <h2>Reservation System</h2>
+            <p>Efficiently make, modify, or cancel reservations for students and manage booking schedules.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="icon"><i class="fas fa-3x fa-comment"></i></div>
+          <div class="desc">
+            <h2>Messaging</h2>
+            <p>Communicate and send notifications to students regarding their reservations or hostel updates.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="about-us">
+        <h2>About Us</h2>
+
+
+        <p>Welcome to our Hostel Management System project! Meet the team behind this endeavor:</p>
+        <div class="team-member">
+          <h3 class="student-info ">George Arhin-Bonnah</h3>
+          <p class="">Undergraduate Student of University of Education, Winneba</p>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/george-arhin-bonnah-5330b925a" target="_blank">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/akwesi-bonah" target="_blank">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+        <div class="team-member">
+          <h3>Godwin Dogbey</h3>
+          <p>Content Producer at Despite Media Group | Digital Marketing | Talent Manager | Events & PR</p>
+
+          <a href="https://www.linkedin.com/in/godwin-dogbey-52462b122" target="_blank">
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://github.com/GodwinDogbey" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+
+        </div>
+
+      </section>
+    </div>
+
+  </div>
+ <footer>
+        <div class="footer-content">
+          <h3>Academy Haven</h3>
+          <p>Discover Comfort and Excellence</p>
+        </div>
+      </footer>
+</body>
+
+</html>

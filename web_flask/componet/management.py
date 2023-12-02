@@ -6,6 +6,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from models.room_type import RoomType
 from models.block import Block
 from web_flask.forms.block import AddBlock
+from web_flask.forms.configuration import HostelConfigForm
 from web_flask.forms.room_type import AddRoomType
 from web_flask.forms.rooms import RoomForm
 from models import storage
@@ -52,7 +53,11 @@ def room_type_add():
 
 @staff_view.route('/configure')
 def configure():
-    return render_template('configure.html')
+    """ display configuration """
+    form = HostelConfigForm()
+    
+    return render_template('configure.html',
+                           form=form)
 
 
 @staff_view.route('/expiry')

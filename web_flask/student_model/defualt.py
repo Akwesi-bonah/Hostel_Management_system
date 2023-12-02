@@ -1,53 +1,80 @@
+from sqlalchemy import func
+from werkzeug.security import check_password_hash
+
+from models.booking import Booking
+from models.student import Student
+from web_flask.forms.login import Login
+from web_flask.forms.password import ChangePasswordForm
 from web_flask.forms.student import StudentForm
 from web_flask.student_model import student_views
-from flask import render_template
+from flask import render_template, session, redirect, url_for, flash
 from models import storage
 from models.room import  Room
 from models.block import Block
 from models.room_type import RoomType
 
 
-@student_views.route('/default', methods=['GET'])
+@student_views.route('/landing', methods=['GET', 'POST'])
+def landing_page():
+    """landing page for the project"""
+    return render_template('landingPage.html')
+
+
+@student_views.route('/default', methods=['GET', 'POST'])
 def default():
     """
-     Display default site student
+    Display default site student
     """
-    #login = LoginForm()
     form = StudentForm()
+    login = Login()
 
-    return render_template('Sdefault.html', form=form)
+    if login.validate_on_submit():
+        session.pop('user_id', None)
+        user = login.email.data
+        pwd = login.password.data
+
+        if pwd == "" or user == "":
+            flash("Invalid credentials", 'error')
+            return redirect(url_for('student_views.default'))
+
+        user_data = storage.session.query(Student).filter(Student.email == user).first()
+        if user_data:
+            user_id = user_data.id
+            hasd_pwd = user_data.password
+
+            if not check_password_hash(hasd_pwd, pwd):
+                flash("Invalid credentials", 'error')
+            else:
+                session['user_id'] = user_id
+                session['user'] = user
+                return redirect(url_for('student_views.dashboard'))
+        else:
+            flash("Invalid credentials", 'error')
+
+    return render_template('Sdefault.html',
+                           form=form, login=login)
 
 
 @student_views.route('/default/student', methods=['GET'])
 def dashboard():
-    return render_template('Sbase.html')
-
-
-@student_views.route('/default/student/profile', methods=['GET'])
-def student_profile():
-    """Student profile"""
-
-    return render_template('Sprofile.html')
-
-
-@student_views.route('/default/student/booking', methods=['GET'])
-def booking():
-    """ booking for rooms"""
+    """Student dashboard"""
+    if 'user' not in session:
+        return redirect(url_for('student_views.default'))
     block = storage.all(Block).values()
     blocks = [block.to_dict() for block in block]
     room_types = storage.all(RoomType).values()
     room_type = [room_type.to_dict() for room_type in room_types]
 
     room = (storage.session.query(Room.id, Room.room_name, Room.booked_beds, Room.floor, Room.gender,
-                                   RoomType.name.label('room_type_name'), RoomType.price,
-                                   Block.name.label('block_name'))
-             .join(Block, Room.block_id == Block.id)
-             .join(RoomType, Room.room_type_id == RoomType.id)
-             .all())
+                                  RoomType.name.label('room_type_name'), RoomType.price,
+                                  Block.name.label('block_name'))
+            .join(Block, Room.block_id == Block.id)
+            .join(RoomType, Room.room_type_id == RoomType.id)
+            .all())
 
     rooms = []
     for result_tuple in room:
-        id, room_name, no_of_beds, floor, gender, room_type_name,price, block_name = result_tuple
+        id, room_name, no_of_beds, floor, gender, room_type_name, price, block_name = result_tuple
 
         result_dict = {
             'id': id,
@@ -62,16 +89,96 @@ def booking():
 
         rooms.append(result_dict)
 
-    return render_template('booking.html', blocks=block,
+    return render_template('Sbase.html',blocks=block,
                            room_types=room_type,
                            rooms=rooms)
 
 
+@student_views.route('/default/student/profile', methods=['GET'])
+def student_profile():
+    """Student profile"""
+    form = StudentForm()
+    reset = ChangePasswordForm()
+    user = None
+    if 'user' not in session:
+        return redirect(url_for('student_views.default'))
+    else:
+        id = session['user_id']
+        try:
+            user = storage.get(Student, id)
+            user = user.to_dict()
+
+            form.first_name.data = user['first_name']
+            form.last_name.data = user['last_name']
+            form.other_name.data = user['other_name']
+            form.email.data = user['email']
+            form.phone.data = user['phone']
+            form.student_number.data = user['student_number']
+            form.program.data = user['program']
+            form.level.data = user['level']
+            form.guardian_name.data = user['guardian_name']
+            form.guardian_phone.data = user['guardian_phone']
+            form.disability.data = user['disability']
+            form.address.data = user['address']
+            form.date_of_birth.data = user['date_of_birth']
+        except Exception as e :
+            pass
+
+    return render_template('Sprofile.html',
+                           form=form, user=user, reset=reset)
+
+
 @student_views.route('/default/student/mybooking', methods=['GET'])
 def my_bookings():
-    """ display student booking infor"""
+    """ Display student booking information """
+    if 'user_id' not in session:
+        return redirect(url_for('student_views.default'))
 
-    return render_template('mybooking.html')
+    user_id = session['user_id']  # Retrieve the user_id from the session
+
+    # Fetch the student based on the user_id
+    user = storage.session.query(Student).filter(Student.id == user_id).first()
+
+    if not user:
+        # Redirect if the user is not found
+        return redirect(url_for('student_views.default'))
+
+    # Query to fetch booking information for the student
+    my_booking = storage.session.query(
+        Booking.id,
+        Room.room_name.label('room_name'),
+        RoomType.name.label('room_type_name'),
+        Block.name.label('block_name'),
+        Booking.status,
+        func.concat(Student.first_name, ' ', Student.other_name, ' ', Student.last_name).label('full_name'),
+        Student.student_number,
+        RoomType.price,
+    ).join(Room, Booking.room_id == Room.id) \
+        .join(RoomType, Room.room_type_id == RoomType.id) \
+        .join(Block, Room.block_id == Block.id) \
+        .join(Student, Booking.student_id == Student.id) \
+        .filter(Student.id == user_id) \
+        .all()
+
+
+    bookings = []
+    for result_tuple in my_booking:
+        id, room_name, room_type_name, block_name, status, full_name, student_number, price = result_tuple
+
+        result_dict = {
+            'id': id,
+            'room_name': room_name,
+            'room_type_name': room_type_name,
+            'block_name': block_name,
+            'status': status,
+            'full_name': full_name,
+            'student_number': student_number,
+            'price': price
+        }
+
+        bookings.append(result_dict)
+
+    return render_template('mybooking.html', bookings=bookings, user=user)
 
 
 @student_views.route('/default/student/mybooking/details', methods=['GET'])

@@ -16,7 +16,7 @@ $(document).ready(function() {
 
     // Event listener for form submission
     $('#AddRoomData').on('click', function(event) {
-      event.preventDefault(); // Prevent default form submission
+      event.preventDefault();
 
       // Check form validation
       var form = $('#RoomForm')[0];

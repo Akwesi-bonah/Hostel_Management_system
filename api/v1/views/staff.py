@@ -70,7 +70,6 @@ def add_staff():
     if phone:
         abort(400, description="phone already exist")
 
-
     try:
         data = request.get_json()
         instance = Staff(**data)

@@ -62,7 +62,6 @@ def add_student():
         return jsonify({'error': error_message}), 400
 
     check_email = request_data.get('email')
-    print(check_email)
     if storage.session.query(Student).filter_by(
             email=check_email).first():
         return jsonify({'error': 'Email already exists'}), 400
@@ -78,10 +77,12 @@ def add_student():
     if check_number:
         return jsonify({'error': 'Student number already exists'})
 
-    new_student = Student(**request_data)
-    storage.new(new_student)
-    storage.save()
-    return jsonify(new_student.to_dict()), 201
+    try:
+        new_student = Student(**request_data)
+        new_student.save()
+        return jsonify(new_student.to_dict()), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 
 @views.route('/student/<student_id>', methods=['PUT'], strict_slashes=False)

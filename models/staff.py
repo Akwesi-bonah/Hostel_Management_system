@@ -46,9 +46,4 @@ class Staff(BaseModel, Base):
         """returns the id of the object"""
         return self.id
 
-    def is_active(self):
-        return True
-    def is_authenticated(self):
-        return True
-
 
