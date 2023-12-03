@@ -17,8 +17,8 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <h2>Name: {{user.name }}</h2>
-              <h3>Role : {{ user.role }}</h3>
+              <h2>Name: {{own.name }}</h2>
+              <h3>Role : {{ own.role }}</h3>
 
             </div>
           </div>
@@ -42,9 +42,6 @@
 
 
 
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
-                </li>
 
               </ul>
               <div class="tab-content pt-2">
@@ -55,24 +52,24 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">{{ user.name }}</div>
+                    <div class="col-lg-9 col-md-8">{{ own.name }}</div>
                   </div>
 
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Role</div>
-                    <div class="col-lg-9 col-md-8">{{ user.role }}</div>
+                    <div class="col-lg-9 col-md-8">{{ own.role }}</div>
                   </div>
 
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8">{{ user.phone }}</div>
+                    <div class="col-lg-9 col-md-8">{{ own.phone }}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">{{ user.email }}</div>
+                    <div class="col-lg-9 col-md-8">{{ own.email }}</div>
                   </div>
 
                 </div>
@@ -136,13 +133,29 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <label> Password <b class="red">*</b></label>
+              <div>
+                {{ form.userPwd(class="form-control text-box single-line",
+                id="userPwd", placeholder="New Password") }} {% for error in
+                form.userPwd.errors %}
+                <span
+                  class="field-validation-valid text-danger"
+                  data-valmsg-for="staffPhone"
+                  data-valmsg-replace="true"
+                  >{{ error }}</span
+                >
+                {% endfor %}
+              </div>
+            </div>
+
 
 
 
           </div>
           <!-- /.card-body -->
 
-          <div class="card-footer" data-staff-id="{{user.id}}">
+          <div class="card-footer" data-staff-id="{{own.id}}">
             {{ form.submit(class="btn btn-primary showloader float-left",
             id="uStaff") }}
           </div>
@@ -151,37 +164,7 @@
                 </div>
 
 
-                <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <!-- Change Password Form -->
-                  <form>
 
-                    <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
-                </div>
 
               </div><!-- End Bordered Tabs -->
 

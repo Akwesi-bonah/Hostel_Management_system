@@ -11,20 +11,25 @@ from web_flask.forms.staff import StaffForm
 @staff_view.route('/user/profile')
 def profile_info():
     form = StaffForm()
-    user = None
-    if 'user' not in session:
+    own = None
+    if 'user_id' not in session:
         return redirect(url_for('staff_view.base'))
+
     else:
+
         try:
             id = session['user_id']
-            user = models.storage.get(Staff, id)
-            user = user.to_dict()
+            own = models.storage.get(Staff, id)
+            own = own.to_dict()
 
-            form.campus.data = user['campus']
-            form.staffName.data = user['name']
-            form.staffEmail.data = user['email']
-            form.staffPhone.data = user['phone']
+            form.campus.data = own['campus']
+            form.staffName.data = own['name']
+            form.staffEmail.data = own['email']
+            form.staffPhone.data = own['phone']
+            user = session['user']
+
         except Exception as e:
             pass
 
-        return render_template('profile.html', user=user , form=form)
+        return render_template('profile.html',
+                               own=own, form=form, user=user)

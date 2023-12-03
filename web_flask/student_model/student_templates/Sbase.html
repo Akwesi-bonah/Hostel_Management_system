@@ -6,9 +6,9 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hostel Management System</title>
-  <!-- Favicon icon -->
+  <title>Academy Haven Hostel Management System</title>
   <link href="{{ url_for('static', filename='assets/img/hostel.png') }}" rel="icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="{{url_for('static', filename='vendor2/pg-calendar/css/pignose.calendar.min.css')}}" rel="stylesheet" />
   <link href="{{url_for('static', filename='vendor2/chartist/css/chartist.min.css')}}" rel="stylesheet" />
   <link href="{{url_for ('static', filename='css2/style.css')}}" rel="stylesheet" />
@@ -80,11 +80,11 @@
                     role="button"
                     data-toggle="dropdown"
                   >
-                    <i class="mdi mdi-account"></i>
+                    <i class="fas fa-user"></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
                     <a href="{{ url_for('student_views.student_profile')}}" class="dropdown-item">
-                      <i class="icon-user"></i>
+                      <i class="fas fa-user"></i>
                       <span class="ml-2">Profile </span>
                     </a>
                     <a href="" class="dropdown-item">
@@ -108,7 +108,7 @@
                 class="has-arrow"
                 href="{{url_for('student_views.dashboard')}}"
                 aria-expanded="false"
-                ><i class="icon icon-single-04"></i
+                ><i class="fas fa-book"></i
                 ><span class="nav-text">Bookings</span></a
               >
 
@@ -119,7 +119,7 @@
                 class="has-arrow"
                 href="{{ url_for('student_views.my_bookings')}}"
                 aria-expanded="false"
-                ><i class="icon icon-chart-bar-33"></i
+                ><i class="fas fa-book"></i
                 ><span class="nav-text">My Bookings</span></a
               >
 
@@ -129,7 +129,7 @@
                 class="has-arrow"
                 href="{{ url_for('student_views.student_profile')}}"
                 aria-expanded="false"
-                ><i class="icon icon-world-2"></i
+                ><i class="fas fa-user"></i
                 ><span class="nav-text">Profile</span></a
               >
             </li>
@@ -137,9 +137,9 @@
             <li>
               <a
                 class="has-arrow"
-                href="javascript:void()"
+                href="{{ url_for('student_views.logout')}}"
                 aria-expanded="false"
-                ><i class="icon icon-plug"></i
+                ><i class="fas fa-key"></i
                 ><span class="nav-text">Logout</span></a
               >
             </li>

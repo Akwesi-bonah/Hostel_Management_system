@@ -40,9 +40,9 @@ $(document).ready(function() {
       guardian_phone: $('#guardian_phone').val(),
       student_number: $('#student_number').val(),
       program: $('#program').val(),
+      level : $('#level').val()
     };
 
-    // Show confirmation dialog using SweetAlert
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to submit the form?',
@@ -55,7 +55,7 @@ $(document).ready(function() {
       if (result.isConfirmed) {
         // If confirmed, proceed with form submission
         $.ajax({
-          url: 'http://127.0.0.1:5003/api/v1/student', // Update the correct URL here
+          url: 'http://127.0.0.1:5003/api/v1/student',
           type: 'POST',
           data: JSON.stringify(formData),
           contentType: 'application/json',

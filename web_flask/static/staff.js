@@ -223,6 +223,7 @@ function selfUser() {
             name: $("#name").val(),
             email: $("#email").val(),
             phone: $("#phone").val(),
+            password: $('#password').val()
         };
 
         var userId = $(this).data('staff-id');
@@ -253,7 +254,10 @@ function selfUser() {
                             confirmButtonColor: "#3085d6",
                             confirmButtonText: "OK",
                         }).then(() => {
+
                             $("#staffCreateUpdate").modal("hide");
+                            $('#password').val('');
+
                         });
                     },
                     error: function (xhr, status, error) {

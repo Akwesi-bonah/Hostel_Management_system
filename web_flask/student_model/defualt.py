@@ -27,6 +27,7 @@ def default():
     """
     form = StudentForm()
     login = Login()
+    error_message = None  # Assign a default value to error_message
 
     if login.validate_on_submit():
         session.pop('user_id', None)
@@ -43,16 +44,24 @@ def default():
             hasd_pwd = user_data.password
 
             if not check_password_hash(hasd_pwd, pwd):
-                flash("Invalid credentials", 'error')
+                error_message = "Invalid credentials"
             else:
                 session['user_id'] = user_id
                 session['user'] = user
                 return redirect(url_for('student_views.dashboard'))
         else:
-            flash("Invalid credentials", 'error')
+            error_message = "Invalid credentials"
 
     return render_template('Sdefault.html',
-                           form=form, login=login)
+                           form=form, login=login,
+                           error=error_message)
+
+
+@student_views.route('/logout', methods=['GET'])
+def logout():
+    if 'user_id' in session:
+        session.clear()
+        return redirect(url_for('student_views.default'))
 
 
 @student_views.route('/default/student', methods=['GET'])
@@ -70,6 +79,7 @@ def dashboard():
                                   Block.name.label('block_name'))
             .join(Block, Room.block_id == Block.id)
             .join(RoomType, Room.room_type_id == RoomType.id)
+            .filter(Room.booked_beds > 0)
             .all())
 
     rooms = []
@@ -100,11 +110,12 @@ def student_profile():
     form = StudentForm()
     reset = ChangePasswordForm()
     user = None
-    if 'user' not in session:
+    if 'user_id' not in session:
         return redirect(url_for('student_views.default'))
     else:
-        id = session['user_id']
+
         try:
+            id = session['user_id']
             user = storage.get(Student, id)
             user = user.to_dict()
 
@@ -134,13 +145,12 @@ def my_bookings():
     if 'user_id' not in session:
         return redirect(url_for('student_views.default'))
 
-    user_id = session['user_id']  # Retrieve the user_id from the session
+    user_id = session['user_id']
 
-    # Fetch the student based on the user_id
     user = storage.session.query(Student).filter(Student.id == user_id).first()
 
     if not user:
-        # Redirect if the user is not found
+
         return redirect(url_for('student_views.default'))
 
     # Query to fetch booking information for the student

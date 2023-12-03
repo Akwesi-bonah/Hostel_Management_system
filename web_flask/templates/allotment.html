@@ -78,18 +78,7 @@
       >
         Block
       </th>
-      <th
-        scope="col"
-        class="sorting"
-        tabindex="0"
-        aria-controls="example1"
-        rowspan="1"
-        colspan="1"
-        aria-label="Category: activate to sort column ascending"
-        style="width: 69.3594px"
-      >
-        Category
-      </th>
+
 
       <th
         scope="col"
@@ -157,19 +146,19 @@
     <!-- Display table rows here -->
     <tr class="">
       <th scope="row" ></th>
-      <td>{{ allot.id }}</td>
-      <td ><a href="#" class="text-primary">{{ allot.studName }}</a></td>
-      <td>{{ allot.Phone }}</td>
-      <td>{{ allot.Block }}</td>
-      <td>{{ allot.category }}</td>
-      <td>{{ allot.RoomType }}</td>
-      <td>{{ allot.RoomNum }}</td>
-      <td>{{ allot.Bill }}</td>
-      <td>{{ allot.Paid }}</td>
-      {% if allot.Status == "Paid" %}
-      <td><span class="badge bg-success">{{ allot.Status }}</span></td>
+      <td>{{ allot.student_number }}</td>
+      <td ><a href="#" class="text-primary">{{ allot.student_name }}</a></td>
+      <td>{{ allot.phone }}</td>
+      <td>{{ allot.block_name }}</td>
+
+      <td>{{ allot.room_type }}</td>
+      <td>{{ allot.room_no }}</td>
+      <td>{{ allot.price }}</td>
+      <td>{{ allot.paid }}</td>
+      {% if allot.status == "Paid" %}
+      <td><span class="badge bg-success">{{ allot.status }}</span></td>
       {% else %}
-      <td><span class="badge bg-danger">{{ allot.Status }}</span></td>
+      <td><span class="badge bg-danger">{{ allot.status }}</span></td>
       {% endif %}
     </tr>
     {% endfor %} {% else %}

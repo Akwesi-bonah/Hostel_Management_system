@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session, redirect, url_for
 
 from models import storage
 from models.block import Block
@@ -14,14 +14,22 @@ from web_flask.forms.reserve import ReservationForm
 @staff_view.route('/reserve_bed')
 def reserve():
     """This function renders the reservation page"""
+    if 'user_id' not in session:
+        return redirect(url_for('staff_view.base'))
+    user = session['user']
+
     form = ReservationForm()
     return render_template('reserve.html',
-                           form=form)
+                           form=form, user=user)
 
 
 @staff_view.route('/assignBed')
 def AssignBed():
     """This function renders the assign bed page"""
+    if 'user_id' not in session:
+        return redirect(url_for('staff_view.base'))
+    user = session['user']
+
     global students_list
     reserve_rooms = storage.session.query(
         Room.id, Room.room_name, Room.reserved_beds, Block.name, Room.gender,
@@ -57,5 +65,5 @@ def AssignBed():
             students_list.append(student_dict)
 
     return render_template('assignBed.html', rooms=rooms_list,
-                           students=students_list)
+                           students=students_list, user=user)
 

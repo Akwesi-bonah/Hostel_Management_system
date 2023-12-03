@@ -5,13 +5,12 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <title>HMS</title>
+ <title>Academy Haven Hostel Management System</title>
   <meta content="" name="description" />
   <meta content="" name="keywords" />
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon" />
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+  <link href="{{ url_for('static', filename='assets/img/hostel.png') }}" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect" />
@@ -34,13 +33,7 @@
 </head>
 
 <body>
-  {% if error %}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong> {{ error }}</strong> You should check in on some of those fields
-    below.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {% endif %}
+
   <main>
     <div class="container">
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -61,17 +54,23 @@
                     <h5 class="card-title text-center pb-0 fs-4">
                       Login to Your Account
                     </h5>
-                    <p class="text-center small">
-                      Enter your username & password to login
-                    </p>
+
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate method="POST"
                     action="{{ url_for('staff_view.base') }}">
+                      {% if error %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong> {{ error }}</strong> You should check in on some of those fields
+    below.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
                     {{ form.hidden_tag() }}
                     <div class="col-12">
-                      {{ form.email.label }} {{ form.email(class="form-control form-control-lg", placeholder="email
-                      address") }}
+                      {{ form.email.label }}
+
+                      {{ form.email(class="form-control form-control-lg", placeholder="email address") }}
                       <div class="invalid-feedback">
                         {% for error in form.email.errors %}
                         {{ error }}

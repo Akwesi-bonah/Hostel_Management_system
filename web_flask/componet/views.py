@@ -3,8 +3,12 @@
 from sqlalchemy import func
 from werkzeug.security import check_password_hash
 
+from models.block import Block
+from models.booking import Booking
 from models.room import Room
+from models.room_type import RoomType
 from models.staff import Staff
+from models.student import Student
 from web_flask.componet import staff_view
 from flask import render_template, request, redirect, url_for, session
 import models
@@ -15,6 +19,7 @@ from web_flask.forms.login import Login
 def landing_page():
     """landing page for the project"""
     return render_template('landingPage.html')
+
 
 @staff_view.route('/login', methods=['GET', 'POST'])
 def base():
@@ -41,8 +46,7 @@ def base():
 
 @staff_view.route('/logout')
 def logout():
-    session.pop('user_id', None)
-    session.pop('user', None)
+    session.clear()
     return redirect(url_for('staff_view.base'))
 
 
@@ -72,49 +76,52 @@ def dashboard():
 
 @staff_view.route('/allotment')
 def allotment():
-    import random
+    if 'user_id' not in session:
+        return redirect(url_for('staff_view.base'))
+    user = session['user']
 
-    allotment_data = [
-        {
-            'id': 1,
-            'studName': 'John Doe',
-            'Phone': '123-456-7890',
-            'Block': 'A',
-            'category': 'Regular',
-            'RoomType': 'Single',
-            'RoomNum': 101,
-            'Bill': 500,
-            'Paid': 250,
-            'Status': 'Paid'
-        },
-        {
-            'id': 2,
-            'studName': 'Jane Smith',
-            'Phone': '987-654-3210',
-            'Block': 'B',
-            'category': 'Regular',
-            'RoomType': 'Double',
-            'RoomNum': 202,
-            'Bill': 600,
-            'Paid': 300,
-            'Status': 'Pending'
-        }
-    ]
+    allotment_tuple = (
+        models.storage.session.query(
+            Booking.id,
+            Booking.paid,
+            Student.student_number,
+            Student.phone,
+            func.concat(
+                Student.first_name,
+                ' ',
+                Student.last_name
+            ).label('full_name'),
+            Block.name,
+            Room.room_name,
+            RoomType.name,
+            RoomType.price,
+            Booking.status
+        )
+        .join(Student, Booking.student_id == Student.id)
+        .join(Room, Booking.room_id == Room.id)
+        .join(Block, Room.block_id == Block.id)
+        .join(RoomType, Room.room_type_id == RoomType.id)
+        .all()
+    )
 
-    for i in range(1, 100):
-        new_record = {
-            'id': i,
-            'studName': 'Student' + str(i),
-            'Phone': f'{random.randint(100, 999)}-{random.randint(100, 999)}-{random.randint(1000, 9999)}',
-            'Block': random.choice(['A', 'B', 'C', 'D']),
-            'category': random.choice(['Regular', 'VIP']),
-            'RoomType': random.choice(['Single', 'Double']),
-            'RoomNum': random.randint(101, 999),
-            'Bill': random.randint(400, 800),
-            'Paid': random.randint(200, 400),
-            'Status': random.choice(['Paid', 'Pending', 'Unpaid'])
+    allotment_list = []
+    for allot in allotment_tuple:
+        (booking_id, paid, student_number,phone, name, block_name,
+         room_no, room_type, price, status) = allot
+
+        result_tuple = {
+            'booking_id': booking_id,
+            'paid': paid,
+            'student_number': student_number,
+            'phone': phone,
+            'student_name': name,
+            'block_name': block_name,
+            'room_no': room_no,
+            'room_type': room_type,
+            'price': price,
+            'status': status
         }
-        allotment_data.append(new_record)
+        allotment_list.append(result_tuple)
     return render_template('allotment.html',
-                           allotment=allotment_data)
+                           allotment=allotment_list, user=user)
 
