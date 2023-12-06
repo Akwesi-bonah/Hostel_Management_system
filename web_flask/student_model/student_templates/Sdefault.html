@@ -27,19 +27,19 @@
       <div class="col-md-6 text-center">
         <!-- Company Logo -->
         <img src="{{url_for('static', filename='images/welcome.jpg')}}" alt="Company Logo" class="img-fluid mt-3">
-        <p> Welcome to Academy Haven Hostel</p>
       </div>
       <div class="col-md-6">
         <div class="login-card">
-          <h2 class="text-center mb-4">Welcome!</h2>
-          <form id="login" action="{{ url_for('student_views.default')}}">
-              {% if error %}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong> {{ error }}</strong> You should check in on some of those fields
-    below.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {% endif %}
+          <h2 class="text-center mb-4">Academy Haven Hostel</h2>
+          <form id="login" method="POST" action="{{ url_for('student_views.default')}}">
+      {% if error_message %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{ error_message }}</strong> You should check in on some of those fields below.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+
               {{ login.hidden_tag() }}
             <div class="form-group">
 

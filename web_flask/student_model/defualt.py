@@ -22,28 +22,24 @@ def landing_page():
 
 @student_views.route('/default', methods=['GET', 'POST'])
 def default():
-    """
-    Display default site student
-    """
     form = StudentForm()
     login = Login()
-    error_message = None  # Assign a default value to error_message
+    error_message = None
 
     if login.validate_on_submit():
         session.pop('user_id', None)
         user = login.email.data
         pwd = login.password.data
 
-        if pwd == "" or user == "":
-            flash("Invalid credentials", 'error')
-            return redirect(url_for('student_views.default'))
+        user_data = storage.session.query(
+            Student.id, Student.password
+        ).filter(Student.email == user).first()
 
-        user_data = storage.session.query(Student).filter(Student.email == user).first()
-        if user_data:
-            user_id = user_data.id
-            hasd_pwd = user_data.password
+        if user_data is not None:
+            user_id = user_data[0]
+            hashed_pwd = user_data[1]
 
-            if not check_password_hash(hasd_pwd, pwd):
+            if not check_password_hash(hashed_pwd, pwd):
                 error_message = "Invalid credentials"
             else:
                 session['user_id'] = user_id
@@ -52,13 +48,12 @@ def default():
         else:
             error_message = "Invalid credentials"
 
-    return render_template('Sdefault.html',
-                           form=form, login=login,
-                           error=error_message)
+    # Pass the error_message to the template
+    return render_template('Sdefault.html', form=form, login=login, error_message=error_message)
 
 
 @student_views.route('/logout', methods=['GET'])
-def logout():
+def Slogout():
     if 'user_id' in session:
         session.clear()
         return redirect(url_for('student_views.default'))
@@ -150,7 +145,6 @@ def my_bookings():
     user = storage.session.query(Student).filter(Student.id == user_id).first()
 
     if not user:
-
         return redirect(url_for('student_views.default'))
 
     # Query to fetch booking information for the student
@@ -160,6 +154,7 @@ def my_bookings():
         RoomType.name.label('room_type_name'),
         Block.name.label('block_name'),
         Booking.status,
+        Booking.paid,
         func.concat(Student.first_name, ' ', Student.other_name, ' ', Student.last_name).label('full_name'),
         Student.student_number,
         RoomType.price,
@@ -173,7 +168,9 @@ def my_bookings():
 
     bookings = []
     for result_tuple in my_booking:
-        id, room_name, room_type_name, block_name, status, full_name, student_number, price = result_tuple
+        (id, room_name, room_type_name,
+         block_name, status, paid,
+         full_name, student_number, price) = result_tuple
 
         result_dict = {
             'id': id,
@@ -181,9 +178,10 @@ def my_bookings():
             'room_type_name': room_type_name,
             'block_name': block_name,
             'status': status,
+            'paid': float(paid),
             'full_name': full_name,
             'student_number': student_number,
-            'price': price
+            'price': float(price)
         }
 
         bookings.append(result_dict)

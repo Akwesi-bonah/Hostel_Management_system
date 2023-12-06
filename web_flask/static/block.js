@@ -65,20 +65,21 @@ $('#AddData').on('click', function(event) {
             }
           });
         },
-        error: function(xhr, status, error) {
-          // On error, handle the error
-          console.error('Error:', error);
+         error: function(xhr, status, error) {
+           var errorMessage = "An error occurred.";
+    if (xhr.responseJSON && xhr.responseJSON.error) {
+      errorMessage = xhr.responseJSON.error;
+    }
 
-          // Show SweetAlert error message or handle the error appropriately
-          Swal.fire({
-            title: 'Error!',
-            text: "Block Name already exists",
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonColor: '#d33',
-            confirmButtonText: 'OK'
-          });
-        }
+    Swal.fire({
+      title: 'Error!',
+      text: errorMessage,
+      icon: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'OK'
+    });
+          }
       });
     }
   });
@@ -140,16 +141,22 @@ $('.blockDeleteBtn').on('click', function(event) {
               location.reload();
             });
           },
-          error: function (xhr, status, error) {
-            console.error("Error deleting block:", error);
-            Swal.fire({
-              title: "Error!",
-              text: "Failed to delete the block.",
-              icon: "error",
-              confirmButtonColor: "#d33",
-              confirmButtonText: "OK",
-            });
-          },
+                   error: function(xhr, status, error) {
+           var errorMessage = "An error occurred.";
+    if (xhr.responseJSON && xhr.responseJSON.error) {
+      errorMessage = xhr.responseJSON.error;
+    }
+
+    Swal.fire({
+      title: 'Error!',
+      text: errorMessage,
+      icon: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'OK'
+    });
+          }
+,
         });
       }
     });

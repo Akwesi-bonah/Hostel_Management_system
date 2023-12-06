@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Define Booking class"""
+from sqlalchemy.orm import relationship
+
 import models
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
@@ -13,6 +15,7 @@ class Booking(BaseModel, Base):
         student_id = Column(String(60), ForeignKey('students.id'), nullable=False)
         paid = Column(String(128), default=0)
         status = Column(String(128), default="pending")
+
     else:
         room_name = ""
         room_type = ""

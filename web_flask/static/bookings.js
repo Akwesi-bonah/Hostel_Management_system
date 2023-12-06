@@ -53,25 +53,25 @@ $(".studbook").on("click", function (event) {
             confirmButtonColor: "#3085d6",
             confirmButtonText: "OK",
           }).then(() => {
-            window.location.href = "/student/mybooking";
+            location.reload();
           });
         },
-        error: function (xhr, status, error) {
-          let errorMessage = "You have already booked a room.";
+                  error: function(xhr, status, error) {
+           var errorMessage = "An error occurred.";
+    if (xhr.responseJSON && xhr.responseJSON.error) {
+      errorMessage = xhr.responseJSON.error;
+    }
 
-          if (xhr.responseJSON && xhr.responseJSON.message) {
-            errorMessage = xhr.responseJSON.message;
+    Swal.fire({
+      title: 'Error!',
+      text: errorMessage,
+      icon: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'OK'
+    });
           }
-
-          Swal.fire({
-            title: "Error!",
-            text: errorMessage,
-            icon: "error",
-            showCancelButton: false,
-            confirmButtonColor: "#d33",
-            confirmButtonText: "OK",
-          });
-        },
+,
       });
     }
   });

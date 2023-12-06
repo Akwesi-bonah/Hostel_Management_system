@@ -30,10 +30,10 @@ $(document).ready(function() {
             success: function(response) {
                 Swal.close();
                 var roomSelect = $('#room_name');
-     // Clear existing options
 
 
-    // Add fetched room names and IDs to the select field
+
+
     $.each(response.rooms, function(index, room) {
         roomSelect.append($('<option>', {
             value: room.id,
@@ -41,16 +41,22 @@ $(document).ready(function() {
         }));
     });
             },
-            error: function(error) {
-                // Close SweetAlert and show an error message if there's an error
-                Swal.close();
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Failed to fetch room details. Please try again.',
-                });
-                console.log('Error:', error);
-            }
+              error: function(xhr, status, error) {
+           var errorMessage = "An error occurred.";
+    if (xhr.responseJSON && xhr.responseJSON.error) {
+      errorMessage = xhr.responseJSON.error;
+    }
+
+    Swal.fire({
+      title: 'Error!',
+      text: errorMessage,
+      icon: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'OK'
+    });
+          }
+
         });
     }
 

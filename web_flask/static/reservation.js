@@ -39,17 +39,22 @@ $(document).ready(function () {
             console.log("Reservation successful:", response);
             // You can add further actions here if needed
           },
-          error: function (error) {
-            // Handle reservation error with SweetAlert
-            Swal.fire({
-              icon: "error",
-              title: error.statusText,
-              text: error.responseText,
-              confirmButtonColor: "#d33",
-            });
-            console.error("Reservation error:", error.responseText);
-            // You can display an error message or perform other actions here
-          },
+                   error: function(xhr, status, error) {
+           var errorMessage = "An error occurred.";
+    if (xhr.responseJSON && xhr.responseJSON.error) {
+      errorMessage = xhr.responseJSON.error;
+    }
+
+    Swal.fire({
+      title: 'Error!',
+      text: errorMessage,
+      icon: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'OK'
+    });
+          }
+,
         });
       }
     });
@@ -186,22 +191,22 @@ $(document).ready(function () {
               location.reload();
             });
           },
-          error: function (xhr, status, error) {
-            let errorMessage = "Error in dropping room.";
+                   error: function(xhr, status, error) {
+           var errorMessage = "An error occurred.";
+    if (xhr.responseJSON && xhr.responseJSON.error) {
+      errorMessage = xhr.responseJSON.error;
+    }
 
-            if (xhr.responseJSON && xhr.responseJSON.message) {
-              errorMessage = xhr.responseJSON.message;
-            }
-
-            Swal.fire({
-              title: "Error!",
-              text: errorMessage,
-              icon: "error",
-              showCancelButton: false,
-              confirmButtonColor: "#d33",
-              confirmButtonText: "OK",
-            });
-          },
+    Swal.fire({
+      title: 'Error!',
+      text: errorMessage,
+      icon: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'OK'
+    });
+          }
+,
         });
       }
     });
