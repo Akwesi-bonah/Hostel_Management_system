@@ -1,7 +1,6 @@
-
 {% extends 'base.html' %}
 {% block content %}
-    <H1>Configure Duration</H1>
+<H1>Configure Duration</H1>
 <section class="content">
   <div class="col-12">
     <div class="card recent-sales overflow-auto">
@@ -11,99 +10,61 @@
         <table class="table table-border datatable">
           <thead>
             <tr role="row">
-              <th
-                class="sorting_asc"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 30.5833px"
-                aria-sort="ascending"
-                aria-label="#: activate to sort column descending"
-              >
+              <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 30.5833px" aria-sort="ascending" aria-label="#: activate to sort column descending">
                 #
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 284.2px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 284.2px" aria-label="
                                        Campus
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 created By
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 369.1px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 369.1px" aria-label="
                                         Name
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Date Created
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 199.217px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 199.217px" aria-label="
                                         Description
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Expiry Date
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 96.3px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 96.3px" aria-label="
                                         Action
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Status
               </th>
             </tr>
           </thead>
 
-<tbody>
-  {% for con in configure %}
-  <tr>
-    <td></td>
-    <td>{{ con.staff_name }}</td>
-    <td>{{ con.start_date }}</td>
-    <td>{{ con.end_date }}</td>
-    <td>
-        {% if con.status == 'active' %}
-        <span class="badge bg-success">{{ con.status }}</span>
-        {% else %}
-        <span class="badge bg-danger">{{ con.status }}</span>
-        {% endif %}
-    </td>
-  </tr>
-  {% endfor %}
-</tbody>
+          <tbody>
+            {% for con in configure %}
+            <tr>
+              <td></td>
+              <td>{{ con.staff_name }}</td>
+              <td>{{ con.start_date }}</td>
+              <td>{{ con.end_date }}</td>
+              <td>
+                {% if con.status == 'active' %}
+                <span class="badge bg-success">{{ con.status }}</span>
+                {% else %}
+                <span class="badge bg-danger">{{ con.status }}</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
 
         </table>
       </div>
       <div class="card-footer">
-       <button type="button" class="btn btn-primary"
-               data-bs-toggle="modal"
-               data-bs-target="#createUpdate">
-  Create New
-</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUpdate">
+          Create New
+        </button>
 
       </div>
     </div>

@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
- <title>Academy Haven Hostel Management System</title>
+  <title>Academy Haven </title>
   <meta content="" name="description" />
   <meta content="" name="keywords" />
 
@@ -43,7 +43,7 @@
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="" />
-                  <span class="d-none d-lg-block">Hostel Management System</span>
+                  <span class="d-none d-lg-block">Academy Haven Hostel</span>
                 </a>
               </div>
               <!-- End Logo -->
@@ -59,13 +59,13 @@
 
                   <form class="row g-3 needs-validation" novalidate method="POST"
                     action="{{ url_for('staff_view.base') }}">
-                      {% if error %}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong> {{ error }}</strong> You should check in on some of those fields
-    below.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {% endif %}
+                    {% if error %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      <strong> {{ error }}</strong> You should check in on some of those fields
+                      below.
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
                     {{ form.hidden_tag() }}
                     <div class="col-12">
                       {{ form.email.label }}

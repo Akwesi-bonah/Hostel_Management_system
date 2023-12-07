@@ -19,104 +19,61 @@
         <table class="table table-border datatable">
           <thead>
             <tr role="row">
-              <th
-                class="sorting_asc"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 30.5833px"
-                aria-sort="ascending"
-                aria-label="#: activate to sort column descending"
-              >
+              <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 30.5833px" aria-sort="ascending" aria-label="#: activate to sort column descending">
                 #
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 284.2px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 284.2px" aria-label="
                                        Campus
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Campus
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 369.1px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 369.1px" aria-label="
                                         Name
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Name
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 199.217px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 199.217px" aria-label="
                                         Description
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Description
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 96.3px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 96.3px" aria-label="
                                         Action
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Action
               </th>
             </tr>
           </thead>
 
-<tbody>
-  {% for block in blocks %}
-  <tr>
-    <td></td>
-    <td>{{ block.campus }}</td>
-    <td>{{ block.name }}</td>
-    <td>{{ block.description }}</td>
-    <td>
-      <a href="#"
-         class="btn btn-sm btn-info showloader blockEditBtn"
-         data-block-id="{{ block.id }}"
-      >Edit
-      </a>
-      <a href="#"
-         class="btn btn-sm btn-danger showloader blockDeleteBtn"
-         data-block-id="{{ block.id }}">
-        Delete
-      </a>
-    </td>
-  </tr>
-  {% endfor %}
-</tbody>
+          <tbody>
+            {% for block in blocks %}
+            <tr>
+              <td></td>
+              <td>{{ block.campus }}</td>
+              <td>{{ block.name }}</td>
+              <td>{{ block.description }}</td>
+              <td>
+                <a href="#" class="btn btn-sm btn-info showloader blockEditBtn" data-block-id="{{ block.id }}">Edit
+                </a>
+                <a href="#" class="btn btn-sm btn-danger showloader blockDeleteBtn" data-block-id="{{ block.id }}">
+                  Delete
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
 
         </table>
       </div>
       <div class="card-footer">
-       <button type="button" class="btn btn-primary"
-               data-bs-toggle="modal"
-               data-bs-target="#createUpdate">
-  Create New
-</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUpdate">
+          Create New
+        </button>
 
       </div>
     </div>
@@ -151,7 +108,7 @@
             </div>
 
             <div class="mb-3">
-              <label  class="form-label">Name <b class="red">*</b></label>
+              <label class="form-label">Name <b class="red">*</b></label>
               <div>
                 {{ form.name(class="form-control", id="name", placeholder="Enter Name") }}
                 {% for error in form.name.errors %}
@@ -171,7 +128,7 @@
             </div>
 
             <div class="mb-3">
-              <label  class="form-label">Status</label>
+              <label class="form-label">Status</label>
               <div>
                 {{ form.status(class="form-control", id="status") }}
                 {% for error in form.status.errors %}
@@ -187,9 +144,9 @@
           </div>
         </form>
       </div>
-      </div>
     </div>
   </div>
+</div>
 </div>
 
 {% endblock %}

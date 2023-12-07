@@ -4,61 +4,61 @@
 <div class="content-wrapper" style="min-height: 602px;" data-select2-id="13">
 
 
-  <section class="content">
-    <div class="container-fluid">
+    <section class="content">
+        <div class="container-fluid">
 
 
-      <div class="row">
-    <!-- left column -->
-    <div class="col-md-3">
-    </div>
-    <!-- general form elements -->
-    <div class="col-md-6">
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Bed Reservation</h3>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-3">
+                </div>
+                <!-- general form elements -->
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Bed Reservation</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <div class="card-body">
+                            <form method="POST" action="" id="reservationForm">
+                                {{ form.csrf_token }}
+
+                                <div class="form-group">
+                                    {{ form.block.label }}
+                                    {{ form.block(class="form-control") }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form.room_type.label }}
+                                    {{ form.room_type(class="form-control") }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form.room_name.label }}
+                                    {{ form.room_name(class="form-control") }}
+                                </div>
+
+
+                                <div class="form-group">
+                                    {{ form.no_of_beds.label }}
+                                    {{ form.no_of_beds(class="form-control") }}
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    {{ form.submit(class="btn btn-primary", id='reserve') }}
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
             </div>
-            <!-- /.card-header -->
-            <!-- form start -->
-            <div class="card-body">
-                <form method="POST" action="" id="reservationForm">
-                    {{ form.csrf_token }}
-
-                    <div class="form-group">
-                        {{ form.block.label }}
-                        {{ form.block(class="form-control") }}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form.room_type.label }}
-                        {{ form.room_type(class="form-control") }}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form.room_name.label }}
-                        {{ form.room_name(class="form-control") }}
-                    </div>
 
 
-                    <div class="form-group">
-                        {{ form.no_of_beds.label }}
-                        {{ form.no_of_beds(class="form-control") }}
-                    </div>
-<br>
-                    <div class="form-group">
-                        {{ form.submit(class="btn btn-primary", id='reserve') }}
-                    </div>
-                </form>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-</div>
-
-
-    </div><!-- /.container-fluid -->
-  </section>
+        </div><!-- /.container-fluid -->
+    </section>
 
 
 </div>

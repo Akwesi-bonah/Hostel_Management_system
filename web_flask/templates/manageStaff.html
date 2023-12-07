@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% block content %}
 <div class="pagetitle">
@@ -22,99 +21,49 @@
         <table class="table table-border datatable">
           <thead>
             <tr role="row">
-              <th
-                class="sorting_asc"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 30.5833px"
-                aria-sort="ascending"
-                aria-label="#: activate to sort column descending"
-              >
+              <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 30.5833px" aria-sort="ascending" aria-label="#: activate to sort column descending">
                 #
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 284.2px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 284.2px" aria-label="
                                        Campus
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Name
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 369.1px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 369.1px" aria-label="
                                         Name
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Email
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 199.217px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 199.217px" aria-label="
                                         Description
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Phone
               </th>
-              <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 96.3px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 96.3px" aria-label="
                                         Action
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Role
               </th>
-                <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 96.3px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 96.3px" aria-label="
                                         Action
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Status
               </th>
-                <th
-                class="sorting"
-                tabindex="0"
-                aria-controls="DataTables_Table_0"
-                rowspan="1"
-                colspan="1"
-                style="width: 96.3px"
-                aria-label="
+              <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                style="width: 96.3px" aria-label="
                                         Action
-                                    : activate to sort column ascending"
-              >
+                                    : activate to sort column ascending">
                 Action
               </th>
             </tr>
           </thead>
-<tbody>
+          <tbody>
             {% for user in users %}
             <tr>
               <td></td>
@@ -124,18 +73,8 @@
               <td>{{ user.role }}</td>
               <td>{{ user.status }}</td>
               <td>
-                <a
-                  href="#"
-                  class="btn btn-sm btn-info showloader edit-user"
-                  data-user-id="{{ user.id }}"
-                  >Edit</a
-                >
-                <a
-                  href="#"
-                  class="btn btn-sm btn-danger showloader delete-user"
-                  data-user-id="{{ user.id }}"
-                  >Delete</a
-                >
+                <a href="#" class="btn btn-sm btn-info showloader edit-user" data-user-id="{{ user.id }}">Edit</a>
+                <a href="#" class="btn btn-sm btn-danger showloader delete-user" data-user-id="{{ user.id }}">Delete</a>
               </td>
             </tr>
             {% endfor %}
@@ -143,18 +82,17 @@
         </table>
       </div>
       <div class="card-footer">
-          <button type="button" class="btn btn-primary"
-               data-bs-toggle="modal"
-               data-bs-target="#staffCreateUpdate">
-  Create New
-</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staffCreateUpdate">
+          Create New
+        </button>
       </div>
     </div>
   </div>
   <!-- /.row -->
 </section>
 
-<div class="modal fade md-col2" id="staffCreateUpdate" tabindex="-1" aria-labelledby="staffUpdateCreate" aria-hidden="true">
+<div class="modal fade md-col2" id="staffCreateUpdate" tabindex="-1" aria-labelledby="staffUpdateCreate"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -165,7 +103,7 @@
       </div>
       <!-- Modal Body -->
       <div class="modal-body ">
-         <form action="" class="agnet-contact-form" id="staffFrom" method="post">
+        <form action="" class="agnet-contact-form" id="staffFrom" method="post">
           {{ form.hidden_tag() }}
           <div class="card-body">
             <div class="form-group">
@@ -179,12 +117,8 @@
                 {{ form.staffName(class="form-control text-box single-line",
                 id="staffName", placeholder="Enter Name") }} {% for error in
                 form.staffName.errors %}
-                <span
-                  class="field-validation-valid text-danger"
-                  data-valmsg-for="staffName"
-                  data-valmsg-replace="true"
-                  >{{ error }}</span
-                >
+                <span class="field-validation-valid text-danger" data-valmsg-for="staffName"
+                  data-valmsg-replace="true">{{ error }}</span>
                 {% endfor %}
               </div>
             </div>
@@ -195,12 +129,8 @@
                 {{ form.staffEmail(class="form-control text-box single-line",
                 id="staffEmail", placeholder="Enter Email") }} {% for error in
                 form.staffEmail.errors %}
-                <span
-                  class="field-validation-valid text-danger"
-                  data-valmsg-for="staffEmail"
-                  data-valmsg-replace="true"
-                  >{{ error }}</span
-                >
+                <span class="field-validation-valid text-danger" data-valmsg-for="staffEmail"
+                  data-valmsg-replace="true">{{ error }}</span>
                 {% endfor %}
               </div>
             </div>
@@ -211,12 +141,8 @@
                 {{ form.staffPhone(class="form-control text-box single-line",
                 id="staffPhone", placeholder="Enter Phone") }} {% for error in
                 form.staffPhone.errors %}
-                <span
-                  class="field-validation-valid text-danger"
-                  data-valmsg-for="staffPhone"
-                  data-valmsg-replace="true"
-                  >{{ error }}</span
-                >
+                <span class="field-validation-valid text-danger" data-valmsg-for="staffPhone"
+                  data-valmsg-replace="true">{{ error }}</span>
                 {% endfor %}
               </div>
             </div>
@@ -226,11 +152,8 @@
               <div>
                 {{ form.userPwd(class="form-control text-box single-line",
                 id="staffPassword", placeholder="Enter Password") }}
-                <span
-                  class="field-validation-valid text-danger"
-                  data-valmsg-for="staffPwd"
-                  data-valmsg-replace="true"
-                ></span>
+                <span class="field-validation-valid text-danger" data-valmsg-for="staffPwd"
+                  data-valmsg-replace="true"></span>
               </div>
             </div>
 
@@ -252,9 +175,9 @@
           </div>
         </form>
       </div>
-      </div>
     </div>
   </div>
+</div>
 
 
 

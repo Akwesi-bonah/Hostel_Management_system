@@ -94,7 +94,7 @@
           <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
             <!-- Profile Edit Form -->
-            <form method="POST" enctype="multipart/form-data" id="studentForm">
+            <form method="" enctype="multipart/form-data" id="studentForm" action="#">
               {{ form.hidden_tag() }}
               <!-- Personal Information Accordion -->
               <div class="accordion" id="personalInfoAccordion">
@@ -319,7 +319,7 @@
               <!--          </script>-->
 
               <div class="mt-3" data-student-id="{{ session['user_id'] }}">
-                {{ form.submit(id="updateSelf", class="btn btn-primary") }}
+{{ form.submit(id="updateSelf", class="btn btn-primary", **{'data-student-id': session['user_id']}) }}
               </div>
             </form>
 
