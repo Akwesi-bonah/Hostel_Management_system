@@ -20,7 +20,7 @@ def landing_page():
     return render_template('landingPage.html')
 
 
-@student_views.route('/default', methods=['GET', 'POST'])
+@student_views.route('/', methods=['GET', 'POST'])
 def default():
     form = StudentForm()
     login = Login()

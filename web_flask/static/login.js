@@ -56,7 +56,7 @@ $(document).ready(function () {
       if (result.isConfirmed) {
         // If confirmed, proceed with form submission
         $.ajax({
-          url: 'http://127.0.0.1:5003/api/v1/student', // Update the correct URL here
+          url: 'http://24.144.81.128/api/student',
           type: 'POST',
           data: JSON.stringify(formData),
           contentType: 'application/json',

@@ -39,6 +39,6 @@ def create_app():
     Session(app)
 
     app.register_blueprint(staff_view, url_prefix='/staff/')
-    app.register_blueprint(student_views, url_prefix='/student/')
+    app.register_blueprint(student_views, url_prefix='/')
 
     return app

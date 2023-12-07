@@ -49,13 +49,13 @@ def add_staff():
         abort(400, description="Name missing")
 
     if 'email' not in request.get_json():
-        abort(400, description="Name missing")
+        abort(400, description="email missing")
 
     if 'password' not in request.get_json():
         abort(400, description="Password missing")
 
     if 'role' not in request.get_json():
-        abort(400, description="Name missing")
+        abort(400, description="role missing")
 
     if 'status' not in request.get_json():
         abort(400, description="status Missing")
