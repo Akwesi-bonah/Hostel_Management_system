@@ -40,7 +40,7 @@ $(".studbook").on("click", function (event) {
     if (result.isConfirmed) {
       $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:5003/api/v1/booking",
+        url: "https://www.aflahgh.tech/api/booking",
         contentType: "application/json",
         data: JSON.stringify(bookingData),
         success: function (response) {

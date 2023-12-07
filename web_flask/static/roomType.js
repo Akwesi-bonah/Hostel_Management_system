@@ -46,7 +46,7 @@ $(document).ready(function() {
         if (result.isConfirmed) {
           // If confirmed, proceed with form submission
           $.ajax({
-            url: 'http://127.0.0.1:5003/api/v1/room_type',
+            url: 'https://www.aflahgh.tech/api/room_type',
             type: 'POST',
             data: JSON.stringify(formData),
             contentType: 'application/json',
@@ -90,7 +90,7 @@ $(document).ready(function() {
       var typeId = $(this).data('type-id');
     
       $.get({
-        url: 'http://127.0.0.1:5003/api/v1/room_type/' + typeId, 
+        url: 'https://www.aflahgh.tech/api/room_type/' + typeId,
         success: function(block) {
           $('#name').val(block.name);
           $('#amount').val(block.price);
@@ -128,7 +128,7 @@ $(document).ready(function() {
         }).then((result) => {
           if (result.isConfirmed) {
             $.ajax({
-              url: "http://127.0.0.1:5003/api/v1/room_type/" + blockId,
+              url: "https://www.aflahgh.tech/api/room_type/" + blockId,
               method: "DELETE",
               success: function (response) {
                 Swal.fire({

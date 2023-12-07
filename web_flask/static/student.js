@@ -56,7 +56,7 @@ $(document).ready(function() {
       if (result.isConfirmed) {
         // If confirmed, proceed with form submission
         $.ajax({
-          url: 'http://127.0.0.1:5003/api/v1/student',
+          url: 'https://www.aflahgh.tech/api/student',
           type: 'POST',
           data: JSON.stringify(formData),
           contentType: 'application/json',
@@ -117,7 +117,7 @@ $('.edit-student').on('click', function(event) {
 
     // Get student data from API
     $.ajax({
-      url: 'http://127.0.0.1:5003/api/v1/student/' + studentId,
+      url: 'https://www.aflahgh.tech/api/student/' + studentId,
       type: 'GET',
       success: function(studentData) {
         // Update the form fields with student data
@@ -183,7 +183,7 @@ $('#updateStudent').on("click", function (event) {
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: 'http://127.0.0.1:5003/api/v1/student/' + studentId,
+        url: 'https://www.aflahgh.tech/api/student/' + studentId,
         type: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify(formData), // Use formData here

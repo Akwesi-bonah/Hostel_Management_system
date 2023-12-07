@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var HOST = "http://127.0.0.1:5003";
+  var HOST = "https://www.aflahgh.tech/api/";
 
   function showValidationErrors(errors) {
     var errorMessage = "Please check the following fields:\n\n";
@@ -56,7 +56,7 @@ $(document).ready(function () {
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: HOST + '/api/v1/student/' + studentId,
+          url: HOST + 'student/' + studentId,
           type: "PUT",
           contentType: "application/json",
           data: JSON.stringify(formData),

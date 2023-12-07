@@ -56,7 +56,7 @@ document.getElementById('quickPayBtn').addEventListener('click', function() {
                         callback: function(response){
                             // Handle payment callback
                             $.ajax({
-                                url: "http://127.0.0.1:5003/api/v1/payment",
+                                url: "https://www.aflahgh.tech/api/payment",
                                 method: 'POST',
                                 data: JSON.stringify({
                                     booking_id: booking_id,

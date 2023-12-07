@@ -22,7 +22,7 @@ $(document).ready(function() {
     function fetchRooms(block, roomType) {
         $.ajax({
             type: 'GET',
-            url: 'http://24.144.81.128/api/fetch',
+            url: 'https://www.aflahgh.tech/api/fetch',
             data: {
                 block_id: block,
                 room_type_id: roomType

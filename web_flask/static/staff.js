@@ -16,7 +16,7 @@ $(document).ready(function () {
 
   function submitForm(formData) {
     $.ajax({
-      url: "http://127.0.0.1:5003/api/v1/staff",
+      url: "https://www.aflahgh.tech/api/staff",
       type: "POST",
       data: JSON.stringify(formData),
       contentType: "application/json",
@@ -105,7 +105,7 @@ function editUser() {
       };
       var userId =  $(this).data('staff-id');;
       $.ajax({
-        url: "http://127.0.0.1:5003/api/v1/staff/" + userId,
+        url: "https://www.aflahgh.tech/api/staff/" + userId,
         type: "PUT",
         data: JSON.stringify(formData),
         contentType: "application/json",
@@ -149,7 +149,7 @@ function deleteUser() {
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: "http://127.0.0.1:5003/api/v1/staff/" + userId,
+          url: "https://www.aflahgh.tech/api/staff/" + userId,
           method: "DELETE",
           success: function (response) {
             Swal.fire({
@@ -228,7 +228,7 @@ function selfUser() {
 
         var userId = $(this).data('staff-id');
 
-        // Show confirmation dialog using SweetAlert
+
         Swal.fire({
             title: 'Are you sure?',
             text: 'You are about to update the user. Confirm?',
@@ -241,7 +241,7 @@ function selfUser() {
             if (result.isConfirmed) {
                 // Proceed with the AJAX request
                 $.ajax({
-                    url: "http://127.0.0.1:5003/api/v1/staff/" + userId,
+                    url: "https://www.aflahgh.tech/api/staff/" + userId,
                     type: "PUT",
                     data: JSON.stringify(formData),
                     contentType: "application/json",

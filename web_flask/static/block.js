@@ -33,7 +33,6 @@ $('#AddData').on('click', function(event) {
     status: $('#status').val()
   };
 
-  // Show confirmation dialog using SweetAlert
   Swal.fire({
     title: 'Are you sure?',
     text: 'Do you want to submit the form?',
@@ -44,9 +43,9 @@ $('#AddData').on('click', function(event) {
     confirmButtonText: 'Yes, submit it!'
   }).then((result) => {
     if (result.isConfirmed) {
-      // If confirmed, proceed with form submission
+
       $.ajax({
-        url: 'http://127.0.0.1:5003/api/v1/block',
+        url: 'https://www.aflahgh.tech/api/block',
         type: 'POST',
         data: JSON.stringify(formData),
         contentType: 'application/json',
@@ -89,20 +88,18 @@ $('#AddData').on('click', function(event) {
 $('.blockEditBtn').on('click', function(event) {
   event.preventDefault();
 
-  // Get the block ID from the data attribute
   var blockId = $(this).data('block-id');
 
-  // Fetch block data for editing
   $.get({
-    url: 'http://127.0.0.1:5003/api/v1/block/' + blockId, // Endpoint for fetching block data by ID
+    url: 'https://www.aflahgh.tech/api/block/' + blockId,
     success: function(block) {
-      // Populate the modal form fields with fetched block data for editing
+
       $('#campus').val(block.campus);
       $('#name').val(block.name);
       $('#description').val(block.name);
       $('#status').val(block.status)
 
-      // show form
+
       $('#createUpdate').modal('show');
     },
     error: function(xhr, status, error) {
@@ -127,7 +124,7 @@ $('.blockDeleteBtn').on('click', function(event) {
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: "http://127.0.0.1:5003/api/v1/block/" + blockId,
+          url: "https://www.aflahgh.tech/api/block/" + blockId,
           method: "DELETE",
           success: function (response) {
             Swal.fire({

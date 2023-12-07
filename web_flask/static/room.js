@@ -35,7 +35,7 @@ $(document).ready(function() {
       booked_beds: $("#noOfBeds").val()
       };
 
-      // Show confirmation dialog using SweetAlert
+
       Swal.fire({
         title: 'Are you sure?',
         text: 'Do you want to submit the form?',
@@ -49,7 +49,7 @@ $(document).ready(function() {
           console.log('Form data:', formData);
           // If confirmed, proceed with form submission
           $.ajax({
-            url: "http://127.0.0.1:5003/api/v1/room",
+            url: "https://www.aflahgh.tech/api/room",
             type: 'POST',
             data: JSON.stringify(formData),
             contentType: 'application/json',
@@ -90,7 +90,7 @@ $(document).ready(function() {
       var roomId = $(this).data('room-id');
 
       $.get({
-        url: 'http://127.0.0.1:5003/api/v1/room/' + roomId,
+        url: 'https://www.aflahgh.tech/api/room/' + roomId,
         success: function(room) {
           $('#roomNo').val(room.no_of_beds);
           $('#roomNo').val(room.no_of_beds);
@@ -130,7 +130,7 @@ $(document).ready(function() {
         }).then((result) => {
           if (result.isConfirmed) {
             $.ajax({
-              url: "http://127.0.0.1:5003/api/v1/room_type/" + blockId,
+              url: "https://www.aflahgh.tech/api/room_type/" + blockId,
               method: "DELETE",
               success: function (response) {
                 Swal.fire({

@@ -25,7 +25,7 @@ $(document).ready(function () {
         // Make a POST request to the reservation endpoint
         $.ajax({
           type: "POST",
-          url: "http://127.0.0.1:5003/api/v1/reserve", // Replace with your Flask endpoint
+          url: "https://www.aflahgh.tech/api/reserve", // Replace with your Flask endpoint
           contentType: "application/json",
           data: JSON.stringify(jsonData),
           success: function (response) {
@@ -36,8 +36,8 @@ $(document).ready(function () {
               text: "Room successfully reserved!",
               confirmButtonColor: "#3085d6",
             });
-            console.log("Reservation successful:", response);
-            // You can add further actions here if needed
+
+
           },
                    error: function(xhr, status, error) {
            var errorMessage = "An error occurred.";
@@ -79,7 +79,7 @@ $(document).ready(function () {
   $(".proceed").on("click", function (event) {
     event.preventDefault();
     if (!selectedStudentID) {
-      // Show SweetAlert if a student is not selected
+
       Swal.fire({
         title: "Select a Student",
         text: "Please select a student before proceeding.",
@@ -107,7 +107,7 @@ $(document).ready(function () {
       if (result.isConfirmed) {
         $.ajax({
           type: "POST",
-          url: "http://127.0.0.1:5003/api/v1/booking",
+          url: "https://www.aflahgh.tech/api/booking",
           contentType: "application/json",
           data: JSON.stringify(bookingData),
           success: function (response) {
@@ -175,7 +175,7 @@ $(document).ready(function () {
       if (result.isConfirmed) {
         $.ajax({
           type: "POST",
-          url: "http://127.0.0.1:5003/api/v1/cancel",
+          url: "https://www.aflahgh.tech/api/cancel",
           contentType: "application/json",
           data: JSON.stringify(bookingData),
           success: function (response) {
