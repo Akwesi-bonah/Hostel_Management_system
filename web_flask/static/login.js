@@ -56,7 +56,7 @@ $(document).ready(function () {
       if (result.isConfirmed) {
         // If confirmed, proceed with form submission
         $.ajax({
-          url: 'http://24.144.81.128/api/student',
+          url: 'https://www.aflahgh.tech/api/student',
           type: 'POST',
           data: JSON.stringify(formData),
           contentType: 'application/json',
