@@ -12,6 +12,7 @@ from web_flask.forms.staff import StaffForm
 def profile_info():
     form = StaffForm()
     own = None
+    user = None
     if 'user_id' not in session:
         return redirect(url_for('staff_view.base'))
 

@@ -27,6 +27,10 @@ def base():
     """Default page - Login"""
     form = Login()
     error_message = None
+    user = None
+
+    if 'user_id' not in session:
+        render_template('default.html', form=form, error=error_message)
 
     if form.validate_on_submit():
         session.pop('user_id', None)
