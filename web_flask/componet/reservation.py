@@ -16,7 +16,8 @@ def reserve():
     """This function renders the reservation page"""
     if 'user_id' not in session:
         return redirect(url_for('staff_view.base'))
-    user = session['user']
+    else:
+        user = session['user']
 
     form = ReservationForm()
     return render_template('reserve.html',
@@ -31,11 +32,17 @@ def AssignBed():
     user = session['user']
 
     global students_list
-    reserve_rooms = storage.session.query(
-        Room.id, Room.room_name, Room.reserved_beds, Block.name, Room.gender,
-        RoomType.price, RoomType.name
-    ).join(Block).join(RoomType).all()
-
+    reserve_rooms = (
+        storage.session.query(
+            Room.id, Room.room_name, Room.reserved_beds,
+            Block.name, Room.gender,
+            RoomType.price, RoomType.name
+        )
+        .join(Block)
+        .join(RoomType)
+        .filter(Room.reserved_beds > 0)
+        .all()
+    )
     rooms_list = []
     for result_tuple in reserve_rooms:
         (room_id, room_name, reserved_beds, block_name, gender,
@@ -52,7 +59,8 @@ def AssignBed():
         rooms_list.append(room_dict)
 
         students = storage.session.query(
-            Student.id, Student.first_name, Student.last_name, Student.student_number).all()
+            Student.id, Student.first_name, Student.last_name,
+            Student.student_number).all()
         students_list = []
         for result_tuple in students:
             (student_id, first_name, last_name, number) = result_tuple

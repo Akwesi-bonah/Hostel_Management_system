@@ -14,7 +14,8 @@ def add_students():
     form = StudentForm()
     if 'user_id' not in session:
         return redirect(url_for('staff_view.base'))
-    user = session['user']
+    else:
+        user = session['user']
 
     return render_template('addUpdateStudent.html',
                            form=form, user=user)
@@ -28,10 +29,12 @@ def student_list():
 
     if 'user_id' not in session:
         return redirect(url_for('staff_view.base'))
-    user = session['user']
+    else:
+        user = session['user']
 
     all_students = storage.all(Student).values()
     students = [student.to_dict() for student in all_students]
 
-    return render_template('StudentList.html', Students=students,
+    return render_template('StudentList.html',
+                           Students=students,
                            form=form, user=user)

@@ -15,7 +15,7 @@ def validate_booking_data(data):
     return True, None
 
 
-@views.route('/booking', methods=['GET'], strict_slashes=False)
+@views.route('/bookings', methods=['GET'], strict_slashes=False)
 def get_all_bookings():
     all_bookings = [booking.to_dict() for booking in storage.all(Booking).values()]
     return jsonify(all_bookings)

@@ -17,9 +17,7 @@ from models import storage
 @staff_view.route('/room', methods=['GET'], strict_slashes=False)
 def rooms():
     """Display all rooms"""
-
     form = RoomForm()
-
     RoomAlias = aliased(Room)
     BlockAlias = aliased(Block)
     RoomTypeAlias = aliased(RoomType)
@@ -48,8 +46,6 @@ def rooms():
             'block_name': block_name,
             'room_type_name': room_type_name
         }
-
-        rooms.append(result_dict)  # Append each room dictionary to the list
-
+        rooms.append(result_dict)
     return render_template('rooms.html',
                            rooms=rooms, form=form)

@@ -19,7 +19,7 @@ def validate_block_data(data):
     return True, None
 
 
-@views.route('/block', methods=['GET'], strict_slashes=False)
+@views.route('/blocks', methods=['GET'], strict_slashes=False)
 def get_blocks():
     """ Retrieves the list of all Student objects """
     all_block = storage.all(Block).values()

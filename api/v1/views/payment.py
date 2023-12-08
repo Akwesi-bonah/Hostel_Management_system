@@ -27,6 +27,7 @@ def payment(booking_id):
         Booking.status,
         func.concat(Student.first_name, ' ',
                     Student.last_name).label('student_name'),
+        Student.email,
         Room.room_name,
         RoomType.name,
         RoomType.price
@@ -43,7 +44,8 @@ def payment(booking_id):
     ).first()
 
     if not booking_info:
-        return jsonify({'error': 'No pending booking found for the provided booking_id'}), 400
+        return jsonify({'error': 'No pending booking '
+                                 'found for the provided booking_id'}), 400
 
     booking_dict = {
         'room_id': booking_info[0],
@@ -51,9 +53,10 @@ def payment(booking_id):
         'paid': booking_info[2],
         'status': booking_info[3],
         'student_name': booking_info[4],
-        'room_name': booking_info[5],
-        'room_type_name': booking_info[6],
-        'room_type_price': booking_info[7]
+        'student_email': booking_info[5],
+        'room_name': booking_info[6],
+        'room_type_name': booking_info[7],
+        'room_type_price': booking_info[8]
     }
 
     return jsonify({'booking_info': booking_dict})
@@ -61,6 +64,7 @@ def payment(booking_id):
 
 @views.route('/payment', methods=['POST'], strict_slashes=False)
 def add_payment():
+    """ Add a new payment """
     data = request.get_json()
     if not data:
         return jsonify({'error': 'Not JSON'}), 400
@@ -85,7 +89,9 @@ def add_payment():
     booking.status = 'paid' if float(booking.paid) >= room_type_price else 'pending'
     storage.session.commit()
 
-    new_payment = Payment(booking_id=booking_id, amount=amount, student_id=student_id ) #, reference_id=reference_id)
+    new_payment = Payment(booking_id=booking_id, amount=amount,
+                          student_id=student_id,
+                          reference_id=reference_id)
     new_payment.save()
 
     return jsonify(new_payment.to_dict()), 201

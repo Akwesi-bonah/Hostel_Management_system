@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Block and Room management"""
 from models.room import Room
+from models.staff import Staff
 from web_flask.componet import staff_view
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from models.room_type import RoomType
@@ -17,7 +18,9 @@ def BlockManage():
     """ display all blocks """
     if 'user_id' not in session:
         return redirect(url_for('staff_view.base'))
-    user = session['user']
+    else:
+        user = session['user']
+
     form = AddBlock()
     all_bocks = storage.all(Block).values()
     blocks = [block.to_dict() for block in all_bocks]
@@ -29,10 +32,11 @@ def BlockManage():
 @staff_view.route('/rooms/add', methods=['GET'], strict_slashes=False)
 def room_add():
     """" add room """
+    form = RoomForm()
     if 'user_id' not in session:
         return redirect(url_for('staff_view.base'))
-    user = session['user']
-    form = RoomForm()
+    else:
+        user = session['user']
     return render_template('AddRoom.html',
                            form=form, user=user)
 
@@ -44,30 +48,28 @@ def room_type():
 
     if 'user_id' not in session:
         return redirect(url_for('staff_view.base'))
-    user = session['user']
-    all_types = storage.all(RoomType).values()
-    types = [room_type.to_dict() for room_type in all_types]
+    else:
+        user = session['user']
+        all_types = storage.all(RoomType).values()
+        types = [room_type.to_dict()
+                 for room_type in all_types]
 
     return render_template('roomType.html',
                            room_type=types,
                            form=form, user=user)
 
 
-@staff_view.route('/roomtype/add')
-def room_type_add():
-    form = AddRoomType()
-    """" add or edit room type """
-    return render_template('addRoomType.html',
-                           form=form)
-
-
 @staff_view.route('/configure')
 def configure():
     """ display configuration """
     form = HostelConfigForm()
+    if 'user_id' not in session:
+        return redirect(url_for('staff_view.base'))
+    else:
+        user = session['user']
     
     return render_template('configure.html',
-                           form=form)
+                           form=form, user=user)
 
 
 @staff_view.route('/expiry')

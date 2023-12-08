@@ -1,4 +1,4 @@
-from sqlalchemy import func
+from sqlalchemy import func, and_
 from werkzeug.security import check_password_hash
 
 from models.booking import Booking
@@ -49,7 +49,9 @@ def default():
             error_message = "Invalid credentials"
 
     # Pass the error_message to the template
-    return render_template('Sdefault.html', form=form, login=login, error_message=error_message)
+    return render_template('Sdefault.html',
+                           form=form, login=login,
+                           error_message=error_message)
 
 
 @student_views.route('/logout', methods=['GET'])
@@ -68,18 +70,23 @@ def dashboard():
     blocks = [block.to_dict() for block in block]
     room_types = storage.all(RoomType).values()
     room_type = [room_type.to_dict() for room_type in room_types]
+    user_id = session['user_id']
+    user = storage.get(Student, user_id)
+    gender = user.gender
 
     room = (storage.session.query(Room.id, Room.room_name, Room.booked_beds, Room.floor, Room.gender,
                                   RoomType.name.label('room_type_name'), RoomType.price,
                                   Block.name.label('block_name'))
             .join(Block, Room.block_id == Block.id)
             .join(RoomType, Room.room_type_id == RoomType.id)
-            .filter(Room.booked_beds > 0)
-            .all())
+            .filter(and_(Room.booked_beds > 0,
+             Room.gender == gender)).all())
 
     rooms = []
     for result_tuple in room:
-        id, room_name, no_of_beds, floor, gender, room_type_name, price, block_name = result_tuple
+        (id, room_name, no_of_beds, floor,
+         gender, room_type_name, price,
+         block_name) = result_tuple
 
         result_dict = {
             'id': id,
@@ -94,7 +101,8 @@ def dashboard():
 
         rooms.append(result_dict)
 
-    return render_template('Sbase.html',blocks=block,
+    return render_template('Sbase.html',
+                           blocks=block,
                            room_types=room_type,
                            rooms=rooms)
 
@@ -113,7 +121,7 @@ def student_profile():
             id = session['user_id']
             user = storage.get(Student, id)
             user = user.to_dict()
-
+            print(user)
             form.first_name.data = user['first_name']
             form.last_name.data = user['last_name']
             form.other_name.data = user['other_name']
@@ -125,6 +133,7 @@ def student_profile():
             form.guardian_name.data = user['guardian_name']
             form.guardian_phone.data = user['guardian_phone']
             form.disability.data = user['disability']
+            form.gender.data = user['gender']
             form.address.data = user['address']
             form.date_of_birth.data = user['date_of_birth']
         except Exception as e :

@@ -17,7 +17,6 @@ def messaging():
     return render_template('message.html', form=form)
 
 
-
 @staff_view.route('/mail', methods=['POST'], strict_slashes=False)
 def send_mail():
     """ send mail """

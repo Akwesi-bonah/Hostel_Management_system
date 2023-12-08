@@ -38,7 +38,7 @@ def delete_staff(staff_id):
         return make_response(jsonify({'error': 'Staff not found'}), 404)
 
 
-@views.route('/staff', methods=['POST'], strict_slashes=False)
+@views.route('/staffs', methods=['POST'], strict_slashes=False)
 def add_staff():
     """create new staff object"""
 
@@ -63,12 +63,12 @@ def add_staff():
     email = request.get_json()['email']
     staff = storage.get_user_email(email)
     if staff:
-        abort(400, description="email already exist")
+        abort(400, description="Email address already exist")
 
     Dphone = request.get_json()['phone']
     phone = storage.get_user_phone(Dphone)
     if phone:
-        abort(400, description="phone already exist")
+        abort(400, description="Phone already exist")
 
     try:
         data = request.get_json()

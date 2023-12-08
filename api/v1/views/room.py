@@ -19,7 +19,7 @@ def validate_room_data(data):
     return True, None
 
 
-@views.route('/room', methods=['GET'], strict_slashes=False)
+@views.route('/rooms', methods=['GET'], strict_slashes=False)
 def room():
     """ Get all rooms """
     all_rooms = storage.all(Room).values()

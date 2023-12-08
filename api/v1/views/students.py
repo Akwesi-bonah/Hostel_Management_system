@@ -21,7 +21,7 @@ def validate_student_data(data):
     return True, None
 
 
-@views.route('/student', methods=['GET'], strict_slashes=False)
+@views.route('/students', methods=['GET'], strict_slashes=False)
 def get_students():
     """ Retrieves the list of all Student objects """
     students = storage.all(Student).values()

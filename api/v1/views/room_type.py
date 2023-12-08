@@ -6,7 +6,7 @@ from api.v1.views import views
 from flask import jsonify, abort, request
 
 
-@views.route('/room_type', methods=['GET'], strict_slashes=False)
+@views.route('/room_types', methods=['GET'], strict_slashes=False)
 def get_room_types():
     """ Retrieves the list of all RoomType objects """
     all_room_type = storage.all(RoomType).values()

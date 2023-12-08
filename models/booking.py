@@ -11,8 +11,10 @@ class Booking(BaseModel, Base):
     """Represent booking in hostel"""
     if models.storage_t == "db":
         __tablename__ = "bookings"
-        room_id = Column(String(60), ForeignKey('rooms.id',  ondelete="CASCADE"), nullable=False)
-        student_id = Column(String(60), ForeignKey('students.id',  ondelete="CASCADE"), nullable=False)
+        room_id = Column(String(60), ForeignKey('rooms.id',
+                                                ondelete="CASCADE"), nullable=False)
+        student_id = Column(String(60), ForeignKey('students.id',
+                                                   ondelete="CASCADE"), nullable=False)
         paid = Column(String(128), default=0)
         status = Column(String(128), default="pending")
 
