@@ -23,7 +23,7 @@ def create_app():
     app.config["SESSION_TYPE"] = "filesystem"
     app.config['SESSION_FILE_DIR'] = './.flask_session/'
     app.config['SESSION_KEY_PREFIX'] = 'session:'
-    app.config['SESSION_COOKIE_SECURE'] = True
+    app.config['SESSION_COOKIE_SECURE'] = False
 
     app.config['PAYSTACK_SECRET_'] = 'sk_test_7530309aeb43b700e14cf312de735ad407747903'
     app.config['PAYSTACK_PUBLIC_KEY'] = 'pk_test_4ccdf50310beaaefdde4febbcef5fee8fbbd7011'

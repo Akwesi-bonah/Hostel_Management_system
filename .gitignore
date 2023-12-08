@@ -1,0 +1,7 @@
+# session
+*.flask_session
+*.pyc
+.idea
+venv
+__pycache__/
+**/__pycache__/
