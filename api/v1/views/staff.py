@@ -6,7 +6,18 @@ from api.v1.views import views
 from flask import jsonify, abort, request, make_response
 
 
-@views.route('/staff', methods=['GET'], strict_slashes=False)
+def validate_staff_data(data):
+    """validate required fields"""
+    required_fields = ['name', 'email', 'password', 'role', 'status']
+
+    for field in required_fields:
+        if field not in data:
+            return False, f"{field.capitalize().replace('_', ' ')} is missing"
+
+    return True, None
+
+
+@views.route('/staffs', methods=['GET'], strict_slashes=False)
 def get_staffs():
     """ Retrieves the list of all Staff objects """
     all_staff = storage.all(Staff).values()
@@ -20,7 +31,7 @@ def get_staff(staff_id):
 
     staff = storage.get(Staff, staff_id)
     if not Staff:
-        return jsonify({"error " : "Staff Not Found"})
+        return jsonify({"error ": "Staff Not Found"})
 
     return jsonify(staff.to_dict())
 
@@ -38,37 +49,26 @@ def delete_staff(staff_id):
         return make_response(jsonify({'error': 'Staff not found'}), 404)
 
 
-@views.route('/staffs', methods=['POST'], strict_slashes=False)
+@views.route('/staff', methods=['POST'], strict_slashes=False)
 def add_staff():
     """create new staff object"""
 
     if not request.get_json():
-        abort(400, description="Not a JSON")
+        return jsonify({'error': 'Not JSON'}), 400
 
-    if 'name' not in request.get_json():
-        abort(400, description="Name missing")
-
-    if 'email' not in request.get_json():
-        abort(400, description="email missing")
-
-    if 'password' not in request.get_json():
-        abort(400, description="Password missing")
-
-    if 'role' not in request.get_json():
-        abort(400, description="role missing")
-
-    if 'status' not in request.get_json():
-        abort(400, description="status Missing")
+    is_valid, error_message = validate_staff_data(request.get_json())
+    if not is_valid:
+        return jsonify({'error': error_message}), 400
 
     email = request.get_json()['email']
     staff = storage.get_user_email(email)
     if staff:
-        abort(400, description="Email address already exist")
+        return jsonify({'error': 'Email already exists'}), 400
 
     Dphone = request.get_json()['phone']
     phone = storage.get_user_phone(Dphone)
     if phone:
-        abort(400, description="Phone already exist")
+        return jsonify({'error': 'Phone already exists'}), 400
 
     try:
         data = request.get_json()

@@ -34,7 +34,7 @@ def get_student(student_id):
     """Retrieves a student"""
     student = storage.get(Student, student_id)
     if not student:
-        abort(404, description="Not found")
+        return jsonify({"error ": "Student Not Found"})
     return jsonify(student.to_dict())
 
 
