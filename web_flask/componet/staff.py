@@ -2,7 +2,7 @@
 """ staff management"""
 
 from web_flask.componet import staff_view
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, redirect, url_for, session
 from models.staff import Staff
 from web_flask.forms.staff import StaffForm
 from models import storage

@@ -150,7 +150,7 @@
         {% if role is not none and role in ['JCR', 'Porter'] %}
         <button
           type="button"
-          class="btn btn-primary"
+          class="btn btn-primary createStaff"
           data-bs-toggle="modal"
           data-bs-target="#staffCreateUpdate"
         >
@@ -265,8 +265,11 @@
           <!-- /.card-body -->
 
           <div class="card-footer">
-            {{ form.submit(class="btn btn-primary showloader float-left",
+            {{ form.submit(class="btn btn-primary  float-left",
             id="Addstaff") }}
+            {{ form.submit(class="btn btn-primary  float-left", 
+            id="updateStaff") }}
+
           </div>
         </form>
       </div>

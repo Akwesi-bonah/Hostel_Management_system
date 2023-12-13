@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """This module defines the Reservation view"""
 from api.v1.views import views
-from flask import jsonify, abort, request
+from flask import jsonify, request
 from models.room import Room
 from models import storage
-from models.reservation import Reservation
 
 
 def validate_reservation_data(data):
@@ -121,8 +120,3 @@ def CancelReservation():
 
     else:
         return jsonify({'error': 'Cannot cancel the reservation with zero reserved beds'}), 400
-
-
-
-
-

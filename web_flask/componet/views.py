@@ -16,12 +16,6 @@ import models
 from web_flask.forms.login import Login
 
 
-@staff_view.route('/', methods=['GET', 'POST'])
-def landing_page():
-    """landing page for the project"""
-    return render_template('landingPage.html')
-
-
 @staff_view.route('/login', methods=['GET', 'POST'])
 def base():
     """Default page - Login"""

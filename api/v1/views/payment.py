@@ -3,8 +3,8 @@
 from sqlalchemy import func
 
 from api.v1.views import views
-from flask import jsonify, abort, request
-
+from flask import jsonify, request
+from api.v1.views.messaging import send_email
 from models.booking import Booking
 from models.room import Room
 from models import storage
@@ -63,6 +63,7 @@ def payment(booking_id):
 
 
 @views.route('/payment', methods=['POST'], strict_slashes=False)
+@views.route('/payment', methods=['POST'], strict_slashes=False)
 def add_payment():
     """ Add a new payment """
     data = request.get_json()
@@ -79,6 +80,9 @@ def add_payment():
     student_id = data['student_id']
     reference_id = data['reference_id']
 
+    student = storage.get(Student, student_id)
+    student_email = str(student.email)
+
     booking = storage.get(Booking, booking_id)
     if not booking:
         return jsonify({'error': 'Booking not found'}), 404
@@ -93,5 +97,15 @@ def add_payment():
                           student_id=student_id,
                           reference_id=reference_id)
     new_payment.save()
+
+    try:
+        # Send email to the student after payment
+        subject = f'Payment Confirmation for Booking ID {booking_id}'
+        body = (f'Dear {student.first_name} {student.last_name},\n\n'
+                f'An amount of GHC {amount} has been paid for your booking (Booking ID: {booking_id}).'
+                f'\n\nYour booking balance is GHC {room_type_price - amount}.\n\nThank you for your payment!')
+        send_email(student_email, subject, body)
+    except Exception as e:
+        print(jsonify({'error': f'Error sending email: {str(e)}'}), 5000)
 
     return jsonify(new_payment.to_dict()), 201

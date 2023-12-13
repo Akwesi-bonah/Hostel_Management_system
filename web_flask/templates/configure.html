@@ -62,7 +62,7 @@
         </table>
       </div>
       <div class="card-footer">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUpdate">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#configure">
           Create New
         </button>
 
@@ -70,5 +70,66 @@
     </div>
   </div>
 </section>
+
+<div class="modal fade md-col2" id="configure" tabindex="-1" aria-labelledby="roomHead" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="roomHead">Create New Configuration</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body ">
+        <div role="form">
+          {% if error %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{ error }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endif %}
+          <form action="" class="agnet-contact-form" id="RoomForm" method="post">
+            {{ form.hidden_tag() }}
+            <div class="card-body">
+              <div class="form-group">
+                <label>Start Date<b class="red">*</b></label>
+                <div>
+                  {{ form.start_date(class="form-control", id="startDate",
+                  placeholder="Start Date") }}
+                  {% for error in form.start_date.errors %}
+                  <span class="field-validation-valid text-danger" data-valmsg-for="roomNo"
+                    data-valmsg-replace="true">{{ error }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>End Date<b class="red">*</b></label>
+                <div>
+                  {{ form.end_date(class="form-control", id="endDate", placeholder="End Date") }}
+                  {% for error in form.end_date.errors %}
+                  <span class="field-validation-valid text-danger" data-valmsg-for="roomType"
+                    data-valmsg-replace="true">{{ error }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+              <br>
+            <div class="card-footer">
+             {{ form.submit(class="btn btn-primary float-left", id="setConfig", **{"data-user-id": session['user_id']}) }}
+
+
+            </div>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}

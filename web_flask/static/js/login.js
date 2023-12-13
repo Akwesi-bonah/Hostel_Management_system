@@ -79,7 +79,7 @@ $(document).ready(function () {
       if (result.isConfirmed) {
 
         $.ajax({
-          url: 'https://www.aflahgh.tech/api/student',
+          url: 'http://127.0.0.1:5003/api/v1/student',
           type: 'POST',
           data: JSON.stringify(formData),
           contentType: 'application/json',

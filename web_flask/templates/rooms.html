@@ -77,8 +77,12 @@
             <td>{{ room.floor }}</td>
             <td>{{ room.no_of_beds }}</td>
             <td>
-              <a href="#" class="btn btn-sm btn-info showloader edit-room" data-room-id="{{ room.id }}">Edit</a>
-              <a href="#" class="btn btn-sm btn-danger showloader delete-room" data-room-id="{{ room.id }}">Delete</a>
+              <a href="#"
+                 class="btn btn-sm btn-info  edit-room"
+                 data-room-id="{{ room.id }}">Edit</a>
+              <a href="#"
+                 class="btn btn-sm btn-danger  delete-room"
+                 data-room-id="{{ room.id }}">Delete</a>
             </td>
           </tr>
           {% endfor %}
@@ -87,7 +91,10 @@
         </table>
       </div>
       <div class="card-footer">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#roomCreateUpdate">
+        <button type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#roomCreateUpdate">
           Create New
         </button>
       </div>
@@ -96,7 +103,11 @@
   <!-- /.row -->
 </section>
 
-<div class="modal fade md-col2" id="roomCreateUpdate" tabindex="-1" aria-labelledby="roomHead" aria-hidden="true">
+<div class="modal fade md-col2"
+     id="roomCreateUpdate"
+     tabindex="-1"
+     aria-labelledby="roomHead"
+     aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 

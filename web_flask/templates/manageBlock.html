@@ -71,7 +71,7 @@
         </table>
       </div>
       <div class="card-footer">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUpdate">
+        <button type="button" class="btn btn-primary createNewButton" data-bs-toggle="modal" data-bs-target="#createUpdate">
           Create New
         </button>
 
@@ -140,7 +140,8 @@
           <!-- /.card-body -->
 
           <div class="card-footer">
-            {{ form.submit(class="btn btn-primary showloader float-left", id="AddData") }}
+            {{ form.submit(class="btn btn-primary showloader float-left", id="AddBlock") }}
+             {{ form.submit(class="btn btn-primary showloader float-left", id="updateBlock") }}
           </div>
         </form>
       </div>

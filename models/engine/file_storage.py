@@ -6,6 +6,7 @@ Contains the FileStorage class
 import json
 import models
 from models.booking import Booking
+from models.configuration import Configuration
 from models.payment import Payment
 from models.room import Room
 from models.room_type import RoomType
@@ -22,7 +23,8 @@ classes = {
     "RoomType": RoomType,
     "Staff": Staff,
     "Student": Student,
-    "Reservation": Reservation
+    "Reservation": Reservation,
+    "Configuration": Configuration
 }
 
 

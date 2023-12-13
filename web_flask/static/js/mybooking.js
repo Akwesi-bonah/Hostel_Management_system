@@ -1,5 +1,5 @@
 document.getElementById('quickPayBtn').addEventListener('click', function() {
-var HOST = "https://www.aflahgh.tech/api/";
+var HOST = "http://127.0.0.1:5003/api/v1/";
     var booking_id = $(this).data('book-id');
     var paymentReference = 'PAYREF_' + Math.floor((Math.random() * 1000000000) + 1);
 
@@ -106,4 +106,57 @@ var HOST = "https://www.aflahgh.tech/api/";
             });
         }
     });
+});
+
+
+$(".cancelBook").on("click", function (event) {
+  event.preventDefault();
+
+  var bookingID = $(this).data("booking-id");
+
+  Swal.fire({
+    title: "Confirm Cancellation",
+    text: "Are you sure you want to cancel this booking?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Cancel it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "DELETE",
+        url: `http://127.0.0.1:5003/api/v1/booking/${bookingID}`,
+        contentType: "application/json",
+        success: function (response) {
+          console.log("Cancellation successful:", response);
+          Swal.fire({
+            title: "Success!",
+            text: "Booking cancelled successfully.",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "OK",
+          }).then(() => {
+            location.reload();
+          });
+        },
+        error: function (xhr, status, error) {
+          var errorMessage = "An error occurred.";
+          if (xhr.responseJSON && xhr.responseJSON.error) {
+            errorMessage = xhr.responseJSON.error;
+          }
+
+          Swal.fire({
+            title: "Error!",
+            text: errorMessage,
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#d33",
+            confirmButtonText: "OK",
+          });
+        },
+      });
+    }
+  });
 });

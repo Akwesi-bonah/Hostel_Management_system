@@ -14,12 +14,6 @@ from models.block import Block
 from models.room_type import RoomType
 
 
-@student_views.route('/landing', methods=['GET', 'POST'])
-def landing_page():
-    """landing page for the project"""
-    return render_template('landingPage.html')
-
-
 @student_views.route('/', methods=['GET', 'POST'])
 def default():
     form = StudentForm()
@@ -66,40 +60,41 @@ def dashboard():
     """Student dashboard"""
     if 'user' not in session:
         return redirect(url_for('student_views.default'))
-    block = storage.all(Block).values()
-    blocks = [block.to_dict() for block in block]
-    room_types = storage.all(RoomType).values()
-    room_type = [room_type.to_dict() for room_type in room_types]
-    user_id = session['user_id']
-    user = storage.get(Student, user_id)
-    gender = user.gender
+    else:
+        block = storage.all(Block).values()
+        blocks = [block.to_dict() for block in block]
+        room_types = storage.all(RoomType).values()
+        room_type = [room_type.to_dict() for room_type in room_types]
+        user_id = session['user_id']
+        user = storage.get(Student, user_id)
+        gender = user.gender
 
-    room = (storage.session.query(Room.id, Room.room_name, Room.booked_beds, Room.floor, Room.gender,
-                                  RoomType.name.label('room_type_name'), RoomType.price,
-                                  Block.name.label('block_name'))
-            .join(Block, Room.block_id == Block.id)
-            .join(RoomType, Room.room_type_id == RoomType.id)
-            .filter(and_(Room.booked_beds > 0,
-             Room.gender == gender)).all())
+        room = (storage.session.query(Room.id, Room.room_name, Room.booked_beds, Room.floor, Room.gender,
+                                      RoomType.name.label('room_type_name'), RoomType.price,
+                                      Block.name.label('block_name'))
+                .join(Block, Room.block_id == Block.id)
+                .join(RoomType, Room.room_type_id == RoomType.id)
+                .filter(and_(Room.booked_beds > 0,
+                 Room.gender == gender)).all())
 
-    rooms = []
-    for result_tuple in room:
-        (id, room_name, no_of_beds, floor,
-         gender, room_type_name, price,
-         block_name) = result_tuple
+        rooms = []
+        for result_tuple in room:
+            (id, room_name, no_of_beds, floor,
+             gender, room_type_name, price,
+             block_name) = result_tuple
 
-        result_dict = {
-            'id': id,
-            'room_name': room_name,
-            'no_of_beds': no_of_beds,
-            'floor': floor,
-            'gender': gender,
-            'room_type_name': room_type_name,
-            'price': price,
-            'block_name': block_name
-        }
+            result_dict = {
+                'id': id,
+                'room_name': room_name,
+                'no_of_beds': no_of_beds,
+                'floor': floor,
+                'gender': gender,
+                'room_type_name': room_type_name,
+                'price': price,
+                'block_name': block_name
+            }
 
-        rooms.append(result_dict)
+            rooms.append(result_dict)
 
     return render_template('Sbase.html',
                            blocks=block,

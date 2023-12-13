@@ -5,6 +5,8 @@ from api.v1.views import views
 from models import storage
 from models.booking import Booking
 from models.room import Room
+from api.v1.views.messaging import send_email
+from models.student import Student
 
 
 def validate_booking_data(data):
@@ -17,7 +19,8 @@ def validate_booking_data(data):
 
 @views.route('/bookings', methods=['GET'], strict_slashes=False)
 def get_all_bookings():
-    all_bookings = [booking.to_dict() for booking in storage.all(Booking).values()]
+    all_bookings = [booking.to_dict()
+                    for booking in storage.all(Booking).values()]
     return jsonify(all_bookings)
 
 
@@ -30,17 +33,22 @@ def get_booking_by_id(booking_id):
 
 
 @views.route('/booking/<booking_id>', methods=['DELETE'], strict_slashes=False)
-def delete_booking_by_id(booking_id):
+def cancel_booking(booking_id):
     booking = storage.get(Booking, booking_id)
     if not booking:
         abort(404)
-    storage.delete(booking)
-    storage.save()
-    return jsonify({})
+    room_id = booking.room_id
+    room = storage.get(Room, room_id)
+    booking.status = 'cancelled'
+    room.booked_beds = int(room.booked_beds) + 1
+    storage.session.commit()
+
+    return jsonify({"cancelled": "success"})
 
 
 @views.route('/booking', methods=['POST'], strict_slashes=False)
 def create_booking():
+    """Create a booking"""
     if not request.is_json:
         return jsonify({'error': 'Request data is not in JSON format'}), 400
 
@@ -62,16 +70,31 @@ def create_booking():
     if existing_booking:
         return jsonify({'error': 'You have already booked a room'}), 400
 
-    available_beds = storage.session.query(Room.booked_beds).filter(Room.id == room_id).scalar()
-    if available_beds == 0:
+    room = storage.get(Room, room_id)
+    if int(room.booked_beds) == 0:
         return jsonify({'error': 'No available beds'}), 400
 
     new_booking = {
         'room_id': room_id,
         'student_id': student_id,
-        'status': 'pending',
-        'no_of_beds': int(available_beds) - 1,
+        'status': 'pending'
     }
     booking = Booking(**new_booking)
     booking.save()
+    room.booked_beds = int(room.booked_beds) - 1
+    storage.session.commit()
+
+    student = storage.get(Student, student_id)
+    student_email = str(student.email)
+
+    try:
+        subject = 'Booking Successfully'
+        body = (f'Dear {student.first_name} {student.last_name},\n\n'
+                f'Congratulations! You have successfully booked {room.room_name} at Academy Haven Hostel.\n\n'
+                f'Your booking is currently pending, and you have 24 hours to complete the payment.\n\n'
+                f'Thank you for choosing Academy Haven Hostel for your stay.')
+        send_email(student_email, subject, body)
+    except Exception as e:
+        return jsonify({'error': 'Email not sent'}), 500
+
     return jsonify(booking.to_dict()), 201

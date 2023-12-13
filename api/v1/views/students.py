@@ -102,6 +102,3 @@ def update_student(student_id):
             setattr(student, key, value)
     storage.save()
     return jsonify(student.to_dict()), 200
-
-
-

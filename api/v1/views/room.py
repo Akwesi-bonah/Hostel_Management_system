@@ -87,6 +87,3 @@ def update_room(room_id):
             setattr(room, key, value)
     room.save()
     return jsonify(room.to_dict())
-
-
-

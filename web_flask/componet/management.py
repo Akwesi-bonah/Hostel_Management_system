@@ -7,9 +7,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 from models.room_type import RoomType
 from models.block import Block
 from web_flask.forms.block import AddBlock
-from web_flask.forms.configuration import HostelConfigForm
+from web_flask.forms.configuration import ConfigForm
 from web_flask.forms.room_type import AddRoomType
-from web_flask.forms.rooms import RoomForm
 from models import storage
 
 
@@ -28,17 +27,6 @@ def BlockManage():
     return render_template('manageBlock.html',
                            blocks=blocks, form=form, user=user)
 
-
-@staff_view.route('/rooms/add', methods=['GET'], strict_slashes=False)
-def room_add():
-    """" add room """
-    form = RoomForm()
-    if 'user_id' not in session:
-        return redirect(url_for('staff_view.base'))
-    else:
-        user = session['user']
-    return render_template('AddRoom.html',
-                           form=form, user=user)
 
 
 @staff_view.route('/roomtype', methods=['GET'], strict_slashes=False)
@@ -62,7 +50,7 @@ def room_type():
 @staff_view.route('/configure')
 def configure():
     """ display configuration """
-    form = HostelConfigForm()
+    form = ConfigForm()
     if 'user_id' not in session:
         return redirect(url_for('staff_view.base'))
     else:

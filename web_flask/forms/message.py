@@ -8,7 +8,7 @@ from wtforms.validators import InputRequired
 class MessageForm(FlaskForm):
     """ message form """
     level = SelectField('Level', choices=[
-        ('', 'All'),
+        ('All', 'All'),
         ('100', '100'),
         ('200', '200'),
         ('300', '300'),
@@ -17,13 +17,6 @@ class MessageForm(FlaskForm):
         ('600', '600'),
 
     ], validators=[InputRequired()])
-
-    to_student = SelectField('Send to Students', choices=[
-        ('', 'Select Option'),
-        ('1', 'Yes'),
-        ('0', 'No'),
-    ], validators=[InputRequired()])
-
 
     to_pending_pay = SelectField('Send to Pending Payment Only', choices=[
         ('', 'Select Option'),

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var HOST = "https://www.aflahgh.tech/api/";
+    var HOST = "http://127.0.0.1:5003/api/v1/";
     function showValidationErrors(errors) {
       var errorMessage = 'Please check the following fields:\n\n';
       for (var i = 0; i < errors.length; i++) {
@@ -93,10 +93,8 @@ $(document).ready(function() {
         url:  HOST + "room/" + roomId,
         success: function(room) {
           $('#roomNo').val(room.no_of_beds);
-          $('#roomNo').val(room.no_of_beds);
           $('#roomType').val(room.room_type_id);
           $('#amount').val(room.price);
-          $('#description').val(block.name);
           $('#status').val(block.status)
 
 
