@@ -71,7 +71,6 @@ def add_block():
         return jsonify({'Error': "some Error Occurred"})
 
 
-
 @views.route('/block/<block_id>', methods=['PUT'], strict_slashes=False)
 def update_block(block_id):
     """update block object"""
