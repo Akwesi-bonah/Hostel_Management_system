@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ API Blueprint  for Room"""
+from flasgger import swag_from
+
 from api.v1.views import views
 from flask import jsonify, abort, request
 from models.room import Room
@@ -20,6 +22,7 @@ def validate_room_data(data):
 
 
 @views.route('/rooms', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/room/all_room_get.yml')
 def room():
     """ Get all rooms """
     all_rooms = storage.all(Room).values()
@@ -29,6 +32,7 @@ def room():
 
 
 @views.route('/room/<room_id>', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/room/get_room.yml')
 def get_room(room_id):
     """ Get room by id """
     room = storage.get(Room, room_id)
@@ -38,6 +42,7 @@ def get_room(room_id):
 
 
 @views.route('/room/<room_id>', methods=['DELETE'], strict_slashes=False)
+@swag_from('documentation/room/delete_room.yml')
 def delete_room(room_id):
     """ Delete room by id """
     room = storage.get(Room, room_id)
@@ -49,6 +54,7 @@ def delete_room(room_id):
 
 
 @views.route('/room', methods=['POST'], strict_slashes=False)
+@swag_from('documentation/room/post_room.yml')
 def add_room():
     """ Create new room """
     if not request.get_json():
@@ -73,6 +79,7 @@ def add_room():
 
 
 @views.route('/room/<room_id>', methods=['PUT'], strict_slashes=False)
+@swag_from('documentation/room/put_room.yml')
 def update_room(room_id):
     """ Update room by id """
     room = storage.get(Room, room_id)

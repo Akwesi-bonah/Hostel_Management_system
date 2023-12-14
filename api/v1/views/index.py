@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ API Blueprint  """
+from flasgger import swag_from
 from flask import request
 from sqlalchemy import and_
 
@@ -12,12 +13,14 @@ from flask import jsonify
 
 
 @views.route('/status', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/index/get_status.yml')
 def status():
     """ Returns status """
     return {"status": "OK"}, 200
 
 
 @views.route('/mail', methods=['POST'], strict_slashes=False)
+@swag_from('documentation/index/post_mail.yml')
 def mail_student():
     data = request.get_json()
     if (not data or 'level' not in data or 'not_paid'

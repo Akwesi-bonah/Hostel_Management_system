@@ -50,8 +50,8 @@ class DBStorage:
                                              HMS_MYSQL_PWD,
                                              HMS_MYSQL_HOST,
                                              HMS_MYSQL_DB))
-        if HMS_ENV == "test":
-            Base.metadata.drop_all(self.__engine)
+        #if HMS_ENV == "test":
+        #Base.metadata.drop_all(self.__engine)
 
     @property
     def session(self):

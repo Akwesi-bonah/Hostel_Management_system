@@ -1,3 +1,4 @@
+import API_ENDPOINTS from './apiEndpoint.js';
 $(document).ready(function () {
   $("#blockFilter, #roomTypeFilter").change(function () {
     var selectedBlock = $("#blockFilter").val();
@@ -40,7 +41,7 @@ $(".studbook").on("click", function (event) {
     if (result.isConfirmed) {
       $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:5003/api/v1/booking",
+        url: API_ENDPOINTS + "booking",
         contentType: "application/json",
         data: JSON.stringify(bookingData),
         success: function (response) {
@@ -78,13 +79,12 @@ $(".studbook").on("click", function (event) {
 });
 
 document.getElementById('quickPayBtn').addEventListener('click', function() {
-var HOST = "http://127.0.0.1:5003/api/v1/";
     var booking_id = $(this).data('book-id');
     var paymentReference = 'PAYREF_' + Math.floor((Math.random() * 1000000000) + 1);
 
     // Fetch payment info for the booking ID
     $.ajax({
-        url: HOST + "paymentInfo/" + booking_id,
+        url: API_ENDPOINTS + "paymentInfo/" + booking_id,
         method: 'GET',
         success: function(response) {
             var paymentDetails = response.booking_info;
@@ -205,7 +205,7 @@ $("#cancelBook").on("click", function (event) {
     if (result.isConfirmed) {
       $.ajax({
         type: "DELETE",
-        url: `http://127.0.0.1:5003/api/v1/booking/${bookingID}`,
+        url: API_ENDPOINTS + "booking/" + bookingID,
         contentType: "application/json",
         success: function (response) {
           console.log("Cancellation successful:", response);

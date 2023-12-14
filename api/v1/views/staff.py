@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """" API Blueprint for staff """
+from flasgger import swag_from
+
 from models import storage
 from models.staff import Staff
 from api.v1.views import views
@@ -18,6 +20,7 @@ def validate_staff_data(data):
 
 
 @views.route('/staffs', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/staff/all_staff.yml')
 def get_staffs():
     """ Retrieves the list of all Staff objects """
     all_staff = storage.all(Staff).values()
@@ -26,6 +29,7 @@ def get_staffs():
 
 
 @views.route('/staff/<staff_id>', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/staff/get_staff.yml')
 def get_staff(staff_id):
     """Retrieves a staff"""
 
@@ -37,6 +41,7 @@ def get_staff(staff_id):
 
 
 @views.route('/staff/<staff_id>', methods=['DELETE'], strict_slashes=False)
+@swag_from('documentation/staff/delete_staff.yml')
 def delete_staff(staff_id):
     """Delete staff object"""
     staff = storage.get(Staff, staff_id)
@@ -50,6 +55,7 @@ def delete_staff(staff_id):
 
 
 @views.route('/staff', methods=['POST'], strict_slashes=False)
+@swag_from('documentation/staff/post_staff.yml')
 def add_staff():
     """create new staff object"""
 
@@ -80,6 +86,7 @@ def add_staff():
 
 
 @views.route('/staff/<staff_id>', methods=['PUT'], strict_slashes=False)
+@swag_from('documentation/staff/put_staff.yml')
 def update_staff(staff_id):
     """Update a staff"""
 

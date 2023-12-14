@@ -2,7 +2,7 @@
 """ This model defines room type class """
 import models
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, Float
 
 
 class RoomType(BaseModel, Base):
@@ -11,7 +11,7 @@ class RoomType(BaseModel, Base):
         __tablename__ = 'room_types'
         name = Column(String(128), nullable=False)
         description = Column(String(128), nullable=False)
-        price = Column(String(128), nullable=False)
+        price = Column(Float(precision=2), nullable=False)
         status = Column(String(128), nullable=False)
     else:
         name = ""
@@ -21,5 +21,3 @@ class RoomType(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-

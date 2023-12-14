@@ -30,15 +30,6 @@ def create_app():
 
     app.config['PAYSTACK_SECRET_'] = 'sk_test_7530309aeb43b700e14cf312de735ad407747903'
     app.config['PAYSTACK_PUBLIC_KEY'] = 'pk_test_4ccdf50310beaaefdde4febbcef5fee8fbbd7011'
-
-    # Configure Flask-Mail
-    app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-    app.config['MAIL_PORT'] = 587
-    app.config['MAIL_USERNAME'] = 'ranisminth@gmail.com'
-    app.config['MAIL_PASSWORD'] = ''
-    app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USE_SSL'] = False
-    mail.init_app(app)
     Session(app)
 
     @app.errorhandler(404)
@@ -49,10 +40,10 @@ def create_app():
     def internal_error(error):
         return render_template('500.html'), 500
 
-    @app.errorhandler(Exception)
-    def unhandled_exception(e):
-        return render_template('error.html',
-                               error=str(e)), 500
+    # @app.errorhandler(Exception)
+    # def unhandled_exception(e):
+    #     return render_template('error.html',
+    #                            error=str(e)), 500
 
     if __name__ == '__main__':
         app.run(debug=True)

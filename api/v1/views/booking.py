@@ -1,3 +1,4 @@
+from flasgger import swag_from
 from flask import jsonify, abort, request
 from sqlalchemy import and_
 
@@ -18,6 +19,7 @@ def validate_booking_data(data):
 
 
 @views.route('/bookings', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/booking/all_booking.yml')
 def get_all_bookings():
     all_bookings = [booking.to_dict()
                     for booking in storage.all(Booking).values()]
@@ -25,6 +27,7 @@ def get_all_bookings():
 
 
 @views.route('/booking/<booking_id>', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/booking/get_booking.yml')
 def get_booking_by_id(booking_id):
     booking = storage.get(Booking, booking_id)
     if not booking:
@@ -33,6 +36,7 @@ def get_booking_by_id(booking_id):
 
 
 @views.route('/booking/<booking_id>', methods=['DELETE'], strict_slashes=False)
+@swag_from('documentation/booking/delete_booking.yml')
 def cancel_booking(booking_id):
     booking = storage.get(Booking, booking_id)
     if not booking:
@@ -42,11 +46,11 @@ def cancel_booking(booking_id):
     booking.status = 'cancelled'
     room.booked_beds = int(room.booked_beds) + 1
     storage.session.commit()
-
     return jsonify({"cancelled": "success"})
 
 
 @views.route('/booking', methods=['POST'], strict_slashes=False)
+@swag_from('documentation/booking/post_booking.yml')
 def create_booking():
     """Create a booking"""
     if not request.is_json:

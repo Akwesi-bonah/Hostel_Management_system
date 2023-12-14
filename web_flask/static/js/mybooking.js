@@ -1,5 +1,7 @@
+import API_ENDPOINTS from './apiEndpoint.js';
+
 document.getElementById('quickPayBtn').addEventListener('click', function() {
-var HOST = "http://127.0.0.1:5003/api/v1/";
+var HOST = API_ENDPOINTS;
     var booking_id = $(this).data('book-id');
     var paymentReference = 'PAYREF_' + Math.floor((Math.random() * 1000000000) + 1);
 
@@ -126,7 +128,7 @@ $(".cancelBook").on("click", function (event) {
     if (result.isConfirmed) {
       $.ajax({
         type: "DELETE",
-        url: `http://127.0.0.1:5003/api/v1/booking/${bookingID}`,
+        url: HOST + "booking/" + bookingID,
         contentType: "application/json",
         success: function (response) {
           console.log("Cancellation successful:", response);

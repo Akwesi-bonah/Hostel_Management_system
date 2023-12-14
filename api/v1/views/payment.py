@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ API Blueprint  for Payment"""
+from flasgger import swag_from
 from sqlalchemy import func
 
 from api.v1.views import views
@@ -14,6 +15,7 @@ from models.student import Student
 
 
 @views.route('/paymentInfo/<booking_id>', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/payment/payment_infor.yml')
 def payment(booking_id):
     """ Get all payments """
 
@@ -63,7 +65,7 @@ def payment(booking_id):
 
 
 @views.route('/payment', methods=['POST'], strict_slashes=False)
-@views.route('/payment', methods=['POST'], strict_slashes=False)
+@swag_from('documentation/payment/post_payment.yml')
 def add_payment():
     """ Add a new payment """
     data = request.get_json()

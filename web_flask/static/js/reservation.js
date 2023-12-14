@@ -1,5 +1,7 @@
+import API_ENDPOINTS from './apiEndpoint.js';
+
 $(document).ready(function () {
-  var HOST = "http://127.0.0.1:5003/api/v1/";
+  var HOST = API_ENDPOINTS;
 
   var selectedRoomID;
   var selectedStudentID;

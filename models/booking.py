@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Define Booking class"""
+from datetime import datetime, timedelta
+
 from sqlalchemy.orm import relationship
 
 import models

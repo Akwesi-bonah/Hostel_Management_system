@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """" API Blueprint for students """
+from flasgger import swag_from
+
 from models.student import Student
 from models import storage
 from api.v1.views import views
@@ -22,6 +24,7 @@ def validate_student_data(data):
 
 
 @views.route('/students', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/student/all_student.yml')
 def get_students():
     """ Retrieves the list of all Student objects """
     students = storage.all(Student).values()
@@ -30,6 +33,7 @@ def get_students():
 
 
 @views.route('/student/<student_id>', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/student/get_student.yml')
 def get_student(student_id):
     """Retrieves a student"""
     student = storage.get(Student, student_id)
@@ -39,6 +43,7 @@ def get_student(student_id):
 
 
 @views.route('/student/<student_id>', methods=['DELETE'], strict_slashes=False)
+@swag_from('documentation/student/delete_student.yml')
 def delete_student(student_id):
     """Deletes a student"""
     student = storage.get(Student, student_id)
@@ -50,6 +55,7 @@ def delete_student(student_id):
 
 
 @views.route('/student', methods=['POST'], strict_slashes=False)
+@swag_from('documentation/student/post_student.yml')
 def add_student():
     """ Add new student"""
     request_data = request.get_json()
@@ -60,23 +66,19 @@ def add_student():
     is_valid, error_message = validate_student_data(request_data)
     if not is_valid:
         return jsonify({'error': error_message}), 400
-
     check_email = request_data.get('email')
     if storage.session.query(Student).filter_by(
             email=check_email).first():
         return jsonify({'error': 'Email already exists'}), 400
-
     check_phone = request_data.get('phone')
     if storage.session.query(Student).filter_by(
             phone=check_phone).first():
         return jsonify({'error': 'Phone already exists'}), 400
-
     student_number = request_data.get('student_number')
     check_number = storage.session.query(Student).filter_by(
         student_number=student_number).first()
     if check_number:
         return jsonify({'error': 'Student number already exists'})
-
     try:
         new_student = Student(**request_data)
         new_student.save()
@@ -86,6 +88,7 @@ def add_student():
 
 
 @views.route('/student/<student_id>', methods=['PUT'], strict_slashes=False)
+@swag_from('documentation/student/put_student.yml')
 def update_student(student_id):
     """Updates a student"""
     student = storage.get(Student, student_id)

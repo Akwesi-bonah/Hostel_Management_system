@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ API Blueprint  for room_type"""
+from flasgger import swag_from
+
 from models.room_type import RoomType
 from models import storage
 from api.v1.views import views
@@ -7,6 +9,7 @@ from flask import jsonify, abort, request
 
 
 @views.route('/room_types', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/room_type/all_room_type.yml')
 def get_room_types():
     """ Retrieves the list of all RoomType objects """
     all_room_type = storage.all(RoomType).values()
@@ -15,6 +18,7 @@ def get_room_types():
 
 
 @views.route('/room_type/<room_type_id>', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/room_type/delete_room_type.yml')
 def get_room_type(room_type_id):
     """Retrieves a room_type"""
     room_type = storage.get(RoomType, room_type_id)
@@ -25,6 +29,7 @@ def get_room_type(room_type_id):
 
 
 @views.route('/room_type/<room_type_id>', methods=['DELETE'], strict_slashes=False)
+@swag_from('documentation/room_type/all_room_type.yml')
 def delete_room_type(room_type_id):
     """Delete room_type object"""
     room_type = storage.get(RoomType, room_type_id)
@@ -35,6 +40,7 @@ def delete_room_type(room_type_id):
 
 
 @views.route('/room_type', methods=['POST'], strict_slashes=False)
+@swag_from('documentation/room_type/post_room_type.yml')
 def add_room_type():
     """create new room_type object"""
 
@@ -60,6 +66,7 @@ def add_room_type():
 
 
 @views.route('/room_type/<room_type_id>', methods=['PUT'], strict_slashes=False)
+@swag_from('documentation/room_type/put_room_type.yml')
 def update_room_type(room_type_id):
     """update room_type object"""
 

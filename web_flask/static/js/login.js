@@ -1,5 +1,6 @@
+import API_ENDPOINTS from './apiEndpoint.js';
 $(document).ready(function () {
-
+var HOST = API_ENDPOINTS;
   function validateDOB(dateString) {
 
     var dob = new Date(dateString);
@@ -45,7 +46,7 @@ $(document).ready(function () {
     // Validate Date of Birth
     var dobValid = validateDOB($('#date_of_birth').val());
     if (dobValid) {
-      showValidationErrors(['Date of Birth should be more than 10 years ago.']);
+      showValidationErrors(['Please Validate your date of birth.']);
       return;
     }
 
@@ -79,7 +80,7 @@ $(document).ready(function () {
       if (result.isConfirmed) {
 
         $.ajax({
-          url: 'http://127.0.0.1:5003/api/v1/student',
+          url: HOST + 'student',
           type: 'POST',
           data: JSON.stringify(formData),
           contentType: 'application/json',

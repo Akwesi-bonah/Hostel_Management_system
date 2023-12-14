@@ -5,6 +5,7 @@ from models.block import Block
 from models import storage
 from api.v1.views import views
 from flask import jsonify, abort, request
+from flasgger.utils import swag_from
 
 
 def validate_block_data(data):
@@ -20,6 +21,7 @@ def validate_block_data(data):
 
 
 @views.route('/blocks', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/block/all_block.yml')
 def get_blocks():
     """ Retrieves the list of all Student objects """
     all_block = storage.all(Block).values()
@@ -28,6 +30,7 @@ def get_blocks():
 
 
 @views.route('/block/<block_id>', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/block/get_block.yml')
 def get_block(block_id):
     """Retrieves a block"""
     block = storage.get(Block, block_id)
@@ -37,6 +40,7 @@ def get_block(block_id):
 
 
 @views.route('/block/<block_id>', methods=['DELETE'], strict_slashes=False)
+@swag_from('documentation/block/delete_block.yml')
 def delete_block(block_id):
     """Delete block object"""
     block = storage.get(Block, block_id)
@@ -48,6 +52,7 @@ def delete_block(block_id):
 
 
 @views.route('/block', methods=['POST'], strict_slashes=False)
+@swag_from('documentation/block/post_block.yml')
 def add_block():
     """create new block object"""
 
@@ -72,6 +77,7 @@ def add_block():
 
 
 @views.route('/block/<block_id>', methods=['PUT'], strict_slashes=False)
+@swag_from('documentation/block/put_block.yml')
 def update_block(block_id):
     """update block object"""
 

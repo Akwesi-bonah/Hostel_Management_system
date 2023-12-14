@@ -1,5 +1,6 @@
+import API_ENDPOINTS from './apiEndpoint.js';
 $(document).ready(function () {
-var host = 'http://127.0.0.1:5003/api/v1/'
+var host = API_ENDPOINTS;
   // Function to show validation errors using SweetAlert
   function showValidationErrors(errors) {
     var errorMessage = "Please check the following fields:\n\n";
@@ -48,7 +49,7 @@ var host = 'http://127.0.0.1:5003/api/v1/'
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: "http://127.0.0.1:5003/api/v1/block",
+          url: host + "block",
           type: "POST",
           data: JSON.stringify(formData),
           contentType: "application/json",
@@ -124,7 +125,7 @@ var host = 'http://127.0.0.1:5003/api/v1/'
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url:  host + "/block/" + blockId,
+          url:  host + "block/" + blockId,
           method: "DELETE",
           success: function (response) {
             Swal.fire({
@@ -184,7 +185,7 @@ var host = 'http://127.0.0.1:5003/api/v1/'
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: host + "/block/" + blockId,
+          url: host + "block/" + blockId,
           type: "PUT",
           data: JSON.stringify(formData),
           contentType: "application/json",

@@ -121,7 +121,7 @@
               <td>{{ user.phone }}</td>
               <td>{{ user.role }}</td>
               <td>{{ user.status }}</td>
-              {% if role is not none and role in ['JCR', 'Porter'] %}
+              {% if role is not none and role not in ['JCR', 'Porter'] %}
               <td>
                 <a
                   href="#"
@@ -147,7 +147,7 @@
         </table>
       </div>
       <div class="card-footer">
-        {% if role is not none and role in ['JCR', 'Porter'] %}
+        {% if role is not none and role not in ['JCR', 'Porter'] %}
         <button
           type="button"
           class="btn btn-primary createStaff"
@@ -262,7 +262,6 @@
               <div>{{ form.status(class="form-control", id="status") }}</div>
             </div>
           </div>
-          <!-- /.card-body -->
 
           <div class="card-footer">
             {{ form.submit(class="btn btn-primary  float-left",

@@ -25,13 +25,13 @@ def reserve():
 
 
 @staff_view.route('/assignBed')
-def AssignBed():
+@staff_view.route('/assignBed')
+def assign_bed():
     """This function renders the assign bed page"""
     if 'user_id' not in session:
         return redirect(url_for('staff_view.base'))
     user = session['user']
 
-    global students_list
     reserve_rooms = (
         storage.session.query(
             Room.id, Room.room_name, Room.reserved_beds,
@@ -58,20 +58,21 @@ def AssignBed():
         }
         rooms_list.append(room_dict)
 
-        students = storage.session.query(
-            Student.id, Student.first_name, Student.last_name,
-            Student.student_number).all()
-        students_list = []
-        for result_tuple in students:
-            (student_id, first_name, last_name, number) = result_tuple
-            student_dict = {
-                'id': student_id,
-                'first_name': first_name,
-                'last_name': last_name,
-                'number': number
-            }
-            students_list.append(student_dict)
+    students = storage.session.query(
+        Student.id, Student.first_name, Student.last_name,
+        Student.student_number).all()
+    students_list = []
+    for result_tuple in students:
+        (student_id, first_name, last_name, number) = result_tuple
+        student_dict = {
+            'id': student_id,
+            'first_name': first_name,
+            'last_name': last_name,
+            'number': number
+        }
+        students_list.append(student_dict)
 
     return render_template('assignBed.html', rooms=rooms_list,
                            students=students_list, user=user)
+
 

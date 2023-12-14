@@ -1,3 +1,4 @@
+import API_ENDPOINTS from './apiEndpoint.js';
 $(document).ready(function() {
     $('#sendMessage').on('click', function(event) {
         event.preventDefault();
@@ -37,7 +38,7 @@ $(document).ready(function() {
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://127.0.0.1:5003/api/v1/mail',
+                    url: API_ENDPOINTS + 'mail',
                     data: JSON.stringify(formData),
                     contentType: 'application/json',
                     success: function(response) {

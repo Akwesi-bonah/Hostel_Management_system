@@ -1,21 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>Room type</h1>
-      </div>
-    </div>
-  </div>
+<div class="pagetitle">
+  <h1>Room Type Management</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{{ url_for('staff_view.dashboard')}}">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Room Type list</li>
+    </ol>
+  </nav>
+</div>
+
   <!-- /.container-fluid -->
 </section>
 <section class="content">
   <div class="col-12">
     <div class="card recent-sales overflow-auto">
       <div class="card-body">
-        <h5 class="card-title"><span>Block List</span></h5>
+        <h5 class="card-title"><span>Room Type List</span></h5>
 
         <table class="table table-border datatable">
           <thead>

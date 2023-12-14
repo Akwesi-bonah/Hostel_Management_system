@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """This module defines the Reservation view"""
+from flasgger import swag_from
+
 from api.v1.views import views
 from flask import jsonify, request
 from models.room import Room
@@ -18,6 +20,7 @@ def validate_reservation_data(data):
 
 
 @views.route('/fetch', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/reservation/get_fetch.yml')
 def fetch():
     """ Fetch rooms based on block and room type """
     block_id = request.args.get('block_id')
@@ -49,7 +52,8 @@ def fetch():
 
 
 @views.route('/reserve', methods=['POST'], strict_slashes=False)
-def ReserveRoom():
+@swag_from('documentation/reservation/post_reservation.yml')
+def reserve_room():
     """Reserve a room"""
     data = request.get_json()
 
@@ -86,7 +90,8 @@ def ReserveRoom():
 
 
 @views.route('/cancel', methods=['POST'], strict_slashes=False)
-def CancelReservation():
+@swag_from('documentation/reservation/post_cancel.yml')
+def cancel_reservation():
     """Cancel a reservation"""
     data = request.get_json()
 

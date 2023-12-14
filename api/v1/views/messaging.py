@@ -4,6 +4,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from smtplib import SMTPAuthenticationError
+from os import getenv
 
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587

@@ -60,8 +60,6 @@ def configure():
                            form=form, user=user)
 
 
-@staff_view.route('/expiry')
-def expiry():
-    return render_template('expiry.html')
+
 
 
