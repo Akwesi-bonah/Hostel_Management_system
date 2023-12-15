@@ -1,5 +1,4 @@
 import API_ENDPOINTS from './apiEndpoint.js';
-
 document.getElementById('quickPayBtn').addEventListener('click', function() {
 var HOST = API_ENDPOINTS;
     var booking_id = $(this).data('book-id');
@@ -140,6 +139,7 @@ $(".cancelBook").on("click", function (event) {
             confirmButtonColor: "#3085d6",
             confirmButtonText: "OK",
           }).then(() => {
+
             location.reload();
           });
         },

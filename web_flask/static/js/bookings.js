@@ -1,5 +1,6 @@
 import API_ENDPOINTS from './apiEndpoint.js';
 $(document).ready(function () {
+var HOST = API_ENDPOINTS;
   $("#blockFilter, #roomTypeFilter").change(function () {
     var selectedBlock = $("#blockFilter").val();
     var selectedRoomType = $("#roomTypeFilter").val();
@@ -41,7 +42,7 @@ $(".studbook").on("click", function (event) {
     if (result.isConfirmed) {
       $.ajax({
         type: "POST",
-        url: API_ENDPOINTS + "booking",
+        url: HOST + "booking",
         contentType: "application/json",
         data: JSON.stringify(bookingData),
         success: function (response) {
@@ -84,7 +85,7 @@ document.getElementById('quickPayBtn').addEventListener('click', function() {
 
     // Fetch payment info for the booking ID
     $.ajax({
-        url: API_ENDPOINTS + "paymentInfo/" + booking_id,
+        url: HOST + "paymentInfo/" + booking_id,
         method: 'GET',
         success: function(response) {
             var paymentDetails = response.booking_info;
@@ -205,7 +206,7 @@ $("#cancelBook").on("click", function (event) {
     if (result.isConfirmed) {
       $.ajax({
         type: "DELETE",
-        url: API_ENDPOINTS + "booking/" + bookingID,
+        url: HOST + "booking/" + bookingID,
         contentType: "application/json",
         success: function (response) {
           console.log("Cancellation successful:", response);

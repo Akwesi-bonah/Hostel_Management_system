@@ -1,5 +1,6 @@
 import API_ENDPOINTS from './apiEndpoint.js';
 $(document).ready(function() {
+var HOST = API_ENDPOINTS;
     $('#block, #room_type').on('change', function() {
         var block = $('#block').val();
         var roomType = $('#room_type').val();
@@ -23,7 +24,7 @@ $(document).ready(function() {
     function fetchRooms(block, roomType) {
         $.ajax({
             type: 'GET',
-            url: API_ENDPOINTS + 'fetch',
+            url: HOST + 'fetch',
             data: {
                 block_id: block,
                 room_type_id: roomType

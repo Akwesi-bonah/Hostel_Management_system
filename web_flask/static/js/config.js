@@ -1,5 +1,6 @@
 import API_ENDPOINTS from './apiEndpoint.js';
 $(document).ready(function() {
+    var = HOST = API_ENDPOINTS;
   $("#setConfig").on("click", function(event) {
     event.preventDefault();
 
@@ -52,7 +53,7 @@ $(document).ready(function() {
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: API_ENDPOINTS + "configure",
+          url: HOST + "configure",
           type: "POST",
           contentType: "application/json",
           data: JSON.stringify(formData),

@@ -19,7 +19,6 @@ app.config['SWAGGER'] = {
     'title': "Academy Haven Hostel Management System",
     'version': 1
 }
-# Configure Flask-Mail
 
 Swagger(app)
 
@@ -48,4 +47,4 @@ def handle_smtp_authentication_error(error):
 
 if __name__ == "__main__":
     """ Main function"""
-    app.run(debug=True, port=5003)
+    app.run(port=5003)

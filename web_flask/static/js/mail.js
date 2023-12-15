@@ -1,5 +1,6 @@
 import API_ENDPOINTS from './apiEndpoint.js';
 $(document).ready(function() {
+var HOST = API_ENDPOINTS;
     $('#sendMessage').on('click', function(event) {
         event.preventDefault();
 
@@ -38,7 +39,7 @@ $(document).ready(function() {
 
                 $.ajax({
                     type: 'POST',
-                    url: API_ENDPOINTS + 'mail',
+                    url: HOST + 'mail',
                     data: JSON.stringify(formData),
                     contentType: 'application/json',
                     success: function(response) {

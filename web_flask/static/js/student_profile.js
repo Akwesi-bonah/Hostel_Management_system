@@ -70,6 +70,7 @@ $(document).ready(function () {
               confirmButtonText: "OK",
             }).then((result) => {
               if (result.isConfirmed) {
+               form.reset();
                 location.reload();
               }
             });

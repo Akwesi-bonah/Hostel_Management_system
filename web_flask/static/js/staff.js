@@ -56,7 +56,7 @@ $(document).ready(function () {
           data: JSON.stringify(formData),
           contentType: "application/json",
           success: function (response) {
-            console.log("Success:", response);
+//            console.log("Success:", response);
             Swal.fire({
               title: "Form Submitted!",
               text: "Your form has been submitted successfully.",
@@ -65,7 +65,7 @@ $(document).ready(function () {
               confirmButtonColor: "#3085d6",
               confirmButtonText: "OK",
             }).then(() => {
-              form.reset(); // Clear the form fields after submission
+              form.reset();
               location.reload();
             });
           },

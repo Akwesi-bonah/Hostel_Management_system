@@ -94,6 +94,8 @@ var HOST = API_ENDPOINTS;
               confirmButtonText: 'OK'
             }).then((result) => {
               if (result.isConfirmed) {
+                            form.reset();
+
                 location.reload();
               }
             });

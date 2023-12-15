@@ -52,7 +52,6 @@ $(document).ready(function() {
       confirmButtonText: 'Yes, submit it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        // If confirmed, proceed with form submission
         $.ajax({
           url:  API_ENDPOINTS + 'student',
           type: 'POST',
@@ -194,6 +193,8 @@ $('#updateStudent').on("click", function (event) {
             confirmButtonText: 'OK'
           }).then((result) => {
             if (result.isConfirmed) {
+                          form.reset();
+
               location.reload();
             }
           });

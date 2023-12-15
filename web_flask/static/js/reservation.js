@@ -121,6 +121,8 @@ $(document).ready(function () {
               confirmButtonColor: "#3085d6",
               confirmButtonText: "OK",
             }).then(() => {
+               form.reset();
+
               location.reload();
             });
           },
@@ -188,6 +190,7 @@ $(document).ready(function () {
               confirmButtonColor: "#3085d6",
               confirmButtonText: "OK",
             }).then(() => {
+            form.reset();
               location.reload();
             });
           },
