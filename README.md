@@ -3,14 +3,14 @@ The Hostel Management System is a web application developed using Flask and SQLA
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Database Structure](#database-structure)
-- [API Documentation](#api-documentation)
-- [Contributing](#contributing)
-- [License](#license)
+- [Overview](##overview)
+- [Features](##features)
+- [Installation](##installation)
+- [Usage](##usage)
+- [Database Structure](##database-structure)
+- [API Documentation](##api-documentation)
+- [Contributing](##contributing)
+- [License](##license)
 
 ## Overview
 
