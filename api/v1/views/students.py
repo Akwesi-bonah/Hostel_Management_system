@@ -78,7 +78,7 @@ def add_student():
     check_number = storage.session.query(Student).filter_by(
         student_number=student_number).first()
     if check_number:
-        return jsonify({'error': 'Student number already exists'})
+        return jsonify({'error': 'Student number already exists'}), 400
     try:
         new_student = Student(**request_data)
         new_student.save()

@@ -27,8 +27,6 @@ class TestBaseModelDocs(unittest.TestCase):
                 errors = pycodestyle.Checker(path).check_all()
                 self.assertEqual(errors, 0)
 
-
-
     def test_class_docstring(self):
         """Test for the BaseModel class docstring"""
         self.assertIsNot(BaseModel.__doc__, None,

@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""smtplib mail"""
+"""Flask mail"""
+from flask_mail import Message
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from smtplib import SMTPAuthenticationError
-from os import getenv
 
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
@@ -27,8 +27,8 @@ def send_email(recipient_email, subject, body):
 
         server.sendmail(SENDER_EMAIL, recipient_email, message.as_string())
         server.quit()
-
         return True
 
     except SMTPAuthenticationError as e:
         return "Error Occurred"
+

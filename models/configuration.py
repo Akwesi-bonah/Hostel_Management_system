@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """booking configurations"""
-from wtforms.fields.datetime import DateField
 
 import models
 from models.base_model import BaseModel, Base
@@ -13,7 +12,7 @@ class Configuration(BaseModel, Base):
     if models.storage_t == 'db':
         __tablename__ = "configuration"
         created_by = Column(String(128),
-                            ForeignKey(Staff.id, ondelete="CASCADE"))
+                            ForeignKey(Staff.id,  ondelete="CASCADE"))
         expiry_date = Column(DateTime)
     else:
         created_by = ""

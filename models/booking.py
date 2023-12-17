@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 """Define Booking class"""
-from datetime import datetime, timedelta
 
-from sqlalchemy.orm import relationship
 
 import models
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey,Numeric
 
 
 class Booking(BaseModel, Base):
@@ -17,7 +15,7 @@ class Booking(BaseModel, Base):
                                                 ondelete="CASCADE"), nullable=False)
         student_id = Column(String(60), ForeignKey('students.id',
                                                    ondelete="CASCADE"), nullable=False)
-        paid = Column(String(128), default=0)
+        paid = Column(Numeric(8,2), default=0)
         status = Column(String(128), default="pending")
 
     else:
@@ -27,6 +25,6 @@ class Booking(BaseModel, Base):
         status = ""
 
     def __init__(self, *args, **kwargs):
-        """initialize booking class"""
+        """Initialize booking class"""
         super().__init__(*args, **kwargs)
 

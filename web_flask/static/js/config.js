@@ -1,6 +1,6 @@
 import API_ENDPOINTS from './apiEndpoint.js';
 $(document).ready(function() {
-    var = HOST = API_ENDPOINTS;
+    var HOST = API_ENDPOINTS;
   $("#setConfig").on("click", function(event) {
     event.preventDefault();
 
@@ -37,9 +37,9 @@ $(document).ready(function() {
     }
 
     var formData = {
-      "start_date": startDate,
-      "expiry_date": expiryDate,
-      "staff_id": $("#setConfig").data("user-id")
+      "start_date": $("#startDate").val(),
+      "expiry_date": $("#endDate").val(),
+      "created_by": $("#setConfig").data("user-id")
     };
 
     Swal.fire({

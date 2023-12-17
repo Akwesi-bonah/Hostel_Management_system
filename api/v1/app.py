@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 """ API Blueprint"""
 import smtplib
-from flask import Flask, make_response, jsonify
+from flask import Flask, make_response, jsonify, request
 from flask_cors import CORS
 from flasgger import Swagger
-from api.v1.views import views, mail
+from flask_mail import Mail
+
+from api.v1.views import views
+from api.v1.views.messaging import send_email
 from models import storage
 
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.register_blueprint(views)
-mail.init_app(app)
-
 cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.config['SWAGGER'] = {
@@ -47,4 +48,4 @@ def handle_smtp_authentication_error(error):
 
 if __name__ == "__main__":
     """ Main function"""
-    app.run(port=5003)
+    app.run(debug=True, port=5003)

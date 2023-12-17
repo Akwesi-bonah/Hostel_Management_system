@@ -101,20 +101,23 @@ var HOST = API_ENDPOINTS;
             });
           },
           error: function(xhr, status, error) {
-           var errorMessage = "An error occurred.";
+    var errorMessage = "An error occurred.";
     if (xhr.responseJSON && xhr.responseJSON.error) {
-      errorMessage = xhr.responseJSON.error;
+        errorMessage = xhr.responseJSON.error;
+    } else {
+        errorMessage = xhr.statusText;
     }
 
     Swal.fire({
-      title: 'Error!',
-      text: errorMessage,
-      icon: 'error',
-      showCancelButton: false,
-      confirmButtonColor: '#d33',
-      confirmButtonText: 'OK'
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'OK'
     });
-          }
+}
+
         });
       }
     });

@@ -50,7 +50,7 @@ def cancel_booking(booking_id):
 
 
 @views.route('/booking', methods=['POST'], strict_slashes=False)
-@swag_from('documentation/booking/post_booking.yml')
+#@swag_from('documentation/booking/post_booking.yml')
 def create_booking():
     """Create a booking"""
     if not request.is_json:
@@ -75,8 +75,9 @@ def create_booking():
         return jsonify({'error': 'You have already booked a room'}), 400
 
     room = storage.get(Room, room_id)
-    if int(room.booked_beds) == 0:
-        return jsonify({'error': 'No available beds'}), 400
+    if room:
+        if room.booked_beds == 0:
+            return jsonify({'error': 'No available beds'}), 400
 
     new_booking = {
         'room_id': room_id,
@@ -85,7 +86,7 @@ def create_booking():
     }
     booking = Booking(**new_booking)
     booking.save()
-    room.booked_beds = int(room.booked_beds) - 1
+    room.booked_beds -= 1
     storage.session.commit()
 
     student = storage.get(Student, student_id)

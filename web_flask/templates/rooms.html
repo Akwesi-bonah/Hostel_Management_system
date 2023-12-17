@@ -92,7 +92,7 @@
       </div>
       <div class="card-footer">
         <button type="button"
-                class="btn btn-primary"
+                class="btn btn-primary createNewRoom"
                 data-bs-toggle="modal"
                 data-bs-target="#roomCreateUpdate">
           Create New
@@ -199,8 +199,10 @@
             <!-- /.card-body -->
 
             <div class="card-footer">
-              {{ form.submit(class="btn btn-primary showloader float-left",
+              {{ form.submit(class="btn btn-primary  float-left",
               id="AddRoomData") }}
+              {{ form.submit(class="btn btn-primary  float-left",
+              id="updateRoomData") }}
 
             </div>
           </form>

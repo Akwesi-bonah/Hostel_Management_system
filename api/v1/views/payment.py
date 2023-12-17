@@ -101,7 +101,6 @@ def add_payment():
     new_payment.save()
 
     try:
-        # Send email to the student after payment
         subject = f'Payment Confirmation for Booking ID {booking_id}'
         body = (f'Dear {student.first_name} {student.last_name},\n\n'
                 f'An amount of GHC {amount} has been paid for your booking (Booking ID: {booking_id}).'

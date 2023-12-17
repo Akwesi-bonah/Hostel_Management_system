@@ -10,6 +10,7 @@ from web_flask.forms.block import AddBlock
 from web_flask.forms.configuration import ConfigForm
 from web_flask.forms.room_type import AddRoomType
 from models import storage
+from models.configuration import Configuration
 
 
 @staff_view.route('/block')
@@ -55,9 +56,15 @@ def configure():
         return redirect(url_for('staff_view.base'))
     else:
         user = session['user']
+
+        config = storage.session.query(
+            Staff.name,
+            Configuration.created_at,
+            Configuration.expiry_date
+        ).join(Staff, Configuration.created_by == Staff.id).all()
     
     return render_template('configure.html',
-                           form=form, user=user)
+                           form=form, user=user, configure=config)
 
 
 
